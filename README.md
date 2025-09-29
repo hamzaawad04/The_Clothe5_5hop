@@ -1,4 +1,4 @@
-# CS2TP-Group55
+# CS2TP - Group 55
 Group Members: <br>
 Ma Basimah - 230248896; [email] <br>
 Uzair Butt - 240229870; [email] <br>
