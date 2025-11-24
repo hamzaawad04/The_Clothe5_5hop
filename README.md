@@ -17,7 +17,7 @@ Ayomide Aidevbo Bola-Monite - 240362605; [email] <br>
 - XAMPP <br>
 - Git <br>
 
-Ensure SQL and Apache are running inside XAMPP and go to http://localhost/phpmyadmin/ to create a new database called "theclothe55shop" <br>
+Ensure SQL and Apache are running inside XAMPP and go to http://localhost/phpmyadmin/; import SQL script in clothes-shop/database/sql to create "theclothe55shop" database <br>
 
 After cloning respository and opening it inside an IDE, run inside terminal: <br>
 cd clothes-shop <br>
