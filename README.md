@@ -9,7 +9,7 @@ Aliyan Ramday - 230126505; 230126505@aston.ac.uk <br>
 Cameron Swaby - 240193227: 240193227@aston.ac.uk <br>
 Ayomide Aidevbo Bola-Monite - 240362605; [email] <br> 
 
-## Required Installations: <br>
+### Required Installations: <br>
 - PHP <br>
 - Laravel <br>
 - Composer <br>
@@ -17,9 +17,9 @@ Ayomide Aidevbo Bola-Monite - 240362605; [email] <br>
 - XAMPP <br>
 - Git <br>
 
-Ensure SQL and Apache are running inside XAMPP and go to http://localhost/phpmyadmin/ and create a new database called "theclothe55shop" <br>
+Ensure SQL and Apache are running inside XAMPP and go to http://localhost/phpmyadmin/ to create a new database called "theclothe55shop" <br>
 
-After cloning respository and opening inside an IDE, run inside terminal: <br>
+After cloning respository and opening it inside an IDE, run inside terminal: <br>
 cd clothes-shop <br>
 composer install <br>
 npm install <br>
