@@ -9,7 +9,7 @@ Aliyan Ramday - 230126505; 230126505@aston.ac.uk <br>
 Cameron Swaby - 240193227: 240193227@aston.ac.uk <br>
 Ayomide Aidevbo Bola-Monite - 240362605; [email] <br> 
 
-Required Installations: <br>
+## Required Installations: <br>
 - PHP <br>
 - Laravel <br>
 - Composer <br>
@@ -27,7 +27,7 @@ npm run dev <br>
 
 In a new terminal, run: <br>
 cd clothes-shop <br>
-cp .env.example env <br>
+cp .env.example .env <br>
 php artisan key:generate <br>
 
 In the newly created file named ".env", replace lines 23 to 28 with: <br>
