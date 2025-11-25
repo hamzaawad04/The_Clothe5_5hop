@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+.container {
+  display: grid;
+  grid-template-areas: 
+  "header"
+  "menu"
+  "content"
+  "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  background-color: rgb(195, 195, 195);
+  padding: 0px;
+}
+.grid-item {
+  background-color: #18005b;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  gap:20px;
+}
+.container div {
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+.container div.header {
+    background-color: #ffffff;
+    grid-area: header;
+    text-align: center;
+}
+.container div.menu {
+    background-color: #ffffff;
+    grid-area: menu;
+    text-align: center;
+    font-size: small;
+}
+.container div.content {
+  grid-area: content;
+  background-color: #000000;
+}
+.container div.footer {
+    background-color: #ffffff;
+    grid-area: footer;
+    text-align: center;
+}
+.container div.login{
+  background-color: #C59A2D;
+  padding: 50px;
+}
+.login-btn {
+  float: right;
+}
+.container div.menu a:hover {
+  color: #C59A2D;
+}
+
+
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 15px 0;
+  background: white;
+  font-family: serif;
+  font-size: 18px;
+}
+
+.menu a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu a.active, /* Highlight the active tab */
+.menu a:hover {
+  color: #C59A2D;
+  font-weight: bold;
+}
