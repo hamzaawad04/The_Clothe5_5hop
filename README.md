@@ -1,6 +1,6 @@
 # CS2TP - Group 55
 Group Members: <br>
-Ma Basimah - 230248896; [email] <br>
+Ma Basimah - 230248896; 230248896@aston.ac.uk <br>
 Uzair Butt - 240229870; 240229870@aston.ac.uk <br>
 Thomas Harvey - 240168801; 240168801@aston.ac.uk <br>
 Kawthar Karim - 240087764; 240087764@aston.ac.uk <br>
