@@ -13,6 +13,7 @@ export default {
         extend: {
             colors: {
                 primary: "#14213D",
+                cathover: "#FCA311",
             },
             fontFamily: {
                 playfair: ['"Playfair Display"', 'serif'],
