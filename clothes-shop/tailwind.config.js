@@ -11,8 +11,12 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                primary: "#14213D",
+                cathover: "#FCA311",
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                playfair: ['"Playfair Display"', 'serif'],
             },
         },
     },
