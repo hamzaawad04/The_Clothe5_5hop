@@ -16,9 +16,30 @@
        </div>
 
        <!-- Icons -->
-       <div class="flex items-center space-x-6 w-1/4 justify-end">
-    
-           <a href="#"> <img src="/icons/account.svg" alt="Account" class="w-6 h-6"> </a>
+        @guest
+            <div class="flex items-center space-x-6 w-1/4 justify-end" x-data = "{open : false}">
+
+                <button @click = "open = !open">
+                 <img src="/icons/account.svg" alt="Account" class="w-6 h-6">
+                </button>
+
+        <div
+        x-show = "open"
+        @click.away = "open = false">
+
+        <x-dropdown-link :href="route('login')">
+            {{ __('Login') }}
+        </x-dropdown-link>
+
+        <x-dropdown-link :href="route('register')">
+            {{ __('Register') }}
+        </x-dropdown-link>
+        </div>
+        @endguest
+
+        @auth
+           <a href="{{ url('/dashboard') }}"><img src="/icons/account.svg" alt="Account" class="w-6 h-6"></a>
+        @endauth
 
            <a href="#"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
 
