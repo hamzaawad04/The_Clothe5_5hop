@@ -16,16 +16,14 @@
        </div>
 
        <!-- Icons -->
-        @guest
-            <div class="flex items-center space-x-6 w-1/4 justify-end" x-data = "{open : false}">
-
+        
+            <div class="flex items-center space-x-6 w-1/4 justify-end relative" x-data = "{open : false}">
+            @guest
                 <button @click = "open = !open">
                  <img src="/icons/account.svg" alt="Account" class="w-6 h-6">
                 </button>
 
-        <div
-        x-show = "open"
-        @click.away = "open = false">
+        <div class="absolute top-7 mt-2 bg-gray-100 rounded-md right-20" x-show = "open" @click.away = "open = false">
 
         <x-dropdown-link :href="route('login')">
             {{ __('Login') }}
@@ -49,7 +47,7 @@
    </header>
 
      <!-- Categories -->
-   <nav class="flex justify-between px-20 py-2 text-lg font-medium">
+   <nav class="flex justify-between px-20 py-3 text-lg font-medium">
        <a href="#" class="hover:text-cathover">Tops</a>
        <a href="#" class="hover:text-cathover">Bottoms</a>
        <a href="#" class="hover:text-cathover">Footwear</a>

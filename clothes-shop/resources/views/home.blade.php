@@ -19,6 +19,9 @@
 <body class = "font-playfair text-black">
     @include('components.mainnavbar')
 
+    <main>
+        <img src="{{ asset('images/herobanner1.png') }}" alt="Model Logo" class="logo" style="width: 100%; height: auto;"> 
+    </main>
     
 </body>
 </html>
