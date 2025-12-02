@@ -55,19 +55,19 @@
             <!-- Name -->
             <label>
               Name
-              <input type="text" name="name" class="mt-1 w-full rounded-md border p-2" placeholder="Enter name" required />
+              <input type="text" name="name" class="mb-1 w-full rounded-md border p-2" placeholder="Enter name" required />
             </label>
 
             <!-- Email -->
             <label>
              Email
-              <input type="email" name="email" class="mt-2 w-full rounded-md border p-2" placeholder="Enter email" required />
+              <input type="email" name="email" class="mb-1 w-full rounded-md border p-2" placeholder="Enter email" required />
             </label>
 
             <!-- Message -->
             <label>
               Message
-              <textarea name="message" class="mt-2 w-full rounded-md border p-2" rows="4" placeholder="Enter your message" required></textarea>
+              <textarea name="message" class="mb-1 w-full rounded-md border p-2" rows="4" placeholder="Enter your message" required></textarea>
             </label>
 
             <!-- Button -->
