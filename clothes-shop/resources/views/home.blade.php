@@ -21,8 +21,8 @@
 
     <main>
         <img src="{{ asset('images/herobanner1.png') }}" alt="Model Logo" class="logo" style="width: 100%; height: auto;"> 
-        @include('components.footer')
-    </main>
     
+    </main>
+     @include('components.footer')
 </body>
 </html>
