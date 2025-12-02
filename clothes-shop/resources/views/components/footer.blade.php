@@ -12,7 +12,7 @@
         </ul>
 
         <ul class="space-y-2 py-5 pl-20">
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
         <li><a href="#">About Us</a></li>
         </ul>
 
