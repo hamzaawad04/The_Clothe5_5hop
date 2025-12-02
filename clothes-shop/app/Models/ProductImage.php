@@ -11,7 +11,6 @@ class ProductImage extends Model
 
     protected $primaryKey = ['product_id', 'url'];
     public $incrementing = false;
-    public $timestamps = false;
 
     protected $fillable = [
         'product_id',

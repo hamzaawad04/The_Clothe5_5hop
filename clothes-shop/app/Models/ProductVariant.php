@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariant extends Model
 {
     protected $primaryKey = 'variant_id';
-    public $timestamps = false;
 
     protected $fillable = [
         'product_id',

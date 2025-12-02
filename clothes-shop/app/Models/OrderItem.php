@@ -11,7 +11,6 @@ class OrderItem extends Model
 
     protected $primaryKey = ['order_id', 'product_id', 'variant_id'];
     public $incrementing = false;
-    public $timestamps = false;
 
     protected $fillable = [
         'order_id',

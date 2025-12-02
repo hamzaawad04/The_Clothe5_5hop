@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class InventoryTransaction extends Model
 {
     protected $primaryKey = 'transaction_id';
-    public $timestamps = false;
 
     protected $fillable = [
         'variant_id',

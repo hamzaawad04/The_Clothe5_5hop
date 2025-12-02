@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     protected $primaryKey = 'cart_id';
-    /* Set attribute 'timestamps' to false so laravel knows no relevant columns exist */
-    public $timestamps = false;
 
     /* The attributes that can be changed */
     protected $fillable = [

@@ -13,7 +13,6 @@ class CartItem extends Model
     protected $primaryKey = ['cart_id', 'variant_id'];
     /* Set attribute 'incrementing' to false so laravel knows the primary composite key doesn't increment */
     public $incrementing = false;
-    public $timestamps = false;
 
     protected $fillable = [
         'cart_id',
