@@ -3,7 +3,6 @@
     <div class="w-1/4">
         <a href="/" class="flex items-center space-x-6">
         <img src="/images/mainlogo.jpg" alt="Logo icon" class="h-20 w-auto object-contain" />
-        <img src="/images/logotext.jpg" alt="Logo text" class="h-8 w-auto object-contain" />
     </a>
     </div>
     
@@ -16,9 +15,28 @@
        </div>
 
        <!-- Icons -->
-       <div class="flex items-center space-x-6 w-1/4 justify-end">
-    
-           <a href="#"> <img src="/icons/account.svg" alt="Account" class="w-6 h-6"> </a>
+        
+            <div class="flex items-center space-x-6 w-1/4 justify-end relative" x-data = "{open : false}">
+            @guest
+                <button @click = "open = !open">
+                 <img src="/icons/account.svg" alt="Account" class="w-6 h-6">
+                </button>
+
+        <div class="absolute top-7 mt-2 bg-gray-100 rounded-md right-20" x-show = "open" @click.away = "open = false">
+
+        <x-dropdown-link :href="route('login')">
+            {{ __('Login') }}
+        </x-dropdown-link>
+
+        <x-dropdown-link :href="route('register')">
+            {{ __('Register') }}
+        </x-dropdown-link>
+        </div>
+        @endguest
+
+        @auth
+           <a href="{{ url('/dashboard') }}"><img src="/icons/account.svg" alt="Account" class="w-6 h-6"></a>
+        @endauth
 
            <a href="#"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
 
@@ -28,7 +46,7 @@
    </header>
 
      <!-- Categories -->
-   <nav class="flex justify-between px-20 py-2 text-lg font-medium">
+   <nav class="flex justify-between px-20 py-3 text-lg font-medium">
        <a href="#" class="hover:text-cathover">Tops</a>
        <a href="#" class="hover:text-cathover">Bottoms</a>
        <a href="#" class="hover:text-cathover">Footwear</a>

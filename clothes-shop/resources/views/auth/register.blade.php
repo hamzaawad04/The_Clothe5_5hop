@@ -80,3 +80,4 @@
         </div>
     </form>
 </x-guest-layout>
+@include('components.footer')
