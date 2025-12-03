@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+
+Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
+
 
 Route::get('/about', function () {
     return view('about');
