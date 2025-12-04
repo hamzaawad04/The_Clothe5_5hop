@@ -38,4 +38,12 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
+Route::get('/tops', function () {
+    return view('tops');
+})->name('tops');
+
+Route::get('footwear', function () {
+    return view('footwear');
+})->name('footwear');
+
 require __DIR__.'/auth.php';
