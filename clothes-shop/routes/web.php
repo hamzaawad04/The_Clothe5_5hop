@@ -44,6 +44,10 @@ Route::get('/tops', function () {
     return view('products.tops');
 })->name('tops');
 
+Route::get('/bottoms', function () {
+    return view('products.bottoms');
+})->name('bottoms');
+
 Route::get('/footwear', function () {
     return view('products.footwear');
 })->name('footwear');

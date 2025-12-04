@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>THE CLOTHE5 5HOP – Tops</title>
+  <title>THE CLOTHE5 5HOP – Bottoms</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,14 @@
       font-family: Arial, sans-serif;
       background: #fff;
       color: #111;
+    }
+    /* Heading */
+    .heading {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      margin: 20px 0;
+      background: #fff;
     }
     /* Filter bar */
     .filters {
@@ -132,31 +140,6 @@
       margin: 0 0 12px;
       color: #fff;
     }
-    .footer-columns {
-      display: inline-flex;
-      justify-content: flex-start;
-      gap: 40px;
-      margin-bottom: 0;
-    }
-    .footer-column {
-      text-align: left;
-    }
-    .footer-column ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .footer-column li {
-      margin: 8px 0;
-    }
-    .footer-column a {
-      text-decoration: none;
-      color: #e5e7eb;
-      transition: color 0.3s;
-    }
-    .footer-column a:hover {
-      color: orange;
-    }
     .about-it p {
       margin: 0;
       color: #e5e7eb;
@@ -169,7 +152,9 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class = "font-playfair text-black">
+  <!-- Top bar -->
   @include('components.mainnavbar')
+
   <!-- Filter bar -->
   <div class="filters">
     <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
@@ -184,11 +169,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image"><img src="https://trello.com/1/cards/692f4a86b7ca787902be6990/attachments/6930b30555d5859e6449d712/download/blue_polo.png" alt="Blue Polo"></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£10</p></div></div>
-      <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Basic blue shirt</div><div class="info"><h3>Unisex basic blue shirt</h3><p>£10</p></div></div>
-      <div class="card"><div class="image">Black T-shirt</div><div class="info"><h3>Premium Unisex black short sleeve T-shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
+      <div class="card"><div class="image">Jeans</div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
+      <div class="card"><div class="image">Shorts</div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
+      <div class="card"><div class="image">Cargo Trouser</div><div class="info"><h3>Cargo Trouser</h3><p>£80</p></div></div>
+      <div class="card"><div class="image">Chinos</div><div class="info"><h3>Chinos</h3><p>£65</p></div></div>
+      <div class="card"><div class="image">Joggers</div><div class="info"><h3>Joggers</h3><p>£50</p></div></div>
     </div>
   </div>
   @include('components.footer')
