@@ -200,8 +200,14 @@ class ProductImagesSeeder extends Seeder
 
             [
                 'product_id' => $getId('THE CLOTHE5 5HOP Blazer'),
-                'url' => 'images/outerwear/blazerback.png',
+                'url' => 'images/outerwear/blazerfront.png',
                 'is_primary' => 1
+            ],
+
+            [
+                'product_id' => $getId('THE CLOTHE5 5HOP Blazer'),
+                'url' => 'images/outerwear/blazerback.png',
+                'is_primary' => 0
             ],
 
             [
