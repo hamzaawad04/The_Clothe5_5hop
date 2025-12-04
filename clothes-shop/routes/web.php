@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductVariantController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
+Route::resource('variants', ProductVariantController::class);
 
 Route::get('/about', function () {
     return view('pages.about');
