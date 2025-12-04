@@ -20,8 +20,8 @@
     @include('components.mainnavbar')
 
     <main class="bg-primary">
-        <div class="mx-auto max-w-5xl px-4 py-10">
-      <h1 class="mb-10 text-center text-3xl font-bold text-white">Contact Us</h1>
+        <div class="mx-auto max-w-3xl px-4 py-10">
+      <h1 class="mb-10 text-center text-4xl font-bold text-white">Contact Us</h1>
 
       <div class="flex">
 
@@ -50,28 +50,36 @@
         </div>
 
         <!--Contact Form -->
-        <div class= "bg-white p-6">
-          <form>
+        <div class= "bg-white p-6 w-full">
+          <form method="POST" action="{{ route('contact.store')}}">
+            <!-- add csrf token for security -->
+            @csrf
             <!-- Name -->
-            <label>
-              Name
-              <input type="text" name="name" class="mb-1 w-full rounded-md border p-2" placeholder="Enter name" required />
-            </label>
+            <div>
+              <x-input-label for="name" :value="__('Name')" />
+              <x-text-input id="name" class="mb-1 w-full rounded-md border p-2" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+              <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
 
             <!-- Email -->
-            <label>
-             Email
-              <input type="email" name="email" class="mb-1 w-full rounded-md border p-2" placeholder="Enter email" required />
-            </label>
+            <div>
+              <x-input-label for="email" :value="__('Email')" />
+              <x-text-input id="email" class="mb-1 w-full rounded-md border p-2" type="email" name="email" :value="old('email')" required autofocus autocomplete="email" />
+              <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
 
             <!-- Message -->
-            <label>
-              Message
-              <textarea name="message" class="mb-1 w-full rounded-md border p-2" rows="4" placeholder="Enter your message" required></textarea>
-            </label>
+            <div>
+              <x-input-label for="message" :value="__('Message')" />
+              <textarea id="message" name="message" class="mb-1 w-full rounded-md border p-2 h-40" required autofocus autocomplete="message"></textarea>
+              <x-input-error :messages="$errors->get('message')" class="mt-2" />
+            </div>
 
             <!-- Button -->
-            <button type="submit" class="hover:bg-primary hover:text-white w-full rounded-md bg-gray-300 px-4 py-2 text-black">Submit</button>
+
+            <x-primary-button class="ms-4">
+                {{ __('Submit Message') }}
+            </x-primary-button>
           </form>
         </div>
       </div>

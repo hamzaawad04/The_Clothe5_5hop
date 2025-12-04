@@ -1,5 +1,5 @@
 <div>
-    <footer class="bg-primary border-white border-t-4">
+    <footer class="bg-primary border-gray-500 border-t-4">
         <div class="text-white flex px-12">
 
         <ul class="space-y-2 pl-12 py-5">
@@ -12,8 +12,8 @@
         </ul>
 
         <ul class="space-y-2 py-5 pl-20">
-        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="{{ route('contact') }}">Contact Us</a></li>
+        <li><a href="{{ route('about') }}">About Us</a></li>
         </ul>
 
         </div>
