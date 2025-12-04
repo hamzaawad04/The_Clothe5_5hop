@@ -23,7 +23,7 @@
     }
     /* Filter bar */
     .filters {
-      background: #f0f0f0;
+      background: #0a2540;
       padding: 16px 24px;
       display: flex;
       justify-content: space-around;
@@ -38,7 +38,7 @@
     .filters label {
       margin-bottom: 6px;
       font-weight: 500;
-      color: #333;
+      color: #fff;
     }
     .filters select {
       width: 100%;
@@ -47,27 +47,7 @@
       border-radius: 6px;
     }
 
-    /* Navy section */
-    .navy-section {
-      background: #0a2540;
-      color: #fff;
-      display: flex;
-      justify-content: space-around;
-      padding: 16px 0;
-    }
-    .navy-section a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      flex: 1;
-      text-align: center;
-      padding: 10px 0;
-      transition: color 0.3s;
-    }
-    .navy-section a:hover,
-    .navy-section a.active {
-      color: orange;
-    }
+    /* Navy section removed */
 
     /* Container */
     .container {
@@ -180,15 +160,7 @@
     <div class="filter-group"><label for="brand">Brand</label><select id="brand"><option>All</option></select></div>
   </div>
 
-  <!-- Navy section -->
-  <div class="navy-section">
-    <a href="#" class="active">Section 1</a>
-    <a href="#">Section 2</a>
-    <a href="#">Section 3</a>
-    <a href="#">Section 4</a>
-    <a href="#">Section 5</a>
-    <a href="#">Section 6</a>
-  </div>
+  <!-- Navy section removed -->
 
   <!-- Product grid -->
   <div class="container">
