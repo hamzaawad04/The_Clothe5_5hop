@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/remove/{variant_id}', [CartController::class, 'removeItem'])->name('cart.remove');
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     /* Order routes */
-    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('checkout.show');
+    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout.place-order');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
 });
@@ -40,6 +40,7 @@ Route::post('/contact', [ContactMessageController::class, 'store'])->name('conta
 Route::resource('variants', ProductVariantController::class);
 /* Category routes */
 Route::resource('categories', CategoryController::class);
+
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
@@ -53,9 +54,5 @@ Route::get('/footwear', [ProductController::class, 'footwear'])->name('products.
 Route::get('/outerwear', [ProductController::class, 'tops'])->name('products.outerwear');
 
 Route::get('/accessories', [ProductController::class, 'tops'])->name('products.accessories');
-
-Route::get('/checkout', function () {
-    return view('orders.checkout');
-})->name('checkout');
 
 require __DIR__.'/auth.php';
