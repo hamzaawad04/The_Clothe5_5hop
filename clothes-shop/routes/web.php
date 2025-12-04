@@ -62,4 +62,8 @@ Route::get('/accessories', function () {
     return view('products.accessories');
 })->name('accessories');
 
+Route::get('/checkout', function () {
+    return view('orders.checkout');
+})->name('checkout');
+
 require __DIR__.'/auth.php';
