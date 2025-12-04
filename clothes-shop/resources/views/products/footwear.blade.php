@@ -84,7 +84,7 @@
     }
     .card .image {
       background: #f3f4f6;
-      height: 220px;
+      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -93,8 +93,8 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .card .image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 90%;
       object-fit: contain;
       display: block;
     }
