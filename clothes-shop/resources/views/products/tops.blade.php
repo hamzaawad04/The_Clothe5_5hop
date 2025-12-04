@@ -13,93 +13,6 @@
       background: #fff;
       color: #111;
     }
-
-    /* Top bar */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 24px;
-      border-bottom: 1px solid #e5e7eb;
-      background: #fff;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }
-    .logo img {
-      height: 40px;
-    }
-    .search {
-      width: 350px;
-      display: flex;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 6px 10px;
-      background: #fff;
-      margin: 0 auto;
-    }
-    .search input {
-      border: none;
-      flex: 1;
-      outline: none;
-      background: #fff;
-    }
-    .search i {
-      color: #666;
-    }
-
-    /* Icons */
-    .icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-    }
-    .icons i {
-      font-size: 24px;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.3s;
-      -webkit-text-stroke: 1px #000;
-      text-stroke: 1px #000;
-    }
-    .icons i:hover {
-      color: orange;
-    }
-
-    /* Navigation bar */
-    .nav-links {
-      display: flex;
-      justify-content: space-around;
-      padding: 16px 0;
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      padding: 10px 30px;
-      flex: 1;
-      text-align: center;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: orange;
-    }
-
-    /* Heading */
-    .heading {
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      margin: 20px 0;
-      background: #fff;
-    }
-
     /* Filter bar */
     .filters {
       background: #f0f0f0;
@@ -272,7 +185,7 @@
   </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class = "font-playfair text-black">
   @include('components.mainnavbar')
   <!-- Filter bar -->
   <div class="filters">
