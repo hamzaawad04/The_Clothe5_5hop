@@ -3,7 +3,6 @@
     <div class="w-1/4">
         <a href="/" class="flex items-center space-x-6">
         <img src="/images/mainlogo.jpg" alt="Logo icon" class="h-20 w-auto object-contain" />
-        <img src="/images/logotext.jpg" alt="Logo text" class="h-8 w-auto object-contain" />
     </a>
     </div>
     
