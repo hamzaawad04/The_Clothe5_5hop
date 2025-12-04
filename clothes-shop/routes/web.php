@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
+Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 
 
 Route::get('/about', function () {
