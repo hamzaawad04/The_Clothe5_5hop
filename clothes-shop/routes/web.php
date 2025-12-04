@@ -27,6 +27,10 @@ Route::post('/checkout', [OrderController::class, 'checkout'])
     ->middleware('auth')
     ->name('checkout.place-order');
 
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
+
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 

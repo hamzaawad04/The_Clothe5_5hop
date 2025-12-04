@@ -16,7 +16,7 @@ class ContactMessageController extends Controller
      */
 
     public function create() {
-        return view('contact');
+        return view('pages.contact');
     }
 
 

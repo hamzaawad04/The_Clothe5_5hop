@@ -12,8 +12,8 @@
         </ul>
 
         <ul class="space-y-2 py-5 pl-20">
-        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
-        <li><a href="{{ url('/about') }}">About Us</a></li>
+        <li><a href="{{ route('contact') }}">Contact Us</a></li>
+        <li><a href="{{ route('about') }}">About Us</a></li>
         </ul>
 
         </div>
