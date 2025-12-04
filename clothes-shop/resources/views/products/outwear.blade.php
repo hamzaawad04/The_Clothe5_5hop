@@ -100,6 +100,30 @@
       object-fit: contain;
       display: block;
     }
+    .card.hover-swap .image {
+      position: relative;
+    }
+    .card.hover-swap .image-front,
+    .card.hover-swap .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-back {
+      opacity: 1;
+    }
     .card .info {
       padding: 16px;
     }
@@ -171,11 +195,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Blazer</div><div class="info"><h3>Blazer</h3><p>£150</p></div></div>
-      <div class="card"><div class="image">Winter Coat</div><div class="info"><h3>Winter Coat</h3><p>£280</p></div></div>
-      <div class="card"><div class="image">Cardigan</div><div class="info"><h3>Cardigan</h3><p>£95</p></div></div>
-      <div class="card"><div class="image">Overcoat</div><div class="info"><h3>Overcoat</h3><p>£200</p></div></div>
-      <div class="card"><div class="image">Denim Jacket</div><div class="info"><h3>Denim Jacket</h3><p>£110</p></div></div>
+      <div class="card"><div class="image"><img src="/images/outerwear/blazerback.png" alt="Blazer"></div><div class="info"><h3>Blazer</h3><p>£150</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/wintercoatsfront.png" alt="Winter Coat"></div><div class="image-back"><img src="/images/outerwear/wintercoatsback.png" alt="Winter Coat Back"></div></div><div class="info"><h3>Winter Coat</h3><p>£280</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/cardiganfront.png" alt="Cardigan"></div><div class="image-back"><img src="/images/outerwear/cardiganback.png" alt="Cardigan Back"></div></div><div class="info"><h3>Cardigan</h3><p>£95</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/overcoatfront.png" alt="Overcoat"></div><div class="image-back"><img src="/images/outerwear/overcoatback.png" alt="Overcoat Back"></div></div><div class="info"><h3>Overcoat</h3><p>£200</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/denimjacketfront.png" alt="Denim Jacket"></div><div class="image-back"><img src="/images/outerwear/denimjacketback.png" alt="Denim Jacket Back"></div></div><div class="info"><h3>Denim Jacket</h3><p>£110</p></div></div>
     </div>
   </div>
   @include('components.footer')
