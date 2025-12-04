@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>THE CLOTHE5 5HOP – Tops</title>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        
   <style>
     body {
       margin: 0;
@@ -13,93 +16,6 @@
       background: #fff;
       color: #111;
     }
-
-    /* Top bar */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 24px;
-      border-bottom: 1px solid #e5e7eb;
-      background: #fff;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }
-    .logo img {
-      height: 40px;
-    }
-    .search {
-      width: 350px;
-      display: flex;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 6px 10px;
-      background: #fff;
-      margin: 0 auto;
-    }
-    .search input {
-      border: none;
-      flex: 1;
-      outline: none;
-      background: #fff;
-    }
-    .search i {
-      color: #666;
-    }
-
-    /* Icons */
-    .icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-    }
-    .icons i {
-      font-size: 24px;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.3s;
-      -webkit-text-stroke: 1px #000;
-      text-stroke: 1px #000;
-    }
-    .icons i:hover {
-      color: orange;
-    }
-
-    /* Navigation bar */
-    .nav-links {
-      display: flex;
-      justify-content: space-around;
-      padding: 16px 0;
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      padding: 10px 30px;
-      flex: 1;
-      text-align: center;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: orange;
-    }
-
-    /* Heading */
-    .heading {
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      margin: 20px 0;
-      background: #fff;
-    }
-
     /* Filter bar */
     .filters {
       background: #0a2540;
@@ -252,14 +168,14 @@
   </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class = "font-playfair text-black">
   @include('components.mainnavbar')
   <!-- Filter bar -->
   <div class="filters">
     <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
     <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option></select></div>
     <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option></select></div>
-    <div class="filter-group"><label for="brand">Brand</label><select id="brand"><option>All</option></select></div>
+    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option></select></div>
   </div>
 
   <!-- Navy section removed -->
