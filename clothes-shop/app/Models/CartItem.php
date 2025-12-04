@@ -3,15 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Thiagoprz\EloquentCompositeKey\HasCompositePrimaryKey;
 
 class CartItem extends Model
 {
-    /* Allows Model to have a composite key */
-    use HasCompositePrimaryKey;
 
-    protected $primaryKey = ['cart_id', 'variant_id'];
-    /* Set attribute 'incrementing' to false so laravel knows the primary composite key doesn't increment */
+    protected $primaryKey = 'cart_id';
+    
     public $incrementing = false;
 
     protected $fillable = [

@@ -7,6 +7,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+
 Route::get('/', function () {
     return view('pages.home');
 });
@@ -42,25 +44,15 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
-Route::get('/tops', function () {
-    return view('products.tops');
-})->name('tops');
+Route::get('/tops', [ProductController::class, 'tops'])->name('products.tops');
 
-Route::get('/bottoms', function () {
-    return view('products.bottoms');
-})->name('bottoms');
+Route::get('/bottoms', [ProductController::class, 'bottoms'])->name('products.bottoms');
 
-Route::get('/footwear', function () {
-    return view('products.footwear');
-})->name('footwear');
+Route::get('/footwear', [ProductController::class, 'footwear'])->name('products.footwear');
 
-Route::get('/outwear', function () {
-    return view('products.outwear');
-})->name('outwear');
+Route::get('/outerwear', [ProductController::class, 'tops'])->name('products.outerwear');
 
-Route::get('/accessories', function () {
-    return view('products.accessories');
-})->name('accessories');
+Route::get('/accessories', [ProductController::class, 'tops'])->name('products.accessories');
 
 Route::get('/checkout', function () {
     return view('orders.checkout');

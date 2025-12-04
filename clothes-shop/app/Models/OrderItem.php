@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Thiagoprz\EloquentCompositeKey\HasCompositePrimaryKey;
 
 class OrderItem extends Model
 {
-    use HasCompositePrimaryKey;
 
-    protected $primaryKey = ['order_id', 'product_id', 'variant_id'];
+    protected $primaryKey = 'order_id';
     public $incrementing = false;
 
     protected $fillable = [
