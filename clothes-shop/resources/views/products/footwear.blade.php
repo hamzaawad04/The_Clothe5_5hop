@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>THE CLOTHE5 5HOP – Footwear</title>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        
   <style>
     body {
       margin: 0;
@@ -177,17 +180,7 @@
     <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
     <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option></select></div>
     <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option></select></div>
-    <div class="filter-group"><label for="brand">Brand</label><select id="brand"><option>All</option></select></div>
-  </div>
-
-  <!-- Navy section -->
-  <div class="navy-section">
-    <a href="#" class="active">Section 1</a>
-    <a href="#">Section 2</a>
-    <a href="#">Section 3</a>
-    <a href="#">Section 4</a>
-    <a href="#">Section 5</a>
-    <a href="#">Section 6</a>
+    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option></select></div>
   </div>
 
   <!-- Product grid -->
