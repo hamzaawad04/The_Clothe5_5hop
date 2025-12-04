@@ -4,9 +4,9 @@
 
         <ul class="space-y-2 pl-12 py-5">
         <li><a href="/">Home</a></li>
-        <li><a href="#">Tops</a></li>
+        <li><a href="{{ route('tops') }}">Tops</a></li>
         <li><a href="#">Bottoms</a></li>
-        <li><a href="#">Footwear</a></li>
+        <li><a href="{{ route('footwear') }}">Footwear</a></li>
         <li><a href="#">Outerwear</a></li>
         <li><a href="#">Accessories</a></li>
         </ul>
