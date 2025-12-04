@@ -304,7 +304,7 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">4 Items found</div>
+    <div class="results-heading">5 Items found</div>
     <div class="grid">
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
       <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
