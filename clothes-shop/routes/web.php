@@ -58,4 +58,8 @@ Route::get('/outwear', function () {
     return view('products.outwear');
 })->name('outwear');
 
+Route::get('/accessories', function () {
+    return view('products.accessories');
+})->name('accessories');
+
 require __DIR__.'/auth.php';
