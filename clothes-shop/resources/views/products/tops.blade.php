@@ -92,6 +92,30 @@
       object-fit: contain;
       display: block;
     }
+    .card.hover-swap .image {
+      position: relative;
+    }
+    .card.hover-swap .image-front,
+    .card.hover-swap .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-back {
+      opacity: 1;
+    }
     .card .info {
       padding: 16px;
     }
@@ -186,7 +210,7 @@
   <div class="container">
     <div class="results-heading">8 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image"><img src="/images/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
       <div class="card"><div class="image"><img src="/images/poloback.png" alt="Polo Shirt Back"></div><div class="info"><h3>Polo Shirt</h3><p>£25</p></div></div>
       <div class="card"><div class="image"><img src="/images/hoodiefront.png" alt="Unisex Hoodie"></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
       <div class="card"><div class="image"><img src="/images/hoodieback.png" alt="Unisex Hoodie Back"></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
