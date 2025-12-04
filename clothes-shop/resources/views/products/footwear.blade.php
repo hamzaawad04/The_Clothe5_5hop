@@ -13,84 +13,6 @@
       background: #fff;
       color: #111;
     }
-
-    /* Top bar */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 24px;
-      border-bottom: 1px solid #e5e7eb;
-      background: #fff;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }
-    .logo img {
-      height: 40px;
-    }
-    .search {
-      width: 350px;
-      display: flex;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 6px 10px;
-      background: #fff;
-      margin: 0 auto;
-    }
-    .search input {
-      border: none;
-      flex: 1;
-      outline: none;
-      background: #fff;
-    }
-    .search i {
-      color: #666;
-    }
-
-    /* Icons */
-    .icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-    }
-    .icons i {
-      font-size: 24px;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.3s;
-      -webkit-text-stroke: 1px #000;
-      text-stroke: 1px #000;
-    }
-    .icons i:hover {
-      color: orange;
-    }
-
-    /* Navigation bar */
-    .nav-links {
-      display: flex;
-      justify-content: space-around;
-      padding: 16px 0;
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      padding: 10px 30px;
-      flex: 1;
-      text-align: center;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: orange;
-    }
-
     /* Heading */
     .heading {
       text-align: center;
@@ -99,7 +21,6 @@
       margin: 20px 0;
       background: #fff;
     }
-
     /* Filter bar */
     .filters {
       background: #f0f0f0;
@@ -236,31 +157,6 @@
       margin: 0 0 12px;
       color: #fff;
     }
-    .footer-columns {
-      display: inline-flex;
-      justify-content: flex-start;
-      gap: 40px;
-      margin-bottom: 0;
-    }
-    .footer-column {
-      text-align: left;
-    }
-    .footer-column ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .footer-column li {
-      margin: 8px 0;
-    }
-    .footer-column a {
-      text-decoration: none;
-      color: #e5e7eb;
-      transition: color 0.3s;
-    }
-    .footer-column a:hover {
-      color: orange;
-    }
     .about-it p {
       margin: 0;
       color: #e5e7eb;
@@ -270,38 +166,11 @@
       display: none;
     }
   </style>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class = "font-playfair text-black">
   <!-- Top bar -->
-  <div class="top-bar">
-    <div class="logo">
-      <a href="/" aria-label="Home">
-        <img src="public/images/logotext.jpg" alt="THE CLOTHE5 5HOP logo" />
-      </a>
-    </div>
-    <div class="search">
-      <input type="text" placeholder="Search..." />
-      <i class="fas fa-search"></i>
-    </div>
-    <div class="icons">
-      <i class="fas fa-user"></i>
-      <i class="fas fa-heart"></i>
-      <i class="fas fa-shopping-cart"></i>
-      <i class="fas fa-bars"></i>
-    </div>
-  </div>
-
-  <!-- Navigation bar -->
-  <div class="nav-links">
-    <a href="#">Tops</a>
-    <a href="#">Bottoms</a>
-    <a href="#" class="active">Footwear</a>
-    <a href="#">Outerwear</a>
-    <a href="#">Accessories</a>
-  </div>
-
-  <!-- Heading -->
-  <div class="heading">FOOTWEAR</div>
+  @include('components.mainnavbar')
 
   <!-- Filter bar -->
   <div class="filters">
@@ -331,34 +200,7 @@
       <div class="card"><div class="image">Sports Shoe</div><div class="info"><h3>Professional Sports Shoe</h3><p>£55</p></div></div>
       <div class="card"><div class="image">Formal Loafer</div><div class="info"><h3>Unisex Formal Loafer</h3><p>£50</p></div></div>
     </div>
-      <!-- About It section -->
-      <footer class="about-it" aria-labelledby="aboutit-heading">
-        <div class="about-inner">
-          <h2 id="aboutit-heading">The Clothe5 5hop</h2>
-          <div class="footer-columns">
-            <div class="footer-column">
-              <h3>Shop</h3>
-              <ul>
-                <li><a href="#">Tops</a></li>
-                <li><a href="#">Bottoms</a></li>
-                <li><a href="#">Footwear</a></li>
-                <li><a href="#">Outerwear</a></li>
-                <li><a href="#">Accessories</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h3>Customer Care</h3>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Contact us</a></li>
-              </ul>
-            </div>
-          </div>
-          <p class="note">Free returns within 30 days • Fast shipping • Ethically sourced materials</p>
-        </div>
-      </footer>
   </div>
+  @include('components.footer')
 </body>
 </html>

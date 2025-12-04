@@ -39,11 +39,11 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/tops', function () {
-    return view('tops');
+    return view('products.tops');
 })->name('tops');
 
-Route::get('footwear', function () {
-    return view('footwear');
+Route::get('/footwear', function () {
+    return view('products.footwear');
 })->name('footwear');
 
 require __DIR__.'/auth.php';

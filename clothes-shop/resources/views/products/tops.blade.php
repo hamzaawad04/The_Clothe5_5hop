@@ -270,39 +270,10 @@
       display: none;
     }
   </style>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-  <!-- Top bar -->
-  <div class="top-bar">
-    <div class="logo">
-      <a href="/" aria-label="Home">
-        <img src="public/images/logotext.jpg" alt="THE CLOTHE5 5HOP logo" />
-      </a>
-    </div>
-    <div class="search">
-      <input type="text" placeholder="Search..." />
-      <i class="fas fa-search"></i>
-    </div>
-    <div class="icons">
-      <i class="fas fa-user"></i>
-      <i class="fas fa-heart"></i>
-      <i class="fas fa-shopping-cart"></i>
-      <i class="fas fa-bars"></i>
-    </div>
-  </div>
-
-  <!-- Navigation bar -->
-  <div class="nav-links">
-    <a href="#" class="active">Tops</a>
-    <a href="#">Bottoms</a>
-    <a href="#">Footwear</a>
-    <a href="#">Outerwear</a>
-    <a href="#">Accessories</a>
-  </div>
-
-  <!-- Heading -->
-  <div class="heading">TOPS</div>
-
+  @include('components.mainnavbar')
   <!-- Filter bar -->
   <div class="filters">
     <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
@@ -331,34 +302,7 @@
       <div class="card"><div class="image">Black T-shirt</div><div class="info"><h3>Premium Unisex black short sleeve T-shirt</h3><p>£15</p></div></div>
       <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
     </div>
-      <!-- About It section -->
-      <footer class="about-it" aria-labelledby="aboutit-heading">
-        <div class="about-inner">
-          <h2 id="aboutit-heading">The Clothe5 5hop</h2>
-          <div class="footer-columns">
-            <div class="footer-column">
-              <h3>Shop</h3>
-              <ul>
-                <li><a href="#">Tops</a></li>
-                <li><a href="#">Bottoms</a></li>
-                <li><a href="#">Footwear</a></li>
-                <li><a href="#">Outerwear</a></li>
-                <li><a href="#">Accessories</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h3>Customer Care</h3>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Contact us</a></li>
-              </ul>
-            </div>
-          </div>
-          <p class="note">Free returns within 30 days • Fast shipping • Ethically sourced materials</p>
-        </div>
-      </footer>
   </div>
+  @include('components.footer')
 </body>
 </html>
