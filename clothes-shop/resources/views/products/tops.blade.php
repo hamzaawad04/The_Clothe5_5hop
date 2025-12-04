@@ -184,13 +184,16 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">5 Items found</div>
+    <div class="results-heading">8 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Polo</div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
-      <div class="card"><div class="image">Hoodie</div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
-      <div class="card"><div class="image">T-Shirt</div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Jumper</div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
-      <div class="card"><div class="image">Button-Up Shirt</div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/polo-beige.png" alt="Premium Unisex Polo Shirt"></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/polo-beige-tt.png" alt="TT Polo Shirt"></div><div class="info"><h3>TT Polo Shirt</h3><p>£28</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/hoodie-black.png" alt="Unisex Hoodie"></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/hoodie-black-back.png" alt="Unisex Hoodie Back"></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/tshirt-black.png" alt="Premium Unisex T-Shirt"></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/tshirt-black-tt.png" alt="TT T-Shirt"></div><div class="info"><h3>TT T-Shirt</h3><p>£18</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/buttonup-navy.png" alt="Unisex Button-Up Shirt"></div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tops/buttonup-navy-tt.png" alt="TT Button-Up Shirt"></div><div class="info"><h3>TT Button-Up Shirt</h3><p>£32</p></div></div>
     </div>
   </div>
   @include('components.footer')
