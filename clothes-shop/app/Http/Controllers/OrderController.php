@@ -18,6 +18,8 @@ class OrderController extends Controller
     /* Show one order */
     public function show($order_id)
     {
+        $user = Auth::user();
+
         $order = Order::where('order_id', $order_id)
                       ->where('user_id', Auth::id())
                       ->with('items.product', 'items.variant')
@@ -57,22 +59,24 @@ class OrderController extends Controller
             $total = 0;
 
             foreach ($cartItems as $item) {
-                $variant = ProductVariant::find($item->variant_id);
+                $variant = $variant = $item->variant;
 
                 if (!$variant || $variant->stock_qty < $item->qty) {
                     DB::rollBack();
                     return redirect()->back()->with('error', 'Insufficient stock for one or more items.');
                 }
 
-                $lineTotal = $variant->product->base_price * $item->qty;
+                $unitPrice = $variant->product->base_price;
+                $lineTotal = $unitPrice * $item->qty;
+
                 $total += $lineTotal;
 
                 OrderItem::create([
-                    'order_id' => $order->order_id,
-                    'product_id' => $variant->product_id,
+                    'order_id'   => $order->order_id,
+                    'product_id' => $variant->product->product_id,
                     'variant_id' => $variant->variant_id,
-                    'unit_price' => $variant->product->base_price,
-                    'qty' => $item->qty,
+                    'unit_price' => $unitPrice,
+                    'qty'        => $item->qty,
                     'line_total' => $lineTotal,
                 ]);
 
@@ -93,7 +97,7 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('confirmation', $order->order_id);
+            return redirect()->route('orders.confirmation', $order->order_id);
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -109,7 +113,7 @@ class OrderController extends Controller
                       ->with('items.product', 'items.variant')
                       ->firstOrFail();
 
-        return view('confirmation', [
+        return view('orders.confirmation', [
             'order' => $order
         ]);
     }

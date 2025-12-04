@@ -25,15 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/update/{variant_id}', [CartController::class, 'updateQuantity'])->name('cart.update');
     Route::delete('/cart/remove/{variant_id}', [CartController::class, 'removeItem'])->name('cart.remove');
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+    /* Order routes */
+    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('checkout.show');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout.place-order');
+    Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
 });
-
-Route::get('/checkout', [OrderController::class, 'showCheckout'])
-    ->middleware('auth')
-    ->name('checkout.show');
-
-Route::post('/checkout', [OrderController::class, 'checkout'])
-    ->middleware('auth')
-    ->name('checkout.place-order');
 
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
