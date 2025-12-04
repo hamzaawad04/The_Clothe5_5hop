@@ -42,6 +42,6 @@ class ContactMessageController extends Controller
         ContactMessage::create($contactMessage);
 
         //  Return back to home page
-        return redirect('/');
+        return back()->with('success', 'Message Sent! We will try to respond as quickly as possible');
     }
 }

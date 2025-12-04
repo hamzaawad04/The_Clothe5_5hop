@@ -54,9 +54,7 @@
 
     /* Container */
     .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
+      padding: 0 24px;
     }
 
     /* Product grid */
@@ -86,7 +84,7 @@
     }
     .card .image {
       background: #f3f4f6;
-      height: 300px;
+      height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -95,8 +93,8 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .card .image img {
-      width: auto;
-      height: 90%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       display: block;
     }
@@ -167,17 +165,3 @@
 
   <!-- Navy section removed -->
 
-  <!-- Product grid -->
-  <div class="container">
-    <div class="results-heading">5 Items found</div>
-    <div class="grid">
-      <div class="card"><div class="image"></div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
-      <div class="card"><div class="image"></div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
-      <div class="card"><div class="image"></div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
-      <div class="card"><div class="image"></div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
-      <div class="card"><div class="image"></div><div class="info"><h3>Joggers</h3><p>£50</p></div></div>
-    </div>
-  </div>
-  @include('components.footer')
-</body>
-</html>

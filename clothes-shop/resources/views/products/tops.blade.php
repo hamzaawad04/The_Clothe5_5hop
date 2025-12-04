@@ -46,7 +46,9 @@
 
     /* Container */
     .container {
-      padding: 0 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
     }
 
     /* Product grid */
@@ -76,7 +78,7 @@
     }
     .card .image {
       background: #f3f4f6;
-      height: 220px;
+      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -85,10 +87,58 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .card .image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 90%;
       object-fit: contain;
       display: block;
+    }
+    .card.hover-swap .image {
+      position: relative;
+    }
+    .card.hover-swap .image-front,
+    .card.hover-swap .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-back {
+      opacity: 1;
+    }
+    .card.hover-swap-hoodie .image {
+      position: relative;
+    }
+    .card.hover-swap-hoodie .image-front,
+    .card.hover-swap-hoodie .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap-hoodie .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap-hoodie:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap-hoodie:hover .image-back {
+      opacity: 1;
     }
     .card .info {
       padding: 16px;
@@ -172,23 +222,26 @@
   @include('components.mainnavbar')
   <!-- Filter bar -->
   <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option></select></div>
+    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Polo</option><option>Hoodie</option><option>T-Shirt</option><option>Jumper</option><option>Button-Up Shirt</option></select></div>
+    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>White</option><option>Blue</option><option>Red</option><option>Grey</option><option>Navy</option></select></div>
+    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £15</option><option>£15-£25</option><option>£25-£40</option><option>Over £40</option></select></div>
   </div>
 
   <!-- Navy section removed -->
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">5 Items found</div>
+    <div class="results-heading">6 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image"><img src="https://trello.com/1/cards/692f4a86b7ca787902be6990/attachments/6930b30555d5859e6449d712/download/blue_polo.png" alt="Blue Polo"></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£10</p></div></div>
-      <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Basic blue shirt</div><div class="info"><h3>Unisex basic blue shirt</h3><p>£10</p></div></div>
-      <div class="card"><div class="image">Black T-shirt</div><div class="info"><h3>Premium Unisex black short sleeve T-shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
+      <div class="card"><div class="image"><img src="/images/hoodiefront.png" alt="Unisex Hoodie"></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
+      <div class="card"><div class="image"><img src="/images/hoodiefront.png" alt="Unisex Hoodie"></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
+      <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
+      <div class="card"><div class="image"><img src="/images/tshirtback.png" alt="Premium Unisex T-Shirt"></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
+      <div class="card"><div class="image"><img src="/images/jumperfront.png" alt="Unisex Jumper"></div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
+      <div class="card"><div class="image"><img src="/images/buttonupshirtfront.png" alt="Unisex Button-Up Shirt"></div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
+      <div class="card"><div class="image"><img src="/images/buttonupshirtback.png" alt="Button-Up Shirt Back"></div><div class="info"><h3>Button-Up Shirt</h3><p>£28</p></div></div>
     </div>
   </div>
   @include('components.footer')

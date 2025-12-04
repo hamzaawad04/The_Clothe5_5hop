@@ -5,7 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\ProductVariantController;
+use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return view('pages.home');
 });
@@ -30,10 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout.place-order');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
 });
-
+/* Contact routes */
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
-
+/* Product Variant routes */
+Route::resource('variants', ProductVariantController::class);
+/* Category routes */
+Route::resource('categories', CategoryController::class);
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
@@ -49,5 +53,13 @@ Route::get('/bottoms', function () {
 Route::get('/footwear', function () {
     return view('products.footwear');
 })->name('footwear');
+
+Route::get('/outwear', function () {
+    return view('products.outwear');
+})->name('outwear');
+
+Route::get('/accessories', function () {
+    return view('products.accessories');
+})->name('accessories');
 
 require __DIR__.'/auth.php';

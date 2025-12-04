@@ -54,7 +54,9 @@
 
     /* Container */
     .container {
-      padding: 0 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
     }
 
     /* Product grid */
@@ -84,7 +86,7 @@
     }
     .card .image {
       background: #f3f4f6;
-      height: 220px;
+      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -93,8 +95,8 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .card .image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 90%;
       object-fit: contain;
       display: block;
     }
@@ -110,7 +112,7 @@
       font-weight: bold;
       margin: 0;
     }
-    /* About It section (full-bleed) */
+    /* About it section */
     .about-it {
       background: #0a2540;
       padding: 8px 0;
@@ -157,10 +159,10 @@
 
   <!-- Filter bar -->
   <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option></select></div>
+    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Heel</option><option>White Trainers</option><option>Flats</option><option>Boots</option><option>Vans</option></select></div>
+    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>White</option><option>Brown</option><option>Red</option><option>Navy</option></select></div>
+    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £30</option><option>£30-£50</option><option>£50-£75</option><option>Over £75</option></select></div>
   </div>
 
   <!-- Navy section removed -->
@@ -169,11 +171,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Running Shoe</div><div class="info"><h3>Premium Running Shoe</h3><p>£45</p></div></div>
-      <div class="card"><div class="image">Casual Sneaker</div><div class="info"><h3>Unisex Casual Sneaker</h3><p>£35</p></div></div>
-      <div class="card"><div class="image">Leather Boot</div><div class="info"><h3>Classic Leather Boot</h3><p>£60</p></div></div>
-      <div class="card"><div class="image">Sports Shoe</div><div class="info"><h3>Professional Sports Shoe</h3><p>£55</p></div></div>
-      <div class="card"><div class="image">Formal Loafer</div><div class="info"><h3>Unisex Formal Loafer</h3><p>£50</p></div></div>
+      <div class="card"><div class="image">Heel</div><div class="info"><h3>Classic Heel</h3><p>£65</p></div></div>
+      <div class="card"><div class="image">White Trainers</div><div class="info"><h3>White Trainers</h3><p>£55</p></div></div>
+      <div class="card"><div class="image">Flats</div><div class="info"><h3>Comfortable Flats</h3><p>£45</p></div></div>
+      <div class="card"><div class="image">Boots</div><div class="info"><h3>Classic Boots</h3><p>£75</p></div></div>
+      <div class="card"><div class="image">Vans</div><div class="info"><h3>Vans Sneakers</h3><p>£50</p></div></div>
     </div>
   </div>
   @include('components.footer')
