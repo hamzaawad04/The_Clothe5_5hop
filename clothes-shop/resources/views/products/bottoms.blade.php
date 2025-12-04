@@ -169,11 +169,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Denim Jeans</div><div class="info"><h3>Classic Denim Jeans</h3><p>£35</p></div></div>
-      <div class="card"><div class="image">Cargo Pants</div><div class="info"><h3>Unisex Cargo Pants</h3><p>£40</p></div></div>
-      <div class="card"><div class="image">Chino Trousers</div><div class="info"><h3>Premium Chino Trousers</h3><p>£45</p></div></div>
-      <div class="card"><div class="image">Shorts</div><div class="info"><h3>Summer Shorts</h3><p>£25</p></div></div>
-      <div class="card"><div class="image">Track Pants</div><div class="info"><h3>Athletic Track Pants</h3><p>£30</p></div></div>
+      <div class="card"><div class="image">Jeans</div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
+      <div class="card"><div class="image">Shorts</div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
+      <div class="card"><div class="image">Cargo Trouser</div><div class="info"><h3>Cargo Trouser</h3><p>£80</p></div></div>
+      <div class="card"><div class="image">Chinos</div><div class="info"><h3>Chinos</h3><p>£65</p></div></div>
+      <div class="card"><div class="image">Joggers</div><div class="info"><h3>Joggers</h3><p>£50</p></div></div>
     </div>
   </div>
   @include('components.footer')
