@@ -140,6 +140,54 @@
     .card.hover-swap-hoodie:hover .image-back {
       opacity: 1;
     }
+    .card.hover-swap-tshirt .image {
+      position: relative;
+    }
+    .card.hover-swap-tshirt .image-front,
+    .card.hover-swap-tshirt .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap-tshirt .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap-tshirt:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap-tshirt:hover .image-back {
+      opacity: 1;
+    }
+    .card.hover-swap-jumper .image {
+      position: relative;
+    }
+    .card.hover-swap-jumper .image-front,
+    .card.hover-swap-jumper .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap-jumper .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap-jumper:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap-jumper:hover .image-back {
+      opacity: 1;
+    }
     .card .info {
       padding: 16px;
     }
@@ -236,8 +284,8 @@
     <div class="grid">
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
       <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
-      <div class="card"><div class="image"><img src="/images/tshirtback.png" alt="Premium Unisex T-Shirt"></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image"><img src="/images/jumperfront.png" alt="Unisex Jumper"></div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
+      <div class="card hover-swap-tshirt"><div class="image"><div class="image-front"><img src="/images/tshirtfront.png" alt="Premium Unisex T-Shirt"></div><div class="image-back"><img src="/images/tshirtback.png" alt="Premium Unisex T-Shirt Back"></div></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
+      <div class="card hover-swap-jumper"><div class="image"><div class="image-front"><img src="/images/jumperfront.png" alt="Unisex Jumper"></div><div class="image-back"><img src="/images/jumperback.png" alt="Unisex Jumper Back"></div></div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
       <div class="card"><div class="image"><img src="/images/buttonupshirtfront.png" alt="Unisex Button-Up Shirt"></div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
     </div>
   </div>
