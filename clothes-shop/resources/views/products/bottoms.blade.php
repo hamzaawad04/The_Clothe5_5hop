@@ -84,7 +84,7 @@
     }
     .card .image {
       background: #f3f4f6;
-      height: 220px;
+      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -93,8 +93,8 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .card .image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 90%;
       object-fit: contain;
       display: block;
     }
@@ -169,11 +169,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Jeans</div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
-      <div class="card"><div class="image">Shorts</div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
-      <div class="card"><div class="image">Cargo Trouser</div><div class="info"><h3>Cargo Trouser</h3><p>£80</p></div></div>
-      <div class="card"><div class="image">Chinos</div><div class="info"><h3>Chinos</h3><p>£65</p></div></div>
-      <div class="card"><div class="image">Joggers</div><div class="info"><h3>Joggers</h3><p>£50</p></div></div>
+      <div class="card"><div class="image"></div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
+      <div class="card"><div class="image"></div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
+      <div class="card"><div class="image"></div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
+      <div class="card"><div class="image"></div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
+      <div class="card"><div class="image"></div><div class="info"><h3>Joggers</h3><p>£50</p></div></div>
     </div>
   </div>
   @include('components.footer')

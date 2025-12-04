@@ -172,10 +172,10 @@
   @include('components.mainnavbar')
   <!-- Filter bar -->
   <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option></select></div>
+    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Polo</option><option>Hoodie</option><option>T-Shirt</option><option>Jumper</option><option>Button-Up Shirt</option></select></div>
+    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>White</option><option>Blue</option><option>Red</option><option>Grey</option><option>Navy</option></select></div>
+    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £15</option><option>£15-£25</option><option>£25-£40</option><option>Over £40</option></select></div>
   </div>
 
   <!-- Navy section removed -->
@@ -184,11 +184,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image"><img src="https://trello.com/1/cards/692f4a86b7ca787902be6990/attachments/6930b30555d5859e6449d712/download/blue_polo.png" alt="Blue Polo"></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£10</p></div></div>
-      <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Basic blue shirt</div><div class="info"><h3>Unisex basic blue shirt</h3><p>£10</p></div></div>
-      <div class="card"><div class="image">Black T-shirt</div><div class="info"><h3>Premium Unisex black short sleeve T-shirt</h3><p>£15</p></div></div>
-      <div class="card"><div class="image">Button-up shirt</div><div class="info"><h3>Unisex Button-up shirt</h3><p>£15</p></div></div>
+      <div class="card"><div class="image">Polo</div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
+      <div class="card"><div class="image">Hoodie</div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
+      <div class="card"><div class="image">T-Shirt</div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
+      <div class="card"><div class="image">Jumper</div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
+      <div class="card"><div class="image">Button-Up Shirt</div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
     </div>
   </div>
   @include('components.footer')

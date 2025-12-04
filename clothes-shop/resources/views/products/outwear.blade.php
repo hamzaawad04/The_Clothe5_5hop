@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>THE CLOTHE5 5HOP – Footwear</title>
+  <title>THE CLOTHE5 5HOP – Outwear</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +84,7 @@
     }
     .card .image {
       background: #f3f4f6;
-      height: 220px;
+      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -93,8 +93,8 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .card .image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 90%;
       object-fit: contain;
       display: block;
     }
@@ -110,7 +110,7 @@
       font-weight: bold;
       margin: 0;
     }
-    /* About it section */
+    /* About It section (full-bleed) */
     .about-it {
       background: #0a2540;
       padding: 8px 0;
@@ -157,10 +157,10 @@
 
   <!-- Filter bar -->
   <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Heel</option><option>White Trainers</option><option>Flats</option><option>Boots</option><option>Vans</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>White</option><option>Brown</option><option>Red</option><option>Navy</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £30</option><option>£30-£50</option><option>£50-£75</option><option>Over £75</option></select></div>
+    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Blazer</option><option>Winter Coat</option><option>Cardigan</option><option>Overcoat</option><option>Denim Jacket</option></select></div>
+    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>Navy</option><option>Grey</option><option>Brown</option><option>Denim</option></select></div>
+    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £100</option><option>£100-£150</option><option>£150-£250</option><option>Over £250</option></select></div>
   </div>
 
   <!-- Navy section removed -->
@@ -169,11 +169,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Heel</div><div class="info"><h3>Classic Heel</h3><p>£65</p></div></div>
-      <div class="card"><div class="image">White Trainers</div><div class="info"><h3>White Trainers</h3><p>£55</p></div></div>
-      <div class="card"><div class="image">Flats</div><div class="info"><h3>Comfortable Flats</h3><p>£45</p></div></div>
-      <div class="card"><div class="image">Boots</div><div class="info"><h3>Classic Boots</h3><p>£75</p></div></div>
-      <div class="card"><div class="image">Vans</div><div class="info"><h3>Vans Sneakers</h3><p>£50</p></div></div>
+      <div class="card"><div class="image">Blazer</div><div class="info"><h3>Blazer</h3><p>£150</p></div></div>
+      <div class="card"><div class="image">Winter Coat</div><div class="info"><h3>Winter Coat</h3><p>£280</p></div></div>
+      <div class="card"><div class="image">Cardigan</div><div class="info"><h3>Cardigan</h3><p>£95</p></div></div>
+      <div class="card"><div class="image">Overcoat</div><div class="info"><h3>Overcoat</h3><p>£200</p></div></div>
+      <div class="card"><div class="image">Denim Jacket</div><div class="info"><h3>Denim Jacket</h3><p>£110</p></div></div>
     </div>
   </div>
   @include('components.footer')
