@@ -47,9 +47,9 @@
 
      <!-- Categories -->
    <nav class="flex justify-between px-20 py-3 text-lg font-medium">
-       <a href="#" class="hover:text-cathover">Tops</a>
-       <a href="#" class="hover:text-cathover">Bottoms</a>
-       <a href="#" class="hover:text-cathover">Footwear</a>
-       <a href="#" class="hover:text-cathover">Outerwear</a>
-       <a href="#" class="hover:text-cathover">Accessories</a>
+       <a href="{{ route('tops') }}" class="hover:text-cathover">Tops</a>
+       <a href="{{ route('bottoms') }}" class="hover:text-cathover">Bottoms</a>
+       <a href="{{ route('footwear') }}" class="hover:text-cathover">Footwear</a>
+       <a href="{{ route('outwear') }}" class="hover:text-cathover">Outerwear</a>
+       <a href="{{ route('accessories') }}" class="hover:text-cathover">Accessories</a>
    </nav>

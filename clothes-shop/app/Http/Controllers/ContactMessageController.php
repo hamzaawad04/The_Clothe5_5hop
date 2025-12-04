@@ -16,7 +16,7 @@ class ContactMessageController extends Controller
      */
 
     public function create() {
-        return view('contact');
+        return view('pages.contact');
     }
 
 
@@ -32,17 +32,16 @@ class ContactMessageController extends Controller
         $contactMessage = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'message' => 'required|string|max:500',
-            'status' => 'required|in:new,in_progress,closed'
+            'message' => 'required|string|max:500'
         ]);
 
         // Get user id if possible
         $contactMessage['user_id'] = Auth::id();
+        $contactMessage['status'] = 'new';
 
         ContactMessage::create($contactMessage);
 
         //  Return back to home page
-        return redirect()
-        ->route('index');
+        return back()->with('success', 'Message Sent! We will try to respond as quickly as possible');
     }
 }
