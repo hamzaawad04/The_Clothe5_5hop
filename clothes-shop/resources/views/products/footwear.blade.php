@@ -193,15 +193,43 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">5 Items found</div>
-    <div class="grid">
-      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/heelleft.png" alt="Classic Heel"></div><div class="image-back"><img src="/images/footwear/heelspair.png" alt="Heels Pair"></div></div><div class="info"><h3>Classic Heel</h3><p>£65</p></div></div>
+    <div class="results-heading">{{ $products->count() }} Items found</div>
+      <div class="grid">
+        @foreach ($products as $product)
+
+          @php
+            $primary = $product->images->where('is_primary', 1)->first();
+            $secondary = $product->images->where('is_primary', 0)->first();
+            $front = $primary ? asset($primary->url): 'images/placeholder.png';
+            $back = $primary ? asset($secondary->url): $front;
+          @endphp
+
+          <div class='card hover-swap'>
+                  <div class='image'>
+
+                    <div class='image-front'>
+                      <img src="{{ $front }}">
+                    </div>
+
+                    <div class='image-back'>
+                      <img src="{{ $back }}">
+                    </div>
+
+                  </div>
+                  <div class='info'>
+                    <h3>{{ $product->name }}</h3>
+                    <p>£{{ $product->base_price }}</p>
+                  </div>
+          </div>
+        @endforeach
+      {{--<div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/heelleft.png" alt="Classic Heel"></div><div class="image-back"><img src="/images/footwear/heelspair.png" alt="Heels Pair"></div></div><div class="info"><h3>Classic Heel</h3><p>£65</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/whitetrainers.png" alt="White Trainers"></div><div class="image-back"><img src="/images/footwear/whitetrainerspair.png" alt="White Trainers Pair"></div></div><div class="info"><h3>White Trainers</h3><p>£55</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/flatsfront.png" alt="Comfortable Flats"></div><div class="image-back"><img src="/images/footwear/flatspair.png" alt="Flats Pair"></div></div><div class="info"><h3>Comfortable Flats</h3><p>£45</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/bootsfront.png" alt="Classic Boots"></div><div class="image-back"><img src="/images/footwear/bootspair.png" alt="Boots Pair"></div></div><div class="info"><h3>Classic Boots</h3><p>£75</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/vansside.png" alt="Vans Sneakers"></div><div class="image-back"><img src="/images/footwear/vanspair.png" alt="Vans Pair"></div></div><div class="info"><h3>Vans Sneakers</h3><p>£50</p></div></div>
-    </div>
+    </div>--}}
   </div>
+</div>
   @include('components.footer')
 </body>
 </html>
