@@ -54,7 +54,9 @@
 
     /* Container */
     .container {
-      padding: 0 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
     }
 
     /* Product grid */
@@ -97,6 +99,30 @@
       height: 90%;
       object-fit: contain;
       display: block;
+    }
+    .card.hover-swap .image {
+      position: relative;
+    }
+    .card.hover-swap .image-front,
+    .card.hover-swap .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-back {
+      opacity: 1;
     }
     .card .info {
       padding: 16px;
@@ -169,11 +195,11 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image">Heel</div><div class="info"><h3>Classic Heel</h3><p>£65</p></div></div>
-      <div class="card"><div class="image">White Trainers</div><div class="info"><h3>White Trainers</h3><p>£55</p></div></div>
-      <div class="card"><div class="image">Flats</div><div class="info"><h3>Comfortable Flats</h3><p>£45</p></div></div>
-      <div class="card"><div class="image">Boots</div><div class="info"><h3>Classic Boots</h3><p>£75</p></div></div>
-      <div class="card"><div class="image">Vans</div><div class="info"><h3>Vans Sneakers</h3><p>£50</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/heelleft.png" alt="Classic Heel"></div><div class="image-back"><img src="/images/footwear/heelspair.png" alt="Heels Pair"></div></div><div class="info"><h3>Classic Heel</h3><p>£65</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/whitetrainers.png" alt="White Trainers"></div><div class="image-back"><img src="/images/footwear/whitetrainerspair.png" alt="White Trainers Pair"></div></div><div class="info"><h3>White Trainers</h3><p>£55</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/flatsfront.png" alt="Comfortable Flats"></div><div class="image-back"><img src="/images/footwear/flatspair.png" alt="Flats Pair"></div></div><div class="info"><h3>Comfortable Flats</h3><p>£45</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/bootsfront.png" alt="Classic Boots"></div><div class="image-back"><img src="/images/footwear/bootspair.png" alt="Boots Pair"></div></div><div class="info"><h3>Classic Boots</h3><p>£75</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/footwear/vansside.png" alt="Vans Sneakers"></div><div class="image-back"><img src="/images/footwear/vanspair.png" alt="Vans Pair"></div></div><div class="info"><h3>Vans Sneakers</h3><p>£50</p></div></div>
     </div>
   </div>
   @include('components.footer')

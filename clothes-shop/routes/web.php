@@ -7,6 +7,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+
 Route::get('/', function () {
     return view('pages.home');
 });
@@ -27,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/remove/{variant_id}', [CartController::class, 'removeItem'])->name('cart.remove');
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     /* Order routes */
-    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('checkout.show');
+    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout.place-order');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
 });
@@ -38,24 +40,19 @@ Route::post('/contact', [ContactMessageController::class, 'store'])->name('conta
 Route::resource('variants', ProductVariantController::class);
 /* Category routes */
 Route::resource('categories', CategoryController::class);
+
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
-Route::get('/tops', function () {
-    return view('products.tops');
-})->name('tops');
+Route::get('/tops', [ProductController::class, 'tops'])->name('products.tops');
 
-Route::get('/bottoms', function () {
-    return view('products.bottoms');
-})->name('bottoms');
+Route::get('/bottoms', [ProductController::class, 'bottoms'])->name('products.bottoms');
 
-Route::get('/footwear', function () {
-    return view('products.footwear');
-})->name('footwear');
+Route::get('/footwear', [ProductController::class, 'footwear'])->name('products.footwear');
 
-Route::get('/outwear', function () {
-    return view('products.outwear');
-})->name('outwear');
+Route::get('/outerwear', [ProductController::class, 'outerwear'])->name('products.outerwear');
+
+Route::get('/accessories', [ProductController::class, 'accessories'])->name('products.accessories');
 
 require __DIR__.'/auth.php';
