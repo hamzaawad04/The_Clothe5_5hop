@@ -312,7 +312,7 @@
           $primary = $product->images->where('is_primary', 1)->first();
           $secondary = $product->images->where('is_primary', 0)->first();
           $front = $primary ? asset($primary->url): 'images/placeholder.png';
-          $back = $primary ? asset($secondary->url): $front;
+          $back = $secondary ? asset($secondary->url): $front;
         @endphp
 
         <div class='card hover-swap'>
