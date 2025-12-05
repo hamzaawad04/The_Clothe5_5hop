@@ -17,6 +17,14 @@ class ProductController extends Controller
         return view('products.index', ['products' => Product::all()]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $results = Product::where('name', 'like', "%$search%")->get();
+
+        return view('products.index', ['results' => $results]);
+    }
+
     public function tops() {
         $products = Product::where('category_id', 1)
                             ->with('images')

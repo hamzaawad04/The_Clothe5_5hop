@@ -55,4 +55,7 @@ Route::get('/outerwear', [ProductController::class, 'outerwear'])->name('product
 
 Route::get('/accessories', [ProductController::class, 'accessories'])->name('products.accessories');
 
+Route::get('/index', [ProductController::class, 'index'])->name('products.index');
+Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+
 require __DIR__.'/auth.php';
