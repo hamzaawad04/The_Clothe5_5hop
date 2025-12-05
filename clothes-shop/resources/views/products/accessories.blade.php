@@ -193,15 +193,43 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">5 Items found</div>
-    <div class="grid">
-      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/necklace.png" alt="Gold Necklace"></div><div class="image-back"><img src="/images/accessories/necklaceonstand.png" alt="Necklace on Stand"></div></div><div class="info"><h3>Gold Necklace</h3><p>£45</p></div></div>
+    <div class="results-heading">{{ $products->count() }} Items found</div>
+      <div class="grid">
+        @foreach ($products as $product)
+
+          @php
+            $primary = $product->images->where('is_primary', 1)->first();
+            $secondary = $product->images->where('is_primary', 0)->first();
+            $front = $primary ? asset($primary->url): 'images/placeholder.png';
+            $back = $primary ? asset($secondary->url): $front;
+          @endphp
+
+          <div class='card hover-swap'>
+                  <div class='image'>
+
+                    <div class='image-front'>
+                      <img src="{{ $front }}">
+                    </div>
+
+                    <div class='image-back'>
+                      <img src="{{ $back }}">
+                    </div>
+
+                  </div>
+                  <div class='info'>
+                    <h3>{{ $product->name }}</h3>
+                    <p>£{{ $product->base_price }}</p>
+                  </div>
+          </div>
+        @endforeach
+      {{-- <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/necklace.png" alt="Gold Necklace"></div><div class="image-back"><img src="/images/accessories/necklaceonstand.png" alt="Necklace on Stand"></div></div><div class="info"><h3>Gold Necklace</h3><p>£45</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/watch.png" alt="Classic Watch"></div><div class="image-back"><img src="/images/accessories/watchback.png" alt="Watch Back"></div></div><div class="info"><h3>Classic Watch</h3><p>£120</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/scarf.png" alt="Cotton Scarf"></div><div class="image-back"><img src="/images/accessories/scarfback.png" alt="Scarf Back"></div></div><div class="info"><h3>Cotton Scarf</h3><p>£40</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/glasses.png" alt="Designer Glasses"></div><div class="image-back"><img src="/images/accessories/glassesback.png" alt="Glasses Back"></div></div><div class="info"><h3>Designer Glasses</h3><p>£95</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/gloves.png" alt="Leather Gloves"></div><div class="image-back"><img src="/images/accessories/glovesright.png" alt="Gloves Right"></div></div><div class="info"><h3>Leather Gloves</h3><p>£55</p></div></div>
-    </div>
+    </div> --}}
   </div>
+</div>
   @include('components.footer')
 </body>
 </html>

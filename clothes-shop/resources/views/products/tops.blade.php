@@ -306,7 +306,7 @@
   <div class="container">
     <div class="results-heading">{{ $products->count() }} Items found</div>
     <div class="grid">
-      {{-- @foreach ($products as $product)
+      @foreach ($products as $product)
 
         @php
           $primary = $product->images->where('is_primary', 1)->first();
@@ -332,14 +332,15 @@
                   <p>£{{ $product->base_price }}</p>
                 </div>
         </div>
-      @endforeach --}}
-      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/tops/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/tops/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
+      @endforeach
+      {{-- <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/tops/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/tops/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
       <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/tops/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/tops/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
       <div class="card hover-swap-tshirt"><div class="image"><div class="image-front"><img src="/images/tops/tshirtfront.png" alt="Premium Unisex T-Shirt"></div><div class="image-back"><img src="/images/tops/tshirtback.png" alt="Premium Unisex T-Shirt Back"></div></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
       <div class="card hover-swap-jumper"><div class="image"><div class="image-front"><img src="/images/tops/jumperfront.png" alt="Unisex Jumper"></div><div class="image-back"><img src="/images/tops/jumperback.png" alt="Unisex Jumper Back"></div></div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
       <div class="card hover-swap-buttonup"><div class="image"><div class="image-front"><img src="/images/tops/buttonupshirtfront.png" alt="Unisex Button-Up Shirt"></div><div class="image-back"><img src="/images/tops/buttonupshirtback.png" alt="Unisex Button-Up Shirt Back"></div></div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
-    </div>
+    </div>--}}
   </div>
+</div>
   @include('components.footer')
 </body>
 </html>
