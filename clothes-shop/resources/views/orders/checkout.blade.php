@@ -5,14 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>The Clothes Shop - Checkout</title>
+        <title>Checkout</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
@@ -20,29 +18,23 @@
                 font-family: "Playfair Display", serif;
                 margin: 0;
                 padding: 0;
-                background: #f4f4f4;
-                color: #333;
+                background: #ffffff;
+                color: #000000;
             }
 
             header {
-                background: #14213D;
-                color: #fff;
-                padding: 1rem;
+                background: white;
+                font-size: 2rem;
+                color: #14213d;
+                padding: 2rem;
                 text-align: center;
                 position: relative;
             }
 
-            header::after {
-                content: "🔒 Secure Checkout";
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                font-size: 0.9rem;
-                color: #ccc;
-            }
 
             .breadcrumb {
-                background: #eee;
+                background: #14213d;
+                color: white;
                 text-align: center;
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
@@ -79,6 +71,9 @@
                 justify-content: space-between;
                 align-items: flex-start;
                 flex-wrap: wrap;
+                border: 1px solid gold;
+                padding: 1rem;
+                border-radius: 5px;
             }
 
             .shipping-details {
@@ -143,6 +138,9 @@
                 background: #fff;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
                 margin-bottom: 1.5rem;
+                border: 1px solid gold;
+                padding: 1rem;
+                border-radius: 3px;
             }
 
             .product-image {
@@ -218,7 +216,8 @@
             }
 
             .info-section {
-                max-width: 600px;
+                max-width: 1000px;
+                font-size: 0.75em;
                 margin: auto;
                 font-family: "Playfair Display", serif;
             }
@@ -238,33 +237,48 @@
             .order-button {
                 background-color: #14213D;
                 font-family: "Playfair Display", serif;
-                color: gold;
+                color: #FCA311;
                 border: none;
-                padding: 12px 20px;
-                font-size: 1em;
+                padding: 16px 18px;
+                font-size: 2em;
                 cursor: pointer;
                 width: 100%;
                 margin-top: 30px;
             }
 
             .order-button:hover {
-                background-color: #0f1829;
+                background-color: #FCA311;
+                color: #14213D;
             }
+
+            .divider {
+                border: none;
+                height: 1px;
+                background: #e0e0e0;
+                margin: 1rem 0;
+            }
+
+            .divider.dashed { background: none; border-top: 1px dashed #ccc; height: 0; }
+            .divider.gold { background: gold; height: 2px; }
         </style>
     </head>
 
     <body class="font-playfair text-black">
-        <!-- Custom Header (no navbar component) -->
+
+        @include('components.checkoutnavbar')
+
         <header>
             <h1>The Clothes Shop - Checkout</h1>
         </header>
+
+
 
         <nav class="breadcrumb">
             Basket > Place Order > Pay > Order Complete
         </nav>
 
         <main>
-            <!-- Shipping Address Section -->
+            <!-- CUSTOMER DETAILS -->
             <section class="shipping-address">
                 <div class="shipping-details">
                     <h2>Shipping Address</h2>
@@ -294,11 +308,13 @@
                 </div>
             </section>
 
-            <!-- Basket Form -->
+           
+            <hr class="divider" />
+
             <form method="POST" action="{{ route('checkout.place-order') }}">
                 @csrf
 
-                <!-- Items Section -->
+                <!-- PRODUCTS IN BASKET -->
                 <section class="item-details">
                     <h2>Your Basket</h2>
 
@@ -320,10 +336,8 @@
                                     <div class="quantity-controls">
                                         <button type="button" class="qty-btn" data-change="-1" data-id="{{ $item['id'] }}">-</button>
 
-                                        <!-- hidden input posted to server -->
                                         <input type="hidden" name="quantities[{{ $item['id'] }}]" value="{{ $item['quantity'] ?? 1 }}" class="quantity-input" data-id="{{ $item['id'] }}" />
 
-                                        <!-- visible count -->
                                         <span class="quantity-display" id="quantity-{{ $item['id'] }}">{{ $item['quantity'] ?? 1 }}</span>
 
                                         <button type="button" class="qty-btn" data-change="1" data-id="{{ $item['id'] }}">+</button>
@@ -338,7 +352,9 @@
                     @endif
                 </section>
 
-                <!-- Shipping Options Section -->
+                <hr class="divider" />
+
+                <!-- SHIPING OPTIONS -->
                 <section class="shipping-options">
                     <h2>Shipping Options</h2>
                     <label><input type="radio" name="shipping" value="standard" data-cost="3.00" checked /> Standard Shipping (£3.00)</label>
@@ -346,7 +362,9 @@
                     <label><input type="radio" name="shipping" value="express" data-cost="6.00" /> Express Shipping (£6.00)</label>
                 </section>
 
-                <!-- Payment Method Section -->
+                <hr class="divider" />
+
+                <!-- PAYYYMENT METHID SECTION -->
                 <section class="payment-method">
                     <h2>Payment Method</h2>
                     <label><input type="radio" name="payment" value="PayPal" /> PayPal</label>
@@ -355,7 +373,9 @@
                     <label><input type="radio" name="payment" value="Google Pay" /> Google Pay</label>
                 </section>
 
-                <!-- Order Summary Section -->
+                <hr class="divider" />
+
+                <!-- ORDER SUMMARY -->
                 <section class="order-summary">
                     <h2>Order Summary</h2>
                     <p>Retail Price: <span id="retail-price">£0.00</span></p>
@@ -364,102 +384,107 @@
                     <p>Promotions: <span id="promotions">-£1.16</span></p>
                     <p><strong>Order Total: <span id="order-total">£0.00</span></strong></p>
 
-                    <!-- Hidden fields submitted with form -->
+                    <!-- ORDER STUFF -->
                     <input type="hidden" name="retail_total" id="retail_total" value="0.00" />
                     <input type="hidden" name="shipping_total" id="shipping_total" value="0.00" />
-                    <input type="hidden" name="promotions_total" id="promotions_total" value="-1.16" />
+                    <input type="hidden" name="promotions_total" id="promotions_total" value="0.00" />
                     <input type="hidden" name="order_total" id="order_total_input" value="0.00" />
                 </section>
 
-                <!-- Info Section with Submit Button -->
+                <hr class="divider" />
+
+
+                <!-- LEGALITIES -->
                 <div class="info-section">
                     <div class="info-block">
-                        <img src="{{ asset('images/payment-icon.png') }}" alt="Payment Security Icon" class="icon" />
                         <div>
-                            <h3>Payment Security</h3>
+                            <h3> 🔒 Payment Security</h3>
                             <p>The Clothes Shop uses the latest industry standards to protect your personal information.</p>
                         </div>
                     </div>
                     <div class="info-block">
-                        <img src="{{ asset('images/privacy-icon.png') }}" alt="Security & Privacy Icon" class="icon" />
-                        <div>
-                            <h3>Security & Privacy</h3>
+                        <div> 
+                            <h3> 🛡️ Security & Privacy</h3>
                             <p>We will not store your card details and information.</p>
                         </div>
                     </div>
                     <div class="info-block">
-                        <img src="{{ asset('images/support-icon.png') }}" alt="Customer Support Icon" class="icon" />
                         <div>
-                            <h3>Customer Support</h3>
+                            <h3> 👨🏻‍💻 Customer Support</h3>
                             <p>Contact our Customer Service Platform or email us with any questions.</p>
                         </div>
                     </div>
 
-                    <!-- submit form to place order -->
+                    <hr class="divider" />
+
+
+                    <!-- ORDER BUTTON -->
                     <button type="submit" class="order-button">Order & Pay</button>
                 </div>
             </form>
         </main>
 
-        @include('components.footer')
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const PROMOTIONS = -1.16;
+        document.addEventListener('DOMContentLoaded', function () {
 
-                function recalcTotals() {
-                    const productCards = document.querySelectorAll('.product-card[data-price]');
-                    let retail = 0;
-                    productCards.forEach(card => {
-                        const price = parseFloat(card.dataset.price) || 0;
-                        const id = card.dataset.id;
-                        const qtyInput = document.querySelector('input.quantity-input[data-id="' + id + '"]');
-                        const qty = parseInt(qtyInput?.value || '1', 10) || 1;
-                        retail += price * qty;
-                    });
+        function recalcTotals() {
+            const productCards = document.querySelectorAll('.product-card[data-price]');
+            let retail = 0;
 
-                    const shippingRadio = document.querySelector('input[name="shipping"]:checked');
-                    const shippingCost = parseFloat(shippingRadio?.dataset.cost || '0') || 0;
-
-                    const total = Math.max(0, retail + shippingCost + PROMOTIONS);
-
-                    document.getElementById('retail-price').textContent = '£' + retail.toFixed(2);
-                    document.getElementById('shipping-fee').textContent = '£' + shippingCost.toFixed(2);
-                    document.getElementById('promotions').textContent = (PROMOTIONS < 0 ? '-' : '') + '£' + Math.abs(PROMOTIONS).toFixed(2);
-                    document.getElementById('order-total').textContent = '£' + total.toFixed(2);
-
-                    document.getElementById('retail_total').value = retail.toFixed(2);
-                    document.getElementById('shipping_total').value = shippingCost.toFixed(2);
-                    document.getElementById('promotions_total').value = PROMOTIONS.toFixed(2);
-                    document.getElementById('order_total_input').value = total.toFixed(2);
-                }
-
-                function updateQuantity(id, change) {
-                    const input = document.querySelector('input.quantity-input[data-id="' + id + '"]');
-                    const display = document.getElementById('quantity-' + id);
-                    if (!input || !display) return;
-                    let qty = parseInt(input.value, 10) || 1;
-                    qty = Math.max(1, qty + change);
-                    input.value = qty;
-                    display.textContent = qty;
-                    recalcTotals();
-                }
-
-                document.querySelectorAll('.qty-btn').forEach(function (btn) {
-                    btn.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const id = this.dataset.id;
-                        const change = parseInt(this.dataset.change, 10) || 0;
-                        updateQuantity(id, change);
-                    });
-                });
-
-                document.querySelectorAll('input[name="shipping"]').forEach(r => {
-                    r.addEventListener('change', recalcTotals);
-                });
-
-                recalcTotals();
+            productCards.forEach(card => {
+                const price = parseFloat(card.dataset.price) || 0;
+                const id = card.dataset.id;
+                const qtyInput = document.querySelector('input.quantity-input[data-id="' + id + '"]');
+                const qty = parseInt(qtyInput?.value || '1', 10) || 1;
+                retail += price * qty;
             });
+
+            // PROMOTIONNNNNNNN
+            const PROMOTIONS = retail * 0.25;
+
+            const shippingRadio = document.querySelector('input[name="shipping"]:checked');
+            const shippingCost = parseFloat(shippingRadio?.dataset.cost || '0') || 0;
+
+            const total = Math.max(0, retail - PROMOTIONS + shippingCost);
+
+            document.getElementById('retail-price').textContent = '£' + retail.toFixed(2);
+            document.getElementById('shipping-fee').textContent = '£' + shippingCost.toFixed(2);
+            document.getElementById('promotions').textContent = '-£' + PROMOTIONS.toFixed(2);
+            document.getElementById('order-total').textContent = '£' + total.toFixed(2);
+
+            document.getElementById('retail_total').value = retail.toFixed(2);
+            document.getElementById('shipping_total').value = shippingCost.toFixed(2);
+            document.getElementById('promotions_total').value = PROMOTIONS.toFixed(2);
+            document.getElementById('order_total_input').value = total.toFixed(2);
+        }
+
+        function updateQuantity(id, change) {
+            const input = document.querySelector('input.quantity-input[data-id="' + id + '"]');
+            const display = document.getElementById('quantity-' + id);
+            if (!input || !display) return;
+            let qty = parseInt(input.value, 10) || 1;
+            qty = Math.max(1, qty + change);
+            input.value = qty;
+            display.textContent = qty;
+            recalcTotals();
+        }
+
+        document.querySelectorAll('.qty-btn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const id = this.dataset.id;
+                const change = parseInt(this.dataset.change, 10) || 0;
+                updateQuantity(id, change);
+            });
+        });
+
+        document.querySelectorAll('input[name="shipping"]').forEach(r => {
+            r.addEventListener('change', recalcTotals);
+        });
+
+        recalcTotals();
+        });
         </script>
     </body>
 </html>

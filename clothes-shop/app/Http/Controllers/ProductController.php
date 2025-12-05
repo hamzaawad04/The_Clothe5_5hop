@@ -17,6 +17,54 @@ class ProductController extends Controller
         return view('products.index', ['products' => Product::all()]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $results = Product::where('name', 'like', "%$search%")->get();
+
+        return view('products.index', ['results' => $results]);
+    }
+
+    public function tops() {
+        $products = Product::where('category_id', 1)
+                            ->with('images')
+                            ->get();
+
+        return view('products.tops', compact('products'));
+    }
+
+    public function bottoms() {
+        $products = Product::where('category_id', 2)
+                            ->with('images')
+                            ->get();
+
+        return view('products.bottoms', compact('products'));
+    }
+
+    public function footwear() {
+        $products = Product::where('category_id', 3)
+                            ->with('images')
+                            ->get();
+
+        return view('products.footwear', compact('products'));
+    }
+
+    public function outerwear() {
+        $products = Product::where('category_id', 4)
+                            ->with('images')
+                            ->get();
+
+        return view('products.outerwear', compact('products'));
+    }
+
+    public function accessories() {
+        $products = Product::where('category_id', 5)
+                            ->with('images')
+                            ->get();
+
+        return view('products.accessories', compact('products'));
+    }
+
 
     /**
      *  Returns the create view for the products.

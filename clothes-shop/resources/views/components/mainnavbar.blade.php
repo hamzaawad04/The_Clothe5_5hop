@@ -1,3 +1,4 @@
+   <div class="{{ request()->is('/') ? 'sticky top-0 z-50 bg-white' : '' }}">
    <!-- Logo -->
    <header class="w-full flex items-center px-6 py-3">
     <div class="w-1/4">
@@ -9,11 +10,12 @@
   <!-- Search -->
        <div class="flex-grow max-w-lg mx-auto">
            <div class="relative">
-               <input type="text" placeholder="Search..." class="w-full pl-12 pr-4 py-2 bg-gray-200 rounded-md focus:ring-cathover border-none" />
+               <form action="{{ route('products.search') }}" method="GET">
+                    <input type="text" placeholder="Search..." name="search" class="w-full pl-12 pr-4 py-2 bg-gray-200 rounded-md focus:ring-cathover border-none" />
+                </form>
                <img src="/icons/search.svg" class="w-6 h-6 absolute left-3 top-1/2 -translate-y-1/2" alt="Search icon">
            </div>
        </div>
-
        <!-- Icons -->
         
             <div class="flex items-center space-x-6 w-1/4 justify-end relative" x-data = "{open : false}">
@@ -38,7 +40,7 @@
            <a href="{{ url('/dashboard') }}"><img src="/icons/account.svg" alt="Account" class="w-6 h-6"></a>
         @endauth
 
-           <a href="#"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
+           <a href="{{ route('cart.basket') }}"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
 
            <a href="#"><img src="/icons/wishlist.svg" alt="Wishlist" class="w-10 h-6"></a>
 
@@ -47,9 +49,10 @@
 
      <!-- Categories -->
    <nav class="flex justify-between px-20 py-3 text-lg font-medium">
-       <a href="{{ route('tops') }}" class="hover:text-cathover">Tops</a>
-       <a href="{{ route('bottoms') }}" class="hover:text-cathover">Bottoms</a>
-       <a href="{{ route('footwear') }}" class="hover:text-cathover">Footwear</a>
-       <a href="{{ route('outwear') }}" class="hover:text-cathover">Outerwear</a>
-       <a href="{{ route('accessories') }}" class="hover:text-cathover">Accessories</a>
+       <a href="{{ route('products.tops') }}" class="hover:text-cathover">Tops</a>
+       <a href="{{ route('products.bottoms') }}" class="hover:text-cathover">Bottoms</a>
+       <a href="{{ route('products.footwear') }}" class="hover:text-cathover">Footwear</a>
+       <a href="{{ route('products.outerwear') }}" class="hover:text-cathover">Outerwear</a>
+       <a href="{{ route('products.accessories') }}" class="hover:text-cathover">Accessories</a>
    </nav>
+   </div>

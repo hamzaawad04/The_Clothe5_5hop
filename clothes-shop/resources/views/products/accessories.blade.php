@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>THE CLOTHE5 5HOP – Accessories</title>
+  <title>Accessories</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +54,9 @@
 
     /* Container */
     .container {
-      padding: 0 24px;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 0 24px;
     }
 
     /* Product grid */
@@ -76,14 +78,14 @@
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.06);
       overflow: hidden;
-      background: #fff;
+      background: #e6e9ed;
       min-height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .card .image {
-      background: #f3f4f6;
+      background: white;
       height: 300px;
       display: flex;
       align-items: center;
@@ -97,6 +99,30 @@
       height: 90%;
       object-fit: contain;
       display: block;
+    }
+    .card.hover-swap .image {
+      position: relative;
+    }
+    .card.hover-swap .image-front,
+    .card.hover-swap .image-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .card.hover-swap .image-back {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-front {
+      opacity: 0;
+    }
+    .card.hover-swap:hover .image-back {
+      opacity: 1;
     }
     .card .info {
       padding: 16px;
@@ -167,15 +193,43 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">5 Items found</div>
-    <div class="grid">
-      <div class="card"><div class="image">Necklace</div><div class="info"><h3>Gold Necklace</h3><p>£45</p></div></div>
-      <div class="card"><div class="image">Watch</div><div class="info"><h3>Classic Watch</h3><p>£120</p></div></div>
-      <div class="card"><div class="image">Scarf</div><div class="info"><h3>Cotton Scarf</h3><p>£40</p></div></div>
-      <div class="card"><div class="image">Glasses</div><div class="info"><h3>Designer Glasses</h3><p>£95</p></div></div>
-      <div class="card"><div class="image">Gloves</div><div class="info"><h3>Leather Gloves</h3><p>£55</p></div></div>
-    </div>
+    <div class="results-heading">{{ $products->count() }} Items found</div>
+      <div class="grid">
+        @foreach ($products as $product)
+
+          @php
+            $primary = $product->images->where('is_primary', 1)->first();
+            $secondary = $product->images->where('is_primary', 0)->first();
+            $front = $primary ? asset($primary->url): 'images/placeholder.png';
+            $back = $secondary ? asset($secondary->url): $front;
+          @endphp
+
+          <div class='card hover-swap'>
+                  <div class='image'>
+
+                    <div class='image-front'>
+                      <img src="{{ $front }}">
+                    </div>
+
+                    <div class='image-back'>
+                      <img src="{{ $back }}">
+                    </div>
+
+                  </div>
+                  <div class='info'>
+                    <h3>{{ $product->name }}</h3>
+                    <p>£{{ $product->base_price }}</p>
+                  </div>
+          </div>
+        @endforeach
+      {{-- <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/necklace.png" alt="Gold Necklace"></div><div class="image-back"><img src="/images/accessories/necklaceonstand.png" alt="Necklace on Stand"></div></div><div class="info"><h3>Gold Necklace</h3><p>£45</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/watch.png" alt="Classic Watch"></div><div class="image-back"><img src="/images/accessories/watchback.png" alt="Watch Back"></div></div><div class="info"><h3>Classic Watch</h3><p>£120</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/scarf.png" alt="Cotton Scarf"></div><div class="image-back"><img src="/images/accessories/scarfback.png" alt="Scarf Back"></div></div><div class="info"><h3>Cotton Scarf</h3><p>£40</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/glasses.png" alt="Designer Glasses"></div><div class="image-back"><img src="/images/accessories/glassesback.png" alt="Glasses Back"></div></div><div class="info"><h3>Designer Glasses</h3><p>£95</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/accessories/gloves.png" alt="Leather Gloves"></div><div class="image-back"><img src="/images/accessories/glovesright.png" alt="Gloves Right"></div></div><div class="info"><h3>Leather Gloves</h3><p>£55</p></div></div>
+    </div> --}}
   </div>
+</div>
   @include('components.footer')
 </body>
 </html>

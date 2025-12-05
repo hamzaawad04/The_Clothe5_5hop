@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Thiagoprz\EloquentCompositeKey\HasCompositePrimaryKey;
 
 class ProductImage extends Model
 {
-    use HasCompositePrimaryKey;
 
-    protected $primaryKey = ['product_id', 'url'];
+    protected $primaryKey = 'url';
     public $incrementing = false;
 
     protected $fillable = [
