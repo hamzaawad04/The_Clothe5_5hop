@@ -7,12 +7,10 @@
 
         <title>Checkout</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
@@ -26,20 +24,13 @@
 
             header {
                 background: white;
+                font-size: 2rem;
                 color: #14213d;
-                padding: 1rem;
+                padding: 2rem;
                 text-align: center;
                 position: relative;
             }
 
-            header::after {
-                content: "🔒 Secure Checkout";
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                font-size: 1rem;
-                color: #14213d;
-            }
 
             .breadcrumb {
                 background: #14213d;

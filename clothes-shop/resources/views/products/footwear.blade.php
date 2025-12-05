@@ -78,14 +78,14 @@
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.06);
       overflow: hidden;
-      background: #fff;
+      background: #e6e9ed;
       min-height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .card .image {
-      background: #f3f4f6;
+      background: white;
       height: 300px;
       display: flex;
       align-items: center;
