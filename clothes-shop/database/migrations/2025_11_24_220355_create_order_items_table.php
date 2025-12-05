@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_items', function (Blueprint $table) {
+            $table->id('order_item_id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('variant_id');
@@ -20,13 +21,7 @@ return new class extends Migration
             $table->decimal('line_total', 10, 2);
             $table->timestamps();
 
-            //  Constraints
-            
-            /**
-             *  Create Composite Key (consists of order_id, product_id, variant_id)
-             */
-
-            $table->primary(['order_id', 'product_id', 'variant_id']);
+            //  Constraint
 
 
             /**
@@ -53,7 +48,7 @@ return new class extends Migration
              *  Foreign Key (variant_id)
              */
 
-            $table->foreign('variant_id')->references('variant_id')
+            $table->foreign('variant_id')->references('product_variant_id')
             ->on('product_variants')
             ->onUpdate('cascade')
             ->onDelete('restrict');

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cart_items', function (Blueprint $table) {
+            $table->id('cart_item_id');
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('variant_id');
             $table->integer('qty');
@@ -19,11 +20,7 @@ return new class extends Migration
 
             //  Constraints
 
-            /**
-             *  Create composite key (consits of cart_id and variant_id)
-             */
-
-            $table->primary(['cart_id', 'variant_id']);
+            $table->primary(['cart_item_id']);
             
             /**
              *  cart_id foreign key constraint
@@ -39,7 +36,7 @@ return new class extends Migration
              *  variant_id foreign key constraint
              */
 
-            $table->foreign('variant_id')->references('variant_id')
+            $table->foreign('variant_id')->references('product_variant_id')
             ->on('product_variants')
             ->onUpdate('cascade')
             ->onDelete('cascade');

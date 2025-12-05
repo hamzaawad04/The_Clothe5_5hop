@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductImage extends Model
 {
 
-    protected $primaryKey = 'url';
+    protected $primaryKey = 'product_image_id';
     public $incrementing = false;
 
     protected $fillable = [
