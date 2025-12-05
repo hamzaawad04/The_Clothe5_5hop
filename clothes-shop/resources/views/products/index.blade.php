@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tops</title>
+  <title>Products</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,14 +70,14 @@
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.06);
       overflow: hidden;
-      background: #e6e9ed;
+      background: #fff;
       min-height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .card .image {
-      background: white;
+      background: #f3f4f6;
       height: 300px;
       display: flex;
       align-items: center;
@@ -304,13 +304,13 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">{{ $products->count() }} Items found</div>
+    <div class="results-heading">{{ $results->count() }} Items found</div>
     <div class="grid">
-      @foreach ($products as $product)
+      @foreach ($results as $result)
 
         @php
-          $primary = $product->images->where('is_primary', 1)->first();
-          $secondary = $product->images->where('is_primary', 0)->first();
+          $primary = $result->images->where('is_primary', 1)->first();
+          $secondary = $result->images->where('is_primary', 0)->first();
           $front = $primary ? asset($primary->url): 'images/placeholder.png';
           $back = $primary ? asset($secondary->url): $front;
         @endphp
@@ -328,19 +328,13 @@
 
                 </div>
                 <div class='info'>
-                  <h3>{{ $product->name }}</h3>
-                  <p>£{{ $product->base_price }}</p>
+                  <h3>{{ $result->name }}</h3>
+                  <p>£{{ $result->base_price }}</p>
                 </div>
         </div>
       @endforeach
-      {{-- <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/tops/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/tops/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
-      <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/tops/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/tops/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
-      <div class="card hover-swap-tshirt"><div class="image"><div class="image-front"><img src="/images/tops/tshirtfront.png" alt="Premium Unisex T-Shirt"></div><div class="image-back"><img src="/images/tops/tshirtback.png" alt="Premium Unisex T-Shirt Back"></div></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
-      <div class="card hover-swap-jumper"><div class="image"><div class="image-front"><img src="/images/tops/jumperfront.png" alt="Unisex Jumper"></div><div class="image-back"><img src="/images/tops/jumperback.png" alt="Unisex Jumper Back"></div></div><div class="info"><h3>Unisex Jumper</h3><p>£30</p></div></div>
-      <div class="card hover-swap-buttonup"><div class="image"><div class="image-front"><img src="/images/tops/buttonupshirtfront.png" alt="Unisex Button-Up Shirt"></div><div class="image-back"><img src="/images/tops/buttonupshirtback.png" alt="Unisex Button-Up Shirt Back"></div></div><div class="info"><h3>Unisex Button-Up Shirt</h3><p>£28</p></div></div>
-    </div>--}}
+    </div>
   </div>
-</div>
   @include('components.footer')
 </body>
 </html>
