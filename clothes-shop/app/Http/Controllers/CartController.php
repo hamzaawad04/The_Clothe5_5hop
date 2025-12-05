@@ -13,56 +13,49 @@ class CartController extends Controller
 
     /* Show entire cart */
     public function index()
-    {
-        $user = Auth::user();
+{
+    $cart = auth()->user()->cart;
 
-        $cart = $user->cart ?? Cart::create([
-            'user_id' => $user->user_id,
-            'session_token' => null
-        ]);
-
-        $items = $cart->items()->with(['variant.product'])->get();
-
-        return view('cart.basket', [
-            'cart' => $cart,
-            'items' => $items
-        ]);
+    if (!$cart) {
+        return view('cart.basket')->with('items', []);
     }
+
+    $items = $cart->items()->with('variant.product.images')->get();
+
+    return view('cart.basket', compact('items'));
+}
 
     /* Add product variant to cart */
-    public function addItem(Request $request)
-    {
-        $request->validate([
-            'variant_id' => 'required|exists:product_variants,variant_id',
-            'qty' => 'required|integer|min=1'
+   public function addItem(Request $request)
+{
+    $request->validate([
+        'variant_id' => 'required|exists:product_variants,variant_id',
+        'qty' => 'required|integer|min:1'
+    ]);
+
+    $user = auth()->user();
+
+    // Get or create cart
+    $cart = Cart::firstOrCreate(['user_id' => $user->user_id]);
+
+    // If item already in cart, update quantity
+    $existing = CartItem::where('cart_id', $cart->cart_id)
+                        ->where('variant_id', $request->variant_id)
+                        ->first();
+
+    if ($existing) {
+        $existing->qty += $request->qty;
+        $existing->save();
+    } else {
+        CartItem::create([
+            'cart_id' => $cart->cart_id,
+            'variant_id' => $request->variant_id,
+            'qty' => $request->qty
         ]);
-
-        $user = Auth::user();
-
-        $cart = $user->cart ?? Cart::create([
-            'user_id' => $user->user_id,
-            'session_token' => null
-        ]);
-
-        $variant = ProductVariant::find($request->variant_id);
-
-        $existing = CartItem::where('cart_id', $cart->cart_id)
-            ->where('variant_id', $variant->variant_id)
-            ->first();
-
-        if ($existing) {
-            $existing->qty += $request->qty;
-            $existing->save();
-        } else {
-            CartItem::create([
-                'cart_id' => $cart->cart_id,
-                'variant_id' => $variant->variant_id,
-                'qty' => $request->qty
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Item added to cart.');
     }
+
+    return redirect()->route('cart.basket')->with('success', 'Item added to basket!');
+}
 
     /* Update the quantity of a product variant within cart */
     public function updateQuantity(Request $request, $variant_id)

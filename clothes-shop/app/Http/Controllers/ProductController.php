@@ -109,7 +109,12 @@ class ProductController extends Controller
      */
 
     public function show($product_id) {
-        return view('products.show', ['product' => Product::findOrFail($product_id)]);
+        $product = Product::with(['images', 'variants'])->findOrFail($product_id);
+
+        return view('products.show', [
+            'product' => $product,
+            'images' => $product->images,
+        ]);
     }
 
     /**
