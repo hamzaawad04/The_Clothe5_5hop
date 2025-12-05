@@ -35,8 +35,6 @@ class CartController extends Controller
             'items' => $items
         ]);
 
-        dd($cart);
-
     }
 
     /**
