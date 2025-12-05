@@ -1,28 +1,23 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Basket - {{ config('app.name', 'Laravel') }}</title>
+    <title>Basket - {{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-playfair text-black antialiased">
-        @include('components.mainnavbar')
-        
-  <style>
-    /*importing font from google*/
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+</head>
 
-    /* container for basket header */
+<body class="font-playfair text-black antialiased">
+
+@include('components.mainnavbar')
+
+<style>
     .basket-header {
       display: flex;
       justify-content: space-between;
@@ -30,158 +25,68 @@
       padding: 0 20px;
       margin-top: 30px;
     }
-
-    /* the title */
     .basket-title {
       font-family: 'Playfair Display', serif;
-      font-style: normal;
-      font-weight: 500;
       font-size: 48px;
-      line-height: 64px;
-      color: #000000;
       margin: 0;
     }
-
-    /* item counter */
     .item-count {
-      font-family: 'Playfair Display', serif;
-      font-weight: 300;
       font-size: 24px;
-      line-height: 28px;
-      color: #000000;
     }
-
-    /* divider line */
     .basket-divider {
-      border: none;
       border-top: 1px solid #000000;
       opacity: 0.2;
       margin: 8px 0;
       margin-left: 42px;
       width: calc(100% - 102px);
     }
+    .basket-content {
+      display: flex;
+      gap: 2rem;
+      padding: 10px 20px;
+    }
 
-    /* basket item container */
+    /* Item Card */
     .basket-item {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: var(--inner-pad);
-      box-sizing: border-box;
+      padding: 1rem;
       width: 355px;
       height: 490px;
       background: rgba(217, 217, 217, 0.55);
       border: 1px solid #000000;
       border-radius: 8px;
     }
+ .item-image {
+  width: 100%;
+  aspect-ratio: 1 / 1.2;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #fff;
+  display: block;
+}
 
-    /* basket content area: items and summary */
-    .basket-content {
-      display: flex;
-      align-items: flex-start;
-      gap: 2rem;
-      padding: 10px 20px;
-    }
 
-    /* product image container */
-    .item-image {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 317px;
-      height: 342px;
-      object-fit: cover;
-      border-radius: 8px;
-      background: #fff;
-    }
 
-    /* details */
     .item-details {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      line-height: 1.25;
-      color: #000;
-      margin: 370px 20px 60px 20px;
+      margin-top: 0.75rem;
+      font-size: 16px;
     }
-
     .item-details h3 {
       margin: 0;
       font-size: 18px;
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0;
     }
-
-    .item-details p {
-      margin: 0;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1.3;
-      color: #000;
-    }
-
-    .item-actions { display:flex; justify-content:space-between; align-items:center; gap:1rem; }
-
-    /* item specifications */
     .item-specs {
-      font-family: 'Playfair Display', serif;
-      font-weight: 300;
-      font-size: 18px;
-      color: #000;
-      margin-top: 4px;
-      opacity: 0.5;
+      font-size: 16px;
+      opacity: 0.6;
     }
 
-    /* heart icon */
-    .heart-icon {
-      position: absolute;
-      top: 375px;
-      right: 20px;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-
-    /* compact controls */
-    .quantity-box { display:flex; gap:.25rem; align-items:center; padding:.25rem .5rem; border:1px solid #000; border-radius:5px; }
-
-    /* trash icon */
-    .trash-icon {
-      position: absolute;
-      bottom: 10px;
-      left: 20px;
-      width: 25px;
-      height: 25px;
-      cursor: pointer;
-    }
-
-    /* empty basket message */
-    .empty-message {
-      text-align: center;
-      color: #000;
-      font-family: 'Playfair Display', serif;
-      font-weight: 250;
-      font-size: 20px;
-      margin: 100px auto;
-      width: 100%;
+    .item-actions {
+      margin-top: 1rem;
       display: flex;
-      flex-direction: column;
+      gap: 1rem;
       align-items: center;
-      justify-content: center;
     }
 
-    .empty-message img{
-      position: relative;
-      width: 158px;
-      height: 158px;
-      margin: 0 auto 20px auto;
-    }
-
-    /* basket summary section */
     .basket-summary {
       width: 380px;
       background: rgba(217, 217, 217, 0.55);
@@ -190,222 +95,127 @@
       padding: 1rem;
       margin-left: auto;
       margin-right: 40px;
-      margin-top: 0;
     }
-
-    /* divider in summary */
-    .summary-divider {
-      border: none;
-      border-top: 1px solid #000000;
-      opacity: 0.2;
-      margin: 8px 0 16px 0;
-    }
-
-    /* summary title */
     .summary-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
       font-size: 24px;
-      line-height: 32px;
-      margin-top: 0;
-      margin-bottom: 16px;
+      margin: 0 0 12px 0;
     }
-
-    /* summary item text */
-    .summary-item {
-      font-family: 'Playfair Display', serif;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 24px;
+    .summary-item,
+    .summary-total {
       margin: 4px 0;
     }
 
-    /* total amount text */
-    .summary-total {
-      font-family: 'Playfair Display', serif;
-      font-weight: 630;
-      font-size: 16px;
-      line-height: 24px;
-      margin: 8px 0;
-      text-transform: uppercase;
-    }
-
-    /* checkout button */
     .checkout-button {
-      width: 292px;
-      height: 45px;
-      background-color: #14213D;
-      border-radius: 3px;
-      border: none;
-      color: #ffffff;
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      font-weight: 570;
-      cursor: pointer;
-      display: block;
-      margin: 1rem auto 0 auto;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+        width: 100%;
+        background-color: #14213D;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: .75rem 1rem;
+        font-size: 16px;
+        cursor: pointer;
+        transition: .3s;
     }
-
     .checkout-button:hover {
-      background-color: #98a2c5;
+        background-color: #56607f;
     }
-  </style>
 
-  <div class="basket-header">
+    .empty-message{
+      margin: 100px auto;
+      text-align: center;
+      font-size: 20px;
+    }
+</style>
+
+
+<div class="basket-header">
     <h2 class="basket-title">BASKET</h2>
-    <span class="item-count">0 items</span>
-  </div>
-  <hr class="basket-divider"/>
+    <span class="item-count">{{ $items->sum('qty') }} items</span>
+</div>
+<hr class="basket-divider"/>
 
-  <main class="basket-content" id="basket-content">
-    <div id="basket-items-container"></div>
 
-    <!-- Empty Basket Message -->
-    <div class="empty-message" style="display: block;">
-      <img src="{{ asset('images/empty-basket.png') }}" alt="Sad basket" />
-      <p>Nothing's in your basket ;(</p>
-    </div>
+<main class="basket-content">
 
-    <!-- Basket Summary (hidden by default) -->
-    <div class="basket-summary" style="display: none;" id="basket-summary">
-      <p class="summary-title">Basket Summary</p>
-      <hr class="summary-divider"/>
-      <p class="summary-item">Subtotal: <span id="subtotal">£0.00</span></p>
-      <p class="summary-item">Delivery Fee: <span id="delivery">£0.00</span></p>
-      <p class="summary-total">Total: <span id="total">£0.00</span></p>
-      <form action="{{ route('orders.checkout') }}" method="GET">
-        <button type="submit" class="checkout-button">PROCESS YOUR ORDER</button>
-      </form>
-    </div>
-  </main>
+    @if($items->count())
 
-  <script>
-    function setupItemListeners() {
-      document.querySelectorAll('.basket-item').forEach(item => {
-        const decreaseBtn = item.querySelector('.decrease');
-        const increaseBtn = item.querySelector('.increase');
+        <div>
+            @foreach($items as $item)
 
-        increaseBtn.addEventListener('click', () => {
-          const index = increaseBtn.getAttribute('data-index');
-          increaseQuantity(index);
-        });
+                <div class="basket-item">
 
-        decreaseBtn.addEventListener('click', () => {
-          const index = decreaseBtn.getAttribute('data-index');
-          decreaseQuantity(index);
-        });
-      });
-    }
+                    <img src="/{{ $item->variant->product->images->first()->url ?? 'images/placeholder.png' }}"
+                         class="item-image" alt="Product">
 
-    function updateBasketState() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const itemCount = document.querySelector('.item-count');
-      const basketSummary = document.getElementById('basket-summary');
-      const emptyMessage = document.querySelector('.empty-message');
+                    <div class="item-details">
+                        <h3>{{ $item->variant->product->name }}</h3>
+                        <p>£{{ number_format($item->variant->price, 2) }}</p>
+                        <p class="item-specs">{{ $item->variant->size }} 
+                            @if($item->variant->color) | {{ $item->variant->color }} @endif
+                        </p>
+                    </div>
 
-      let totalQuantity = 0;
-      cart.forEach(item => {
-        totalQuantity += item.quantity;
-      });
+                    <div class="item-actions">
 
-      if (cart.length === 0) {
-        itemCount.textContent = '0 items';
-        basketSummary.style.display = 'none';
-        emptyMessage.style.display = 'block';
-      } else {
-        itemCount.textContent = `${totalQuantity} item${totalQuantity > 1 ? 's' : ''}`;
-        basketSummary.style.display = 'block';
-        emptyMessage.style.display = 'none';
-      }
-    }
+                        {{-- Update Qty --}}
+                        <form method="POST" action="{{ route('cart.update', $item->variant_id) }}">
+                            @csrf
+                            <input
+                                type="number"
+                                name="qty"
+                                value="{{ $item->qty }}"
+                                min="1"
+                                class="border rounded px-2 w-16"
+                            >
+                            <button class="px-2 py-1 border rounded">Update</button>
+                        </form>
 
-    function setupTrashListeners() {
-      document.querySelectorAll('.trash-icon').forEach(icon => {
-        icon.addEventListener('click', () => {
-          const index = icon.getAttribute('data-index');
-          removeFromCart(index);
-        });
-      });
-    }
+                        {{-- Remove --}}
+                        <form method="POST" action="{{ route('cart.remove', $item->variant_id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="px-2 py-1 border rounded text-red-600">
+                                Remove
+                            </button>
+                        </form>
 
-    function displayBasket() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const container = document.getElementById('basket-items-container');
+                    </div>
 
-      container.innerHTML = '';
+                </div>
 
-      cart.forEach((item, index) => {
-        const itemHTML = `
-          <div class="basket-item">
-            <img src="${item.image}" alt="${item.name}" class="item-image" />
-            <div class="item-details">
-              <h3>${item.name}</h3>
-              <p>£${item.price.toFixed(2)}</p>
-              <p class="item-specs">${item.size || 'N/A'} | ${item.color || 'N/A'}</p>
-            </div>
-            <div class="item-actions">
-              <img src="/icons/heart.svg" alt="Add to favorites" class="heart-icon" />
-              <img src="/icons/bin.svg" alt="Remove item" class="trash-icon" data-index="${index}" />
-              <div class="quantity-box">
-                <button type="button" class="decrease" data-index="${index}">−</button>
-                <span class="quantity-display">${item.quantity}</span>
-                <button type="button" class="increase" data-index="${index}">+</button>
-              </div>
-            </div>
-          </div>
-        `;
-        container.innerHTML += itemHTML;
-      });
+            @endforeach
+        </div>
 
-      updateTotals();
-      updateBasketState();
-      setupItemListeners();
-      setupTrashListeners();
-    }
 
-    function updateTotals() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      let subtotal = 0;
+        {{-- Basket Summary --}}
+        <div class="basket-summary">
+            <p class="summary-title">Basket Summary</p>
+            <p class="summary-item">Subtotal:
+                £{{ number_format($items->sum(fn($i) => $i->variant->price * $i->qty), 2) }}
+            </p>
+            <p class="summary-item">Delivery Fee: £0.00</p>
 
-      cart.forEach(item => {
-        subtotal += item.price * item.quantity;
-      });
+            <p class="summary-total">
+                Total: £{{ number_format($items->sum(fn($i) => $i->variant->price * $i->qty), 2) }}
+            </p>
 
-      const deliveryFee = subtotal > 0 ? 5.00 : 0;
-      const total = subtotal + deliveryFee;
+            <form action="{{ route('orders.checkout') }}" method="GET">
+                <button type="submit" class="checkout-button">
+                    PROCESS YOUR ORDER
+                </button>
+            </form>
+        </div>
 
-      document.getElementById('subtotal').textContent = '£' + subtotal.toFixed(2);
-      document.getElementById('delivery').textContent = '£' + deliveryFee.toFixed(2);
-      document.getElementById('total').textContent = '£' + total.toFixed(2);
-    }
+    @else
 
-    function removeFromCart(index) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      displayBasket();
-    }
+        <div class="empty-message">
+            <img src="{{ asset('images/empty-basket.png') }}" alt="Empty">
+            <p>Nothing's in your basket ;(</p>
+        </div>
 
-    function increaseQuantity(index) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart[index]) {
-        cart[index].quantity++;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayBasket();
-      }
-    }
+    @endif
 
-    function decreaseQuantity(index) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart[index] && cart[index].quantity > 1) {
-        cart[index].quantity--;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayBasket();
-      }
-    }
+</main>
 
-    document.addEventListener('DOMContentLoaded', displayBasket);
-  </script>
-    </body>
+</body>
 </html>

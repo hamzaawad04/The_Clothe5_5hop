@@ -100,9 +100,36 @@ class ProductController extends Controller
      *  @return Illuminate\View\View
      */
 
-    public function show($product_id) {
-        return view('products.show', ['product' => Product::findOrFail($product_id)]);
+public function show($product_id)
+{
+    $product = Product::with([
+        'primaryImage',
+        'otherImages'
+    ])
+    ->where('product_id', $product_id)
+    ->firstOrFail();
+
+    // Build image collection
+    $images = collect();
+
+    if ($product->primaryImage) {
+        $images->push($product->primaryImage);
     }
+
+    foreach ($product->otherImages as $img) {
+        $images->push($img);
+    }
+
+    return view('products.show', compact('product', 'images'));
+
+
+
+
+
+
+}
+
+
 
     /**
      *  Gets product based off of its product_id, and will return the 'products.edit' view,
