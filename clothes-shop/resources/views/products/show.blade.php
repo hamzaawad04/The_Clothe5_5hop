@@ -17,23 +17,27 @@
 <form action="{{ route('cart.add') }}" method="POST" class="mt-6">
     @csrf
 
-    @if($product->variants->count() > 1)
-        <label class="block mb-2 font-medium">Select Size:</label>
-        <select name="variant_id" class="border rounded px-3 py-2 w-48">
-            @foreach($product->variants as $variant)
-                <option value="{{ $variant->variant_id }}">
-                    {{ $variant->size ?? 'Variant' }}
-                    @if($variant->color) - {{ $variant->color }} @endif
-                </option>
-            @endforeach
-        </select>
-    @else
+    <!-- No variants yet, so store product_id -->
+    <input type="hidden" name="variant_id" value="{{ $product->product_id }}">
+
+    <div class="mt-4 flex items-center gap-3">
         <input 
-            type="hidden" 
-            name="variant_id" 
-            value="{{ $product->variants->first()->variant_id }}"
+            type="number" 
+            name="qty" 
+            value="1" 
+            min="1" 
+            class="border rounded px-3 py-2 w-20"
         >
-    @endif
+
+        <button 
+            type="submit"
+            class="bg-black px-6 py-3 rounded-md hover:bg-gray-800 transition-all"
+            style="color:#14213D;"
+        >
+            Add to Basket
+        </button>
+    </div>
+</form>
 
     <div class="mt-4 flex items-center gap-3">
         <input 

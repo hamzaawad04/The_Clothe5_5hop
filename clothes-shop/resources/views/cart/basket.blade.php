@@ -45,8 +45,6 @@
       gap: 2rem;
       padding: 10px 20px;
     }
-
-    /* Item Card */
     .basket-item {
       position: relative;
       padding: 1rem;
@@ -56,17 +54,14 @@
       border: 1px solid #000000;
       border-radius: 8px;
     }
- .item-image {
-  width: 100%;
-  aspect-ratio: 1 / 1.2;
-  object-fit: cover;
-  border-radius: 8px;
-  background: #fff;
-  display: block;
-}
-
-
-
+    .item-image {
+      width: 100%;
+      aspect-ratio: 1 / 1.2;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #fff;
+      display: block;
+    }
     .item-details {
       margin-top: 0.75rem;
       font-size: 16px;
@@ -75,18 +70,12 @@
       margin: 0;
       font-size: 18px;
     }
-    .item-specs {
-      font-size: 16px;
-      opacity: 0.6;
-    }
-
     .item-actions {
       margin-top: 1rem;
       display: flex;
       gap: 1rem;
       align-items: center;
     }
-
     .basket-summary {
       width: 380px;
       background: rgba(217, 217, 217, 0.55);
@@ -104,7 +93,6 @@
     .summary-total {
       margin: 4px 0;
     }
-
     .checkout-button {
         width: 100%;
         background-color: #14213D;
@@ -119,7 +107,6 @@
     .checkout-button:hover {
         background-color: #56607f;
     }
-
     .empty-message{
       margin: 100px auto;
       text-align: center;
@@ -127,13 +114,11 @@
     }
 </style>
 
-
 <div class="basket-header">
     <h2 class="basket-title">BASKET</h2>
     <span class="item-count">{{ $items->sum('qty') }} items</span>
 </div>
 <hr class="basket-divider"/>
-
 
 <main class="basket-content">
 
@@ -144,20 +129,16 @@
 
                 <div class="basket-item">
 
-                    <img src="/{{ $item->variant->product->images->first()->url ?? 'images/placeholder.png' }}"
+                    <img src="/{{ $item->product->images->first()->url ?? 'images/placeholder.png' }}"
                          class="item-image" alt="Product">
 
                     <div class="item-details">
-                        <h3>{{ $item->variant->product->name }}</h3>
-                        <p>£{{ number_format($item->variant->price, 2) }}</p>
-                        <p class="item-specs">{{ $item->variant->size }} 
-                            @if($item->variant->color) | {{ $item->variant->color }} @endif
-                        </p>
+                        <h3>{{ $item->product->name }}</h3>
+                        <p>£{{ number_format($item->product->base_price, 2) }}</p>
                     </div>
 
                     <div class="item-actions">
 
-                        {{-- Update Qty --}}
                         <form method="POST" action="{{ route('cart.update', $item->variant_id) }}">
                             @csrf
                             <input
@@ -170,7 +151,6 @@
                             <button class="px-2 py-1 border rounded">Update</button>
                         </form>
 
-                        {{-- Remove --}}
                         <form method="POST" action="{{ route('cart.remove', $item->variant_id) }}">
                             @csrf
                             @method('DELETE')
@@ -186,17 +166,15 @@
             @endforeach
         </div>
 
-
-        {{-- Basket Summary --}}
         <div class="basket-summary">
             <p class="summary-title">Basket Summary</p>
             <p class="summary-item">Subtotal:
-                £{{ number_format($items->sum(fn($i) => $i->variant->price * $i->qty), 2) }}
+                £{{ number_format($items->sum(fn($i) => $i->product->base_price * $i->qty), 2) }}
             </p>
             <p class="summary-item">Delivery Fee: £0.00</p>
 
             <p class="summary-total">
-                Total: £{{ number_format($items->sum(fn($i) => $i->variant->price * $i->qty), 2) }}
+                Total: £{{ number_format($items->sum(fn($i) => $i->product->base_price * $i->qty), 2) }}
             </p>
 
             <form action="{{ route('orders.checkout') }}" method="GET">
