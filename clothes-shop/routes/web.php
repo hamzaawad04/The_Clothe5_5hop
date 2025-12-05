@@ -51,8 +51,8 @@ Route::get('/bottoms', [ProductController::class, 'bottoms'])->name('products.bo
 
 Route::get('/footwear', [ProductController::class, 'footwear'])->name('products.footwear');
 
-Route::get('/outerwear', [ProductController::class, 'tops'])->name('products.outerwear');
+Route::get('/outerwear', [ProductController::class, 'outerwear'])->name('products.outerwear');
 
-Route::get('/accessories', [ProductController::class, 'tops'])->name('products.accessories');
+Route::get('/accessories', [ProductController::class, 'accessories'])->name('products.accessories');
 
 require __DIR__.'/auth.php';

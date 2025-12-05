@@ -195,7 +195,7 @@
   <div class="container">
     <div class="results-heading">5 Items found</div>
     <div class="grid">
-      <div class="card"><div class="image"><img src="/images/outerwear/blazerback.png" alt="Blazer"></div><div class="info"><h3>Blazer</h3><p>£150</p></div></div>
+      <div class="card hover-swap"><div class="image"><div class='image-front'><img src="/images/outerwear/blazerfront.png" alt="Blazer"></div><div class="image-back"><img src="/images/outerwear/blazerback.png" alt="Blazer"></div></div><div class="info"><h3>Blazer</h3><p>£150</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/wintercoatsfront.png" alt="Winter Coat"></div><div class="image-back"><img src="/images/outerwear/wintercoatsback.png" alt="Winter Coat Back"></div></div><div class="info"><h3>Winter Coat</h3><p>£280</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/cardiganfront.png" alt="Cardigan"></div><div class="image-back"><img src="/images/outerwear/cardiganback.png" alt="Cardigan Back"></div></div><div class="info"><h3>Cardigan</h3><p>£95</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/overcoatfront.png" alt="Overcoat"></div><div class="image-back"><img src="/images/outerwear/overcoatback.png" alt="Overcoat Back"></div></div><div class="info"><h3>Overcoat</h3><p>£200</p></div></div>
