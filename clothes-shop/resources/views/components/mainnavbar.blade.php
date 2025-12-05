@@ -1,3 +1,4 @@
+   <div class="{{ request()->is('/') ? 'sticky top-0 z-50 bg-white' : '' }}">
    <!-- Logo -->
    <header class="w-full flex items-center px-6 py-3">
     <div class="w-1/4">
@@ -53,3 +54,4 @@
        <a href="{{ route('products.outerwear') }}" class="hover:text-cathover">Outerwear</a>
        <a href="{{ route('products.accessories') }}" class="hover:text-cathover">Accessories</a>
    </nav>
+   </div>
