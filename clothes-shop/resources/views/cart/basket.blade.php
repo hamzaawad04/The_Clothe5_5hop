@@ -274,7 +274,7 @@
       <p class="summary-item">Subtotal: <span id="subtotal">£0.00</span></p>
       <p class="summary-item">Delivery Fee: <span id="delivery">£0.00</span></p>
       <p class="summary-total">Total: <span id="total">£0.00</span></p>
-      <form action="{{ route('checkout.show') }}" method="GET">
+      <form action="{{ route('orders.checkout') }}" method="GET">
         <button type="submit" class="checkout-button">PROCESS YOUR ORDER</button>
       </form>
     </div>
