@@ -22,9 +22,6 @@ return new class extends Migration
             ->on('products')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-
-            //  Define composite key
-            $table->primary(['product_id', 'url']);
         });
     }
 
