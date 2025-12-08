@@ -13,6 +13,14 @@
         body { 
             font-family: "Playfair Display", serif; 
             background: #fff;
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+        }
+        .basket-main {
+            flex:1;
+            display:flex;
+            flex-direction:column;
         }
         .basket-header {
             display:flex; justify-content:space-between; 
@@ -100,6 +108,7 @@
 
 @include('components.mainnavbar')
 
+<main class="basket-main">
 <div class="basket-header">
     <h2 class="basket-title">BASKET</h2>
     <span class="item-count">{{ $cartItems->count() }} items</span>
@@ -182,6 +191,8 @@
     @endif
 
     </div>
+
+</main>
 
 @include('components.footer')
 
