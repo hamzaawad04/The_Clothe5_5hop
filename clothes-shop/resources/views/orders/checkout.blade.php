@@ -88,7 +88,7 @@
             .shipping-actions button {
                 display: block;
                 margin-bottom: 0.5rem;
-                background: #000;
+                background: #14213D;
                 color: #fff;
                 border: none;
                 padding: 0.4rem 0.8rem;
@@ -117,7 +117,7 @@
             }
 
             button {
-                background: #000;
+                background: #14213D;
                 color: #fff;
                 border: none;
                 padding: 0.6rem 1rem;
