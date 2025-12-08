@@ -267,12 +267,6 @@
 
         @include('components.checkoutnavbar')
 
-        <header>
-            <h1>The Clothes Shop - Checkout</h1>
-        </header>
-
-
-
         <nav class="breadcrumb">
             Basket > Place Order > Pay > Order Complete
         </nav>
@@ -327,7 +321,7 @@
                                     <p class="product-description">{{ $item['description'] ?? '' }}</p>
                                     <div class="product-details">
                                         <span class="detail-item">Size: {{ $item['size'] ?? 'N/A' }}</span>
-                                        <span class="detail-item">Color: {{ $item['color'] ?? 'N/A' }}</span>
+                                        <span class="detail-item">Color: {{ $item['colour'] ?? 'N/A' }}</span>
                                     </div>
 
                                     <div class="quantity-controls">

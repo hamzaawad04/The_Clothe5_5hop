@@ -312,10 +312,10 @@
           $primary = $result->images->where('is_primary', 1)->first();
           $secondary = $result->images->where('is_primary', 0)->first();
           $front = $primary ? asset($primary->url): 'images/placeholder.png';
-          $back = $primary ? asset($secondary->url): $front;
+          $back = $secondary ? asset($secondary->url): $front;
         @endphp
 
-        <a href="{{ route('products.show', $product->product_id) }}">
+        <a href="{{ route('products.show', $result->product_id) }}">
           <div class='card hover-swap'>
                   <div class='image'>
 
@@ -329,8 +329,8 @@
 
                   </div>
                   <div class='info'>
-                    <h3>{{ $product->name }}</h3>
-                    <p>£{{ $product->base_price }}</p>
+                    <h3>{{ $result->name }}</h3>
+                    <p>£{{ $result->base_price }}</p>
                   </div>
           </div>
         </a>
