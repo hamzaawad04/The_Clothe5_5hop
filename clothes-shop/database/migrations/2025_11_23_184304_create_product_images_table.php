@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_images', function (Blueprint $table) {
+            $table->id('product_image_id');
             $table->unsignedBigInteger('product_id');
             $table->string('url');
             $table->boolean('is_primary');
@@ -22,9 +23,6 @@ return new class extends Migration
             ->on('products')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-
-            //  Define composite key
-            $table->primary(['product_id', 'url']);
         });
     }
 

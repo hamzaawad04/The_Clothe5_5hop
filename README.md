@@ -7,7 +7,7 @@ Kawthar Karim - 240087764; 240087764@aston.ac.uk <br>
 Hamza Awad - 220081621; 220081621@aston.ac.uk <br>
 Aliyan Ramday - 230126505; 230126505@aston.ac.uk <br>
 Cameron Swaby - 240193227: 240193227@aston.ac.uk <br>
-Ayomide Aidevbo Bola-Monite - 240362605@aston.ac.uk <br> 
+Ayomide Aidevbo Bola-Monite - 240362605; 240362605@aston.ac.uk <br> 
 
 ### Required Installations: <br>
 - PHP <br>

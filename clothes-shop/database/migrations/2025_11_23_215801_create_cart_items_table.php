@@ -12,19 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cart_items', function (Blueprint $table) {
+            $table->id('cart_item_id');
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('variant_id');
             $table->integer('qty');
             $table->timestamps();
 
             //  Constraints
-
-            /**
-             *  Create composite key (consits of cart_id and variant_id)
-             */
-
-            $table->primary(['cart_id', 'variant_id']);
-            
             /**
              *  cart_id foreign key constraint
              */

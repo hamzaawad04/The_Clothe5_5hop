@@ -314,24 +314,26 @@
           $front = $primary ? asset($primary->url): 'images/placeholder.png';
           $back = $secondary ? asset($secondary->url): $front;
         @endphp
+        
+        <a href="{{ route('products.show', $product->product_id) }}">
+          <div class='card hover-swap'>
+                  <div class='image'>
 
-        <div class='card hover-swap'>
-                <div class='image'>
+                    <div class='image-front'>
+                      <img src="{{ $front }}">
+                    </div>
 
-                  <div class='image-front'>
-                    <img src="{{ $front }}">
+                    <div class='image-back'>
+                      <img src="{{ $back }}">
+                    </div>
+
                   </div>
-
-                  <div class='image-back'>
-                    <img src="{{ $back }}">
+                  <div class='info'>
+                    <h3>{{ $product->name }}</h3>
+                    <p>£{{ $product->base_price }}</p>
                   </div>
-
-                </div>
-                <div class='info'>
-                  <h3>{{ $product->name }}</h3>
-                  <p>£{{ $product->base_price }}</p>
-                </div>
-        </div>
+          </div>
+        </a>
       @endforeach
       {{-- <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/tops/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/tops/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
       <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/tops/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/tops/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>

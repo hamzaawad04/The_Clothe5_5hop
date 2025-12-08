@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     /* Order routes */
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
-    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout.place-order');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
 });
 /* Contact routes */
@@ -55,7 +55,8 @@ Route::get('/outerwear', [ProductController::class, 'outerwear'])->name('product
 
 Route::get('/accessories', [ProductController::class, 'accessories'])->name('products.accessories');
 
-Route::get('/index', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 
 require __DIR__.'/auth.php';

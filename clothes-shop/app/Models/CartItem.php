@@ -8,8 +8,7 @@ class CartItem extends Model
 {
     protected $table = 'cart_items';
     public $timestamps = false;
-    public $incrementing = false;
-    protected $primaryKey = null; // no single primary key
+    protected $primaryKey = 'cart_item_id'; // no single primary key
 
     protected $fillable = [
         'cart_id',

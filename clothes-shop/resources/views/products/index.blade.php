@@ -312,26 +312,28 @@
           $primary = $result->images->where('is_primary', 1)->first();
           $secondary = $result->images->where('is_primary', 0)->first();
           $front = $primary ? asset($primary->url): 'images/placeholder.png';
-          $back = $primary ? asset($secondary->url): $front;
+          $back = $secondary ? asset($secondary->url): $front;
         @endphp
 
-        <div class='card hover-swap'>
-                <div class='image'>
+        <a href="{{ route('products.show', $result->product_id) }}">
+          <div class='card hover-swap'>
+                  <div class='image'>
 
-                  <div class='image-front'>
-                    <img src="{{ $front }}">
+                    <div class='image-front'>
+                      <img src="{{ $front }}">
+                    </div>
+
+                    <div class='image-back'>
+                      <img src="{{ $back }}">
+                    </div>
+
                   </div>
-
-                  <div class='image-back'>
-                    <img src="{{ $back }}">
+                  <div class='info'>
+                    <h3>{{ $result->name }}</h3>
+                    <p>£{{ $result->base_price }}</p>
                   </div>
-
-                </div>
-                <div class='info'>
-                  <h3>{{ $result->name }}</h3>
-                  <p>£{{ $result->base_price }}</p>
-                </div>
-        </div>
+          </div>
+        </a>
       @endforeach
     </div>
   </div>

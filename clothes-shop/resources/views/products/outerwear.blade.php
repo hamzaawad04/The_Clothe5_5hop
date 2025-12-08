@@ -204,6 +204,7 @@
             $back = $secondary ? asset($secondary->url): $front;
           @endphp
 
+          <a href="{{ route('products.show', $product->product_id) }}">
           <div class='card hover-swap'>
                   <div class='image'>
 
@@ -221,6 +222,7 @@
                     <p>£{{ $product->base_price }}</p>
                   </div>
           </div>
+        </a>
         @endforeach
       {{--<div class="card hover-swap"><div class="image"><div class='image-front'><img src="/images/outerwear/blazerfront.png" alt="Blazer"></div><div class="image-back"><img src="/images/outerwear/blazerback.png" alt="Blazer"></div></div><div class="info"><h3>Blazer</h3><p>£150</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/outerwear/wintercoatsfront.png" alt="Winter Coat"></div><div class="image-back"><img src="/images/outerwear/wintercoatsback.png" alt="Winter Coat Back"></div></div><div class="info"><h3>Winter Coat</h3><p>£280</p></div></div>
