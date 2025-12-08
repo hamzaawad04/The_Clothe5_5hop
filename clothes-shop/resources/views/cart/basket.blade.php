@@ -18,7 +18,7 @@
             display:flex; justify-content:space-between; 
             padding-left:20px; margin-top:0px;
             padding-right: 10px;
-            padding-top: 5px:
+            padding-top: 5px;
         }
         .basket-title { font-size:48px; font-weight:500; }
         .item-count { font-size:22px; opacity:.7; }
@@ -28,7 +28,13 @@
             margin:auto;
         }
         .basket-content { display:flex; gap:40px; padding:20px; }
-        .basket-items { flex:1; }
+        .basket-items { 
+            flex:1; 
+            display:flex; 
+            flex-wrap:wrap; 
+            gap:20px; 
+            align-content:flex-start;
+        }
 
         .basket-item {
             position:relative;
@@ -36,12 +42,11 @@
             border:1px solid #000;
             border-radius:8px;
             padding:20px;
-            width:350px;
-            margin-bottom:20px;
+            width:320px;
         }
 
         .item-image {
-            width:310px;
+            width:100%;
             height:330px;
             object-fit:contain;
             border-radius:8px;
