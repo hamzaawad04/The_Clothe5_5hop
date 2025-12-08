@@ -71,6 +71,7 @@
     </style>
 </head>
 <body>
+    @include('components.mainnavbar')
 
     <div class="container">
 
@@ -133,5 +134,6 @@
 
     </div>
 
+    @include('components.footer')
 </body>
 </html>
