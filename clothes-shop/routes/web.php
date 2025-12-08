@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     /* Order routes */
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
-    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout.place-order');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
 });
 /* Contact routes */

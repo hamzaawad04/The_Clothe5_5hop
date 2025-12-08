@@ -124,15 +124,11 @@ class OrderController extends Controller
         $user = auth()->user();
         $cart = $user->cart;
 
-        /* if (!$cart || $cart->items->isEmpty()) {
-            return redirect()->back()->with('error', 'Your cart is empty.');
-        } */
-
         if (!$cart || $cart->items->isEmpty()) {
             return view('orders.checkout', [
                 'basket' => ['items' => []]
         ]);
-}
+    }
 
         return view('orders.checkout', [
             'basket' => [
@@ -143,7 +139,7 @@ class OrderController extends Controller
                         'image' => $item->variant->product->images->first()->url ?? null,
                         'price' => $item->variant->product->base_price,
                         'size' => $item->variant->size,
-                        'color' => $item->variant->color,
+                        'colour' => $item->variant->colour,
                         'quantity' => $item->qty,
                         'description' => $item->variant->product->description
                     ];
