@@ -88,7 +88,7 @@
             .shipping-actions button {
                 display: block;
                 margin-bottom: 0.5rem;
-                background: #000;
+                background: #14213D;
                 color: #fff;
                 border: none;
                 padding: 0.4rem 0.8rem;
@@ -117,7 +117,7 @@
             }
 
             button {
-                background: #000;
+                background: #14213D;
                 color: #fff;
                 border: none;
                 padding: 0.6rem 1rem;
@@ -319,7 +319,6 @@
                                 <div class="product-info">
                                     <h3>{{ $item['name'] ?? 'Product Name' }}</h3>
                                     <p class="product-price">£{{ number_format($item['price'] ?? 0, 2) }}</p>
-                                    <p class="product-description">{{ $item['description'] ?? '' }}</p>
                                     <div class="product-details">
                                         <span class="detail-item">Size: {{ $item['size'] ?? 'N/A' }}</span>
                                         <span class="detail-item">Color: {{ $item['colour'] ?? 'N/A' }}</span>
