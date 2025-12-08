@@ -288,7 +288,7 @@
                         @php $user = auth()->user(); @endphp
                         <p>{{ $user->first_name }} {{ $user->last_name }}</p>
 
-                        {{-- This is a Blade comment --}}
+                        {{-- Add the other deatils of the database for the cutsomer here --}}
                         
                     @else
                         <p>Customer Name</p>
