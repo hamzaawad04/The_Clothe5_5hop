@@ -267,18 +267,12 @@
 
         @include('components.checkoutnavbar')
 
-        <header>
-            <h1>The Clothes Shop - Checkout</h1>
-        </header>
-
-
-
         <nav class="breadcrumb">
             Basket > Place Order > Pay > Order Complete
         </nav>
 
         <main>
-            <!-- CUSTOMER DETAILS -->
+            <!-- CUSTOMER DETAILS(use order) -->
             <section class="shipping-address">
                 <div class="shipping-details">
                     <h2>Shipping Address</h2>
@@ -286,7 +280,9 @@
                     
                     @auth
                         @php $user = auth()->user(); @endphp
-                        <p>{{ $user->first_name }} {{ $user->last_name }}</p>
+                        <input type="text" name="ship_name" placeholder="Full Name" required><br>
+                        <input type="text" name="ship_address" placeholder="Shipping Address" required>
+
 
                         {{-- Add the other deatils of the database for the cutsomer here --}}
                         
@@ -311,36 +307,41 @@
             <form method="POST" action="{{ route('checkout.place-order') }}">
                 @csrf
 
-                <!-- PRODUCTS IN BASKET -->
+                <!-- PRODUCTS IN BASKET(use order_items) -->
                 <section class="item-details">
                     <h2>Your Basket</h2>
 
                     @if(!empty($basket['items']))
                         @foreach($basket['items'] as $item)
-                            <div class="product-card" data-id="{{ $item['id'] }}" data-price="{{ $item['price'] ?? 0 }}">
+                            <div class="product-card" data-id="{{ $item['variant_id'] }}" data-price="{{ $item['unit_price'] ?? 0 }}">
                                 <div class="product-image">
-                                    <img src="{{ asset($item['image'] ?? 'images/placeholder.jpg') }}" alt="{{ $item['name'] ?? 'Product' }}" />
+                                    <img src="{{ asset($item['image'] ?? 'images/placeholder.jpg') }}" alt="Product Image" />
                                 </div>
+
                                 <div class="product-info">
-                                    <h3>{{ $item['name'] ?? 'Product Name' }}</h3>
-                                    <p class="product-price">£{{ number_format($item['price'] ?? 0, 2) }}</p>
-                                    <p class="product-description">{{ $item['description'] ?? '' }}</p>
+                                    <h3>{{ $item['product_name'] ?? 'Product Name' }}</h3>
+                                    <p class="product-price">£{{ number_format($item['unit_price'] ?? 0, 2) }}</p>
+
                                     <div class="product-details">
-                                        <span class="detail-item">Size: {{ $item['size'] ?? 'N/A' }}</span>
-                                        <span class="detail-item">Color: {{ $item['color'] ?? 'N/A' }}</span>
+                                        <span class="detail-item">Variant ID: {{ $item['variant_id'] }}</span>
+                                        <span class="detail-item">Product ID: {{ $item['product_id'] }}</span>
                                     </div>
 
                                     <div class="quantity-controls">
-                                        <button type="button" class="qty-btn" data-change="-1" data-id="{{ $item['id'] }}">-</button>
+                                        <button type="button" class="qty-btn" data-change="-1" data-id="{{ $item['variant_id'] }}">-</button>
 
-                                        <input type="hidden" name="quantities[{{ $item['id'] }}]" value="{{ $item['quantity'] ?? 1 }}" class="quantity-input" data-id="{{ $item['id'] }}" />
+                                        <input type="hidden" name="quantities[{{ $item['variant_id'] }}]" value="{{ $item['qty'] ?? 1 }}" class="quantity-input" data-id="{{ $item['variant_id'] }}" />
 
-                                        <span class="quantity-display" id="quantity-{{ $item['id'] }}">{{ $item['quantity'] ?? 1 }}</span>
+                                        <span class="quantity-display" id="quantity-{{ $item['variant_id'] }}">{{ $item['qty'] ?? 1 }}</span>
 
-                                        <button type="button" class="qty-btn" data-change="1" data-id="{{ $item['id'] }}">+</button>
+                                        <button type="button" class="qty-btn" data-change="1" data-id="{{ $item['variant_id'] }}">+</button>
                                     </div>
 
-                                    <input type="hidden" name="items[]" value="{{ $item['id'] }}" />
+                                    <p class="line-total font-semibold mt-2">
+                                        Line Total: £{{ number_format($item['line_total'] ?? ($item['unit_price'] * $item['qty']), 2) }}
+                                    </p>
+
+                                    <input type="hidden" name="items[]" value="{{ $item['variant_id'] }}" />
                                 </div>
                             </div>
                         @endforeach
@@ -348,7 +349,6 @@
                         <p>Your basket is empty.</p>
                     @endif
                 </section>
-
                 <hr class="divider" />
 
                 <!-- SHIPING OPTIONS -->
@@ -361,31 +361,50 @@
 
                 <hr class="divider" />
 
-                <!-- PAYYYMENT METHID SECTION -->
+                <!-- PAYYYMENT METHID SECTION(use order) -->
                 <section class="payment-method">
                     <h2>Payment Method</h2>
-                    <label><input type="radio" name="payment" value="PayPal" /> PayPal</label>
-                    <label><input type="radio" name="payment" value="Credit/Debit Card" /> Credit/Debit Card</label>
-                    <label><input type="radio" name="payment" value="Apple Pay" /> Apple Pay</label>
-                    <label><input type="radio" name="payment" value="Google Pay" /> Google Pay</label>
+                    <label><input type="radio" name="payment_method" value="PayPal" /> PayPal</label>
+                    <label><input type="radio" name="payment_method" value="Credit/Debit Card" /> Credit/Debit Card</label>
+                    <label><input type="radio" name="payment_method" value="Apple Pay" /> Apple Pay</label>
+                    <label><input type="radio" name="payment_method" value="Google Pay" /> Google Pay</label>
                 </section>
 
                 <hr class="divider" />
 
-                <!-- ORDER SUMMARY -->
+                <!-- ORDER SUMMARY (use order/order_items/products) -->
                 <section class="order-summary">
                     <h2>Order Summary</h2>
-                    <p>Retail Price: <span id="retail-price">£0.00</span></p>
-                    <p>Shipping Fee: <span id="shipping-fee">£0.00</span></p>
-                    <p>On-Time Delivery Guarantee: FREE</p>
-                    <p>Promotions: <span id="promotions">-£1.16</span></p>
-                    <p><strong>Order Total: <span id="order-total">£0.00</span></strong></p>
 
-                    <!-- ORDER STUFF -->
-                    <input type="hidden" name="retail_total" id="retail_total" value="0.00" />
-                    <input type="hidden" name="shipping_total" id="shipping_total" value="0.00" />
-                    <input type="hidden" name="promotions_total" id="promotions_total" value="0.00" />
-                    <input type="hidden" name="order_total" id="order_total_input" value="0.00" />
+                    <p>Retail Price: 
+                        <span id="retail-price">
+                            £{{ number_format($order->base_price ?? 0, 2) }}
+                        </span>
+                    </p>
+
+                    <p>Shipping Fee: 
+                        <span id="shipping-fee">
+                            £{{ number_format($order->shipping_fee ?? 0, 2) }}
+                        </span>
+                    </p>
+
+                    {{-- Promotions --}}
+                    <p>Promotions: 
+                        <span id="promotions">
+                            -£{{ number_format($order->promotions_total ?? 0, 2) }}
+                        </span>
+                    </p>
+
+                    <p><strong>Order Total: 
+                        <span id="order-total">
+                            £{{ number_format($order->total_amount ?? 0, 2) }}
+                        </span>
+                    </strong></p>
+
+                    <input type="hidden" name="base_price" id="base_price" value="{{ $order->base_price ?? 0 }}" />
+                    <input type="hidden" name="shipping_fee" id="shipping_fee_input" value="{{ $order->shipping_fee ?? 0 }}" />
+                    <input type="hidden" name="promotions_total" id="promotions_total" value="{{ $order->promotions_total ?? 0 }}" />
+                    <input type="hidden" name="total_amount" id="total_amount_input" value="{{ $order->total_amount ?? 0 }}" />
                 </section>
 
                 <hr class="divider" />
