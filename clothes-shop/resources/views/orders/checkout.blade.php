@@ -145,7 +145,7 @@
 
             .product-image {
                 width: 150px;
-                height: 150px;
+                height: 200px;
                 overflow: hidden;
                 background: #f0f0f0;
                 flex-shrink: 0;
@@ -303,7 +303,7 @@
            
             <hr class="divider" />
 
-            <form method="POST" action="{{ route('checkout.place-order') }}">
+            <form method="POST" action="{{ route('orders.place-order') }}">
                 @csrf
 
                 <!-- PRODUCTS IN BASKET -->
@@ -322,7 +322,7 @@
                                     <p class="product-description">{!! $item['description'] ?? '' !!}</p>
                                     <div class="product-details">
                                         <span class="detail-item">Size: {{ $item['size'] ?? 'N/A' }}</span>
-                                        <span class="detail-item">Color: {{ $item['colour'] ?? 'N/A' }}</span>
+                                        <span class="detail-item">Colour: {{ $item['colour'] ?? 'N/A' }}</span>
                                     </div>
 
                                     <div class="quantity-controls">
@@ -350,7 +350,7 @@
                 <section class="shipping-options">
                     <h2>Shipping Options</h2>
                     <label><input type="radio" name="shipping" value="standard" data-cost="3.00" checked /> Standard Shipping (£3.00)</label>
-                    <label><input type="radio" name="shipping" value="click_collect" data-cost="3.00" /> Click & Collect (£3.00)</label>
+                    <label><input type="radio" name="shipping" value="click_collect" data-cost="3.00" /> Click & Collect </label>
                     <label><input type="radio" name="shipping" value="express" data-cost="6.00" /> Express Shipping (£6.00)</label>
                 </section>
 
