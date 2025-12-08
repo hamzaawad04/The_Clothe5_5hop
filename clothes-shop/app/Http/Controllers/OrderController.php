@@ -83,11 +83,11 @@ class OrderController extends Controller
                 $variant->stock_qty -= $item->qty;
                 $variant->save();
 
-                InventoryTransaction::create([
+                /* InventoryTransaction::create([
                     'variant_id' => $variant->variant_id,
                     'change_qty' => -$item->qty,
                     'reason' => 'Order #' . $order->order_id,
-                ]);
+                ]); */
             }
 
             $order->total_amount = $total;
