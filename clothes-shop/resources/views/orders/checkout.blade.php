@@ -280,7 +280,8 @@
                     
                     @auth
                         @php $user = auth()->user(); @endphp
-                        <p>{{ $user->first_name }} {{ $user->last_name }}</p>
+                        <input type="text" name="ship_name" placeholder="Full Name" required><br>
+                        <input type="text" name="ship_address" placeholder="Shipping Address" required>
 
                         {{-- Add the other deatils of the database for the cutsomer here --}}
                         
