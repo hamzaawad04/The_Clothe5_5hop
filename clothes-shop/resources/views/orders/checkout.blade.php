@@ -282,17 +282,14 @@
             <section class="shipping-address">
                 <div class="shipping-details">
                     <h2>Shipping Address</h2>
+                   
+                    
                     @auth
                         @php $user = auth()->user(); @endphp
-                        <p>{{ $user->name }}</p>
-                        <p>{{ $user->address_line1 ?? $user->address ?? 'Road name' }}</p>
-                        <p>
-                            @if(!empty($user->city) || !empty($user->county))
-                                {{ $user->city ?? '' }}@if(!empty($user->city) && !empty($user->county)), @endif{{ $user->county ?? '' }}
-                            @endif
-                        </p>
-                        <p>{{ $user->country ?? 'Country' }}</p>
-                        <p>{{ $user->postcode ?? $user->postal_code ?? 'Post code' }}</p>
+                        <p>{{ $user->first_name }} {{ $user->last_name }}</p>
+
+                        {{-- This is a Blade comment --}}
+                        
                     @else
                         <p>Customer Name</p>
                         <p>Road name</p>
