@@ -272,39 +272,30 @@
         </nav>
 
         <main>
-            <!-- CUSTOMER DETAILS -->
-            <section class="shipping-address">
-                <div class="shipping-details">
-                    <h2>Shipping Address</h2>
-                   
-                    
-                    @auth
-                        @php $user = auth()->user(); @endphp
-                        <input type="text" name="ship_name" placeholder="Full Name" required><br>
-                        <input type="text" name="ship_address" placeholder="Shipping Address" required>
-
-                        {{-- Add the other deatils of the database for the cutsomer here --}}
-                        
-                    @else
-                        <p>Customer Name</p>
-                        <p>Road name</p>
-                        <p>City, County</p>
-                        <p>Country</p>
-                        <p>Post code</p>
-                        <p><a href="{{ route('login') }}">Sign in to use saved address</a></p>
-                    @endauth
-                </div>
-                <div class="shipping-actions">
-                    <button type="button">Change</button>
-                    <button type="button">Edit address</button>
-                </div>
-            </section>
-
            
             <hr class="divider" />
 
             <form method="POST" action="{{ route('orders.place-order') }}">
                 @csrf
+                
+                <section class="shipping-address">
+                    <div class="shipping-details">
+                        <h2>Shipping Address</h2>
+
+                        @auth
+                            @php $user = auth()->user(); @endphp
+
+                            <label>Full Name</label>
+                            <input type="text" name="ship_name" value="{{ $user->first_name }} {{ $user->last_name }}" required>
+
+                            <label>Shipping Address</label>
+                            <input type="text" name="ship_address" placeholder="123 Example Road" required>
+                        @else
+                            <p>Please <a href="{{ route('login') }}">login</a> to enter an address.</p>
+                        @endauth
+                    </div>
+                </section>
+
 
                 <!-- PRODUCTS IN BASKET -->
                 <section class="item-details">
@@ -346,7 +337,7 @@
 
                 <hr class="divider" />
 
-                <!-- SHIPING OPTIONS -->
+                <!-- SHIPPING OPTIONS -->
                 <section class="shipping-options">
                     <h2>Shipping Options</h2>
                     <label><input type="radio" name="shipping" value="standard" data-cost="3.00" checked /> Standard Shipping (£3.00)</label>
@@ -359,10 +350,10 @@
                 <!-- PAYYYMENT METHID SECTION -->
                 <section class="payment-method">
                     <h2>Payment Method</h2>
-                    <label><input type="radio" name="payment" value="PayPal" /> PayPal</label>
-                    <label><input type="radio" name="payment" value="Credit/Debit Card" /> Credit/Debit Card</label>
-                    <label><input type="radio" name="payment" value="Apple Pay" /> Apple Pay</label>
-                    <label><input type="radio" name="payment" value="Google Pay" /> Google Pay</label>
+                    <label><input type="radio" name="payment_method" value="PayPal" /> PayPal</label>
+                    <label><input type="radio" name="payment_method" value="Credit/Debit Card" /> Credit/Debit Card</label>
+                    <label><input type="radio" name="payment_method" value="Apple Pay" /> Apple Pay</label>
+                    <label><input type="radio" name="payment_method" value="Google Pay" /> Google Pay</label>
                 </section>
 
                 <hr class="divider" />
