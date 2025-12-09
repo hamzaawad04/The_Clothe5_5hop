@@ -12,7 +12,7 @@ class TopsSeeder extends Seeder
     {
         DB::table('products')->insert([
             [
-                'name' => 'THE CLOTHE5 5HOP Polo',
+                'name' => 'THE CLOTHE5 5HOP Polo Shirt',
                 'description' => '
                     <p>Keep your everyday style sharp with this classic polo shirt from <strong>THE CLOTHE5 5HOP</strong>.</p>
                     <ul>

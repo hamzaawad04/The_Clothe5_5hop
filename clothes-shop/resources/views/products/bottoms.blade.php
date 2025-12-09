@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>THE CLOTHE5 5HOP – Bottoms</title>
+  <title>Bottoms</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,14 +78,14 @@
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.06);
       overflow: hidden;
-      background: #fff;
+      background: #e6e9ed;
       min-height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .card .image {
-      background: #f3f4f6;
+      background: white;
       height: 300px;
       display: flex;
       align-items: center;
@@ -193,15 +193,45 @@
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">5 Items found</div>
-    <div class="grid">
-      <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/bottoms/jeansfront.png" alt="Jeans"></div><div class="image-back"><img src="/images/bottoms/jeansback.png" alt="Jeans Back"></div></div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
+    <div class="results-heading">{{ $products->count() }} Items found</div>
+      <div class="grid">
+        @foreach ($products as $product)
+
+          @php
+            $primary = $product->images->where('is_primary', 1)->first();
+            $secondary = $product->images->where('is_primary', 0)->first();
+            $front = $primary ? asset($primary->url): 'images/placeholder.png';
+            $back = $secondary ? asset($secondary->url): $front;
+          @endphp
+
+          <a href="{{ route('products.show', $product->product_id) }}">
+          <div class='card hover-swap'>
+                  <div class='image'>
+
+                    <div class='image-front'>
+                      <img src="{{ $front }}">
+                    </div>
+
+                    <div class='image-back'>
+                      <img src="{{ $back }}">
+                    </div>
+
+                  </div>
+                  <div class='info'>
+                    <h3>{{ $product->name }}</h3>
+                    <p>£{{ $product->base_price }}</p>
+                  </div>
+          </div>
+        </a>
+        @endforeach
+      {{--<div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/bottoms/jeansfront.png" alt="Jeans"></div><div class="image-back"><img src="/images/bottoms/jeansback.png" alt="Jeans Back"></div></div><div class="info"><h3>Jeans</h3><p>£67</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/bottoms/shortsfront.png" alt="Shorts"></div><div class="image-back"><img src="/images/bottoms/shortsback.png" alt="Shorts Back"></div></div><div class="info"><h3>Shorts</h3><p>£50</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/bottoms/joggersfront.png" alt="Joggers"></div><div class="image-back"><img src="/images/bottoms/joggersback.png" alt="Joggers Back"></div></div><div class="info"><h3>Joggers</h3><p>£50</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/bottoms/cargosfront.png" alt="Cargos"></div><div class="image-back"><img src="/images/bottoms/cargosback.png" alt="Cargos Back"></div></div><div class="info"><h3>Cargos</h3><p>£60</p></div></div>
       <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/bottoms/chinosfront.png" alt="Chinos"></div><div class="image-back"><img src="/images/bottoms/chinosback.png" alt="Chinos Back"></div></div><div class="info"><h3>Chinos</h3><p>£55</p></div></div>
-    </div>
+    </div>--}}
   </div>
-  @include('components.footer')
+</div>
+@include('components.footer')
 </body>
 </html>
