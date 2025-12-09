@@ -19,19 +19,19 @@ class ProductVariantsSeeder extends Seeder
 
         DB::table('product_variants')->insert([
             [
-                'product_id' => $getId('THE CLOTHE5 5HOP Polo Shirt'),
+                'product_id' => $getId('THE CLOTHE5 5HOP Polo'),
                 'size' => 'S',
                 'colour' => 'Beige',
                 'stock_qty' => 10
             ],
             [
-                'product_id' => $getId('THE CLOTHE5 5HOP Polo Shirt'),
+                'product_id' => $getId('THE CLOTHE5 5HOP Polo'),
                 'size' => 'M',
                 'colour' => 'Beige',
                 'stock_qty' => 10
             ],
             [
-                'product_id' => $getId('THE CLOTHE5 5HOP Polo Shirt'),
+                'product_id' => $getId('THE CLOTHE5 5HOP Polo'),
                 'size' => 'L',
                 'colour' => 'Beige',
                 'stock_qty' => 10

@@ -50,8 +50,8 @@ class User extends Authenticatable
     }
 
     /* Define relationship between users and their cart */
-    public function cart() {
-        return $this->hasOne(Cart::class, 'user_id', 'user_id');
+    public function carts() {
+        return $this->hasMany(Cart::class, 'user_id', 'user_id');
     }
 
     /* Define relationship between users and their orders */
