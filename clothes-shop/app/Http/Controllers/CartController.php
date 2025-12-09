@@ -10,79 +10,82 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    /**
+     * Show user cart (basket page)
+     */
+    public function index()
+    {
+        $user = Auth::user();
 
-    /* Show entire cart */
-    public function index() {
+        // If user has no cart yet, create one
+        $cart = $user->cart ?? Cart::create([
+            'user_id' => $user->user_id,
+            'session_token' => null
+        ]);
 
-        $cart = auth()->user()->cart;
+        
 
-        if (!$cart || $cart->items->isEmpty()) {
-            return view('cart.basket', [
-                'cartItems'   => collect(),
-                'subtotal'    => 0,
-                'deliveryFee' => 0,
-                'total'       => 0,
-            ]);
-        }
-
-        $cartItems = $cart->items()->with('variant.product.images')->get();
-
-        $subtotal = 0;
-        foreach ($cartItems as $item) {
-            $subtotal += $item->variant->product->base_price * $item->qty;
-        }
-
-        $deliveryFee = $deliveryFee = $subtotal > 0 ? 5.00 : 0.00;
-
-        $total = $subtotal + $deliveryFee;
+        // Eager load product & variant
+        $items = $cart->items()
+            ->with(['variant.product'])
+            ->get();
 
         return view('cart.basket', [
-            'cartItems'   => $cartItems,
-            'subtotal'    => $subtotal,
-            'deliveryFee' => $deliveryFee,
-            'total'       => $total,
+            'cart' => $cart,
+            'items' => $items
         ]);
+
+        dd($cart);
 
     }
 
-    /* Add product variant to cart */
-    public function addItem(Request $request) {
+    /**
+     * Add a product variant to the cart
+     */
+   public function addItem(Request $request)
+{
+    // For debugging: show request data and stop execution
+    //dd($request->all());
+    
 
-        $request->validate([
-            'variant_id' => 'required|exists:product_variants,variant_id',
-            'qty' => 'required|integer|min:1'
+
+    $request->validate([
+        'variant_id' => 'required|exists:product_variants,variant_id',
+        'qty' => 'required|integer|min:1'
+    ]);
+
+    $user = Auth::user();
+
+    $cart = $user->cart ?? Cart::create([
+        'user_id' => $user->user_id,
+        'session_token' => null
+    ]);
+
+    $variant = ProductVariant::findOrFail($request->variant_id);
+
+    $existing = CartItem::where('cart_id', $cart->cart_id)
+        ->where('variant_id', $variant->variant_id)
+        ->first();
+
+    if ($existing) {
+        $existing->qty += $request->qty;
+        $existing->save();
+    } else {
+        CartItem::create([
+            'cart_id' => $cart->cart_id,
+            'variant_id' => $variant->variant_id,
+            'qty' => $request->qty
         ]);
+    }
 
-        $user = auth()->user();
-
-        $cart = Cart::firstOrCreate(['user_id' => $user->user_id]);
-
-        $existing = CartItem::where('cart_id', $cart->cart_id)
-                            ->where('variant_id', $request->variant_id)
-                            ->first();
-
-        if ($existing) {
-            $existing->qty += $request->qty;
-            $existing->save();
-        } else {
-            CartItem::create([
-                'cart_id' => $cart->cart_id,
-                'variant_id' => $request->variant_id,
-                'qty' => $request->qty,
-            ]);
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Item added to cart.'
-        ]);
-
+    return redirect()->back()->with('success', 'Item added to cart.');
 }
 
-
-    /* Update the quantity of a product variant within cart */
-    public function updateQuantity(Request $request, $variant_id) {
-
+    /**
+     * Update item quantity in cart
+     */
+    public function updateQuantity(Request $request, $variant_id)
+    {
         $request->validate([
             'qty' => 'required|integer|min:1'
         ]);
@@ -97,12 +100,13 @@ class CartController extends Controller
         $item->save();
 
         return redirect()->back()->with('success', 'Quantity updated.');
-
     }
 
-    /* Remove product variant from cart */
-    public function removeItem($variant_id) {
-
+    /**
+     * Remove an item from the cart
+     */
+    public function removeItem($variant_id)
+    {
         $cart = Auth::user()->cart;
 
         CartItem::where('cart_id', $cart->cart_id)
@@ -110,17 +114,17 @@ class CartController extends Controller
             ->delete();
 
         return redirect()->back()->with('success', 'Item removed.');
-
     }
 
-    /* Empty cart */
-    public function clear() {
-
+    /**
+     * Clear the entire cart
+     */
+    public function clear()
+    {
         $cart = Auth::user()->cart;
 
         CartItem::where('cart_id', $cart->cart_id)->delete();
 
         return redirect()->back()->with('success', 'Cart cleared.');
-
     }
 }

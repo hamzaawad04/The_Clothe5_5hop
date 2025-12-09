@@ -1,4 +1,3 @@
-   <div class="{{ request()->is('/') ? 'sticky top-0 z-50 bg-white' : '' }}">
    <!-- Logo -->
    <header class="w-full flex items-center px-6 py-3">
     <div class="w-1/4">
@@ -39,9 +38,11 @@
            <a href="{{ url('/dashboard') }}"><img src="/icons/account.svg" alt="Account" class="w-6 h-6"></a>
         @endauth
 
-           <a href="{{ route('cart.basket') }}"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
+           <a href="#"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
 
            <a href="#"><img src="/icons/wishlist.svg" alt="Wishlist" class="w-10 h-6"></a>
 
        </div>
    </header>
+
+    

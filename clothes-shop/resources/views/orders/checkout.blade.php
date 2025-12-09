@@ -5,12 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Checkout</title>
+        <title>The Clothes Shop - Checkout</title>
 
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         
+        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
@@ -24,13 +26,20 @@
 
             header {
                 background: white;
-                font-size: 2rem;
                 color: #14213d;
-                padding: 2rem;
+                padding: 1rem;
                 text-align: center;
                 position: relative;
             }
 
+            header::after {
+                content: "🔒 Secure Checkout";
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                font-size: 1rem;
+                color: #14213d;
+            }
 
             .breadcrumb {
                 background: #14213d;
@@ -88,7 +97,7 @@
             .shipping-actions button {
                 display: block;
                 margin-bottom: 0.5rem;
-                background: #14213D;
+                background: #000;
                 color: #fff;
                 border: none;
                 padding: 0.4rem 0.8rem;
@@ -117,7 +126,7 @@
             }
 
             button {
-                background: #14213D;
+                background: #000;
                 color: #fff;
                 border: none;
                 padding: 0.6rem 1rem;
@@ -145,7 +154,7 @@
 
             .product-image {
                 width: 150px;
-                height: 200px;
+                height: 150px;
                 overflow: hidden;
                 background: #f0f0f0;
                 flex-shrink: 0;
@@ -267,35 +276,52 @@
 
         @include('components.checkoutnavbar')
 
+        <header>
+            <h1>The Clothes Shop - Checkout</h1>
+        </header>
+
+
+
         <nav class="breadcrumb">
             Basket > Place Order > Pay > Order Complete
         </nav>
 
         <main>
+            <!-- CUSTOMER DETAILS -->
+            <section class="shipping-address">
+                <div class="shipping-details">
+                    <h2>Shipping Address</h2>
+                    @auth
+                        @php $user = auth()->user(); @endphp
+                        <p>{{ $user->name }}</p>
+                        <p>{{ $user->address_line1 ?? $user->address ?? 'Road name' }}</p>
+                        <p>
+                            @if(!empty($user->city) || !empty($user->county))
+                                {{ $user->city ?? '' }}@if(!empty($user->city) && !empty($user->county)), @endif{{ $user->county ?? '' }}
+                            @endif
+                        </p>
+                        <p>{{ $user->country ?? 'Country' }}</p>
+                        <p>{{ $user->postcode ?? $user->postal_code ?? 'Post code' }}</p>
+                    @else
+                        <p>Customer Name</p>
+                        <p>Road name</p>
+                        <p>City, County</p>
+                        <p>Country</p>
+                        <p>Post code</p>
+                        <p><a href="{{ route('login') }}">Sign in to use saved address</a></p>
+                    @endauth
+                </div>
+                <div class="shipping-actions">
+                    <button type="button">Change</button>
+                    <button type="button">Edit address</button>
+                </div>
+            </section>
+
            
             <hr class="divider" />
 
-            <form method="POST" action="{{ route('orders.place-order') }}">
+            <form method="POST" action="{{ route('checkout.place-order') }}">
                 @csrf
-                
-                <section class="shipping-address">
-                    <div class="shipping-details">
-                        <h2>Shipping Address</h2>
-
-                        @auth
-                            @php $user = auth()->user(); @endphp
-
-                            <label>Full Name</label>
-                            <input type="text" name="ship_name" value="{{ $user->first_name }} {{ $user->last_name }}" required>
-
-                            <label>Shipping Address</label>
-                            <input type="text" name="ship_address" placeholder="123 Example Road" required>
-                        @else
-                            <p>Please <a href="{{ route('login') }}">login</a> to enter an address.</p>
-                        @endauth
-                    </div>
-                </section>
-
 
                 <!-- PRODUCTS IN BASKET -->
                 <section class="item-details">
@@ -310,9 +336,10 @@
                                 <div class="product-info">
                                     <h3>{{ $item['name'] ?? 'Product Name' }}</h3>
                                     <p class="product-price">£{{ number_format($item['price'] ?? 0, 2) }}</p>
+                                    <p class="product-description">{{ $item['description'] ?? '' }}</p>
                                     <div class="product-details">
                                         <span class="detail-item">Size: {{ $item['size'] ?? 'N/A' }}</span>
-                                        <span class="detail-item">Colour: {{ $item['colour'] ?? 'N/A' }}</span>
+                                        <span class="detail-item">Color: {{ $item['color'] ?? 'N/A' }}</span>
                                     </div>
 
                                     <div class="quantity-controls">
@@ -336,11 +363,11 @@
 
                 <hr class="divider" />
 
-                <!-- SHIPPING OPTIONS -->
+                <!-- SHIPING OPTIONS -->
                 <section class="shipping-options">
                     <h2>Shipping Options</h2>
                     <label><input type="radio" name="shipping" value="standard" data-cost="3.00" checked /> Standard Shipping (£3.00)</label>
-                    <label><input type="radio" name="shipping" value="click_collect" data-cost="3.00" /> Click & Collect </label>
+                    <label><input type="radio" name="shipping" value="click_collect" data-cost="3.00" /> Click & Collect (£3.00)</label>
                     <label><input type="radio" name="shipping" value="express" data-cost="6.00" /> Express Shipping (£6.00)</label>
                 </section>
 
@@ -349,10 +376,10 @@
                 <!-- PAYYYMENT METHID SECTION -->
                 <section class="payment-method">
                     <h2>Payment Method</h2>
-                    <label><input type="radio" name="payment_method" value="PayPal" /> PayPal</label>
-                    <label><input type="radio" name="payment_method" value="Credit/Debit Card" /> Credit/Debit Card</label>
-                    <label><input type="radio" name="payment_method" value="Apple Pay" /> Apple Pay</label>
-                    <label><input type="radio" name="payment_method" value="Google Pay" /> Google Pay</label>
+                    <label><input type="radio" name="payment" value="PayPal" /> PayPal</label>
+                    <label><input type="radio" name="payment" value="Credit/Debit Card" /> Credit/Debit Card</label>
+                    <label><input type="radio" name="payment" value="Apple Pay" /> Apple Pay</label>
+                    <label><input type="radio" name="payment" value="Google Pay" /> Google Pay</label>
                 </section>
 
                 <hr class="divider" />

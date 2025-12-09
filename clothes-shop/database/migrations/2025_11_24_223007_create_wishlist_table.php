@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wishlist', function (Blueprint $table) {
+            $table->id('wishlist_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('variant_id')->nullable();
@@ -51,7 +52,7 @@ return new class extends Migration
              *  Foreign Key (variant_id)
              */
 
-            $table->foreign('variant_id')->references('variant_id')
+            $table->foreign('variant_id')->references('product_variant_id')
             ->on('product_variants')
             ->onUpdate('cascade')
             ->onDelete('set null');

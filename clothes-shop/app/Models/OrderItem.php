@@ -8,6 +8,7 @@ class OrderItem extends Model
 {
 
     protected $primaryKey = 'order_item_id';
+    public $incrementing = false;
 
     protected $fillable = [
         'order_id',
