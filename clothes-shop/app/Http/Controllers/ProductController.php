@@ -17,6 +17,14 @@ class ProductController extends Controller
         return view('products.index', ['products' => Product::all()]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $results = Product::where('name', 'like', "%$search%")->get();
+
+        return view('products.index', ['results' => $results]);
+    }
+
     public function tops() {
         $products = Product::where('category_id', 1)
                             ->with('images')
@@ -100,36 +108,14 @@ class ProductController extends Controller
      *  @return Illuminate\View\View
      */
 
-public function show($product_id)
-{
-    $product = Product::with([
-        'primaryImage',
-        'otherImages'
-    ])
-    ->where('product_id', $product_id)
-    ->firstOrFail();
+    public function show($product_id) {
+        $product = Product::with(['images', 'variants'])->findOrFail($product_id);
 
-    // Build image collection
-    $images = collect();
-
-    if ($product->primaryImage) {
-        $images->push($product->primaryImage);
+        return view('products.show', [
+            'product' => $product,
+            'images' => $product->images,
+        ]);
     }
-
-    foreach ($product->otherImages as $img) {
-        $images->push($img);
-    }
-
-    return view('products.show', compact('product', 'images'));
-
-
-
-
-
-
-}
-
-
 
     /**
      *  Gets product based off of its product_id, and will return the 'products.edit' view,

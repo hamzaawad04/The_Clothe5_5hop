@@ -24,7 +24,7 @@ return new class extends Migration
              *  Foreign Key (variant_id)
              */
 
-            $table->foreign('variant_id')->references('product_variant_id')
+            $table->foreign('variant_id')->references('variant_id')
             ->on('product_variants')
             ->onUpdate('cascade')
             ->onDelete('cascade');

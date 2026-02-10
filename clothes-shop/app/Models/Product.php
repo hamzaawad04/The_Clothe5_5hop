@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -40,15 +39,5 @@ class Product extends Model
     /* Define relationship between products and wishlists */
     public function wishlist() {
         return $this->hasMany(Wishlist::class, 'product_id', 'product_id');
-    }
-
-    public function primaryImage()
-    {
-        return $this->hasOne(ProductImage::class, 'product_id')->where('is_primary', 1);
-    }
-
-    public function otherImages()
-    {
-        return $this->hasMany(ProductImage::class, 'product_id')->where('is_primary', 0);
     }
 }
