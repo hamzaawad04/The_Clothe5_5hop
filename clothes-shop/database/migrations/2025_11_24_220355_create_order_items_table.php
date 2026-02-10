@@ -21,7 +21,9 @@ return new class extends Migration
             $table->decimal('line_total', 10, 2);
             $table->timestamps();
 
-            //  Constraints
+            //  Constraint
+
+
             /**
              *  Foreign Key (order_id)
              */
@@ -46,7 +48,7 @@ return new class extends Migration
              *  Foreign Key (variant_id)
              */
 
-            $table->foreign('variant_id')->references('variant_id')
+            $table->foreign('variant_id')->references('product_variant_id')
             ->on('product_variants')
             ->onUpdate('cascade')
             ->onDelete('restrict');

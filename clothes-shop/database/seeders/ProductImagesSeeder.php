@@ -19,12 +19,12 @@ class ProductImagesSeeder extends Seeder
 
         DB::table('product_images')->insert([
             [
-                'product_id' => $getId('THE CLOTHE5 5HOP Polo Shirt'),
+                'product_id' => $getId('THE CLOTHE5 5HOP Polo'),
                 'url' => 'images/tops/polofront.png',
                 'is_primary' => 1
             ],
             [
-                'product_id' => $getId('THE CLOTHE5 5HOP Polo Shirt'),
+                'product_id' => $getId('THE CLOTHE5 5HOP Polo'),
                 'url' => 'images/tops/poloback.png',
                 'is_primary' => 0
             ],

@@ -8,6 +8,7 @@ class ProductImage extends Model
 {
 
     protected $primaryKey = 'product_image_id';
+    public $incrementing = false;
 
     protected $fillable = [
         'product_id',

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->timestamps();
 
             //  Constraints
+
+            $table->primary(['cart_item_id']);
+            
             /**
              *  cart_id foreign key constraint
              */
@@ -33,7 +36,7 @@ return new class extends Migration
              *  variant_id foreign key constraint
              */
 
-            $table->foreign('variant_id')->references('variant_id')
+            $table->foreign('variant_id')->references('product_variant_id')
             ->on('product_variants')
             ->onUpdate('cascade')
             ->onDelete('cascade');
