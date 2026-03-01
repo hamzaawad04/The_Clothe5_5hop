@@ -59,4 +59,10 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
 Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 
+/* Admin Routes */
+Route::middleware(['auth', 'admin'])->group(function () {
+    
+    //
+
+});
 require __DIR__.'/auth.php';
