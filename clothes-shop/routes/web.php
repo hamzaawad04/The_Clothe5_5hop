@@ -17,6 +17,13 @@ Route::get('/dashboard', function () {
     return view('profile.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+<<<<<<< Updated upstream
+=======
+Route::get('/admindashboard', function () {
+    return view('profile.admin.adminDashboard');
+})->middleware(['auth', 'verified', AdminMiddleware::class])->name('admin.dashboard');
+
+>>>>>>> Stashed changes
 Route::middleware('auth')->group(function () {
     /* Profile routes */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
