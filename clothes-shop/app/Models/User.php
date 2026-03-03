@@ -68,4 +68,9 @@ class User extends Authenticatable
     public function contactMessages() {
         return $this->hasMany(ContactMessage::class, 'user_id', 'user_id');
     }
+
+    /* Function which returns true if user is admin, false otherwise */
+    public function isAdmin() {
+        return $this->role === 'admin';
+    }
 }
