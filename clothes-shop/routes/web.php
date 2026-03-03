@@ -9,6 +9,8 @@ use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 
+use App\Http\Middleware\AdminMiddleware;
+
 Route::get('/', function () {
     return view('pages.home');
 });
