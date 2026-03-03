@@ -9,6 +9,8 @@ use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 
+use App\Http\Middleware\AdminMiddleware;
+
 Route::get('/', function () {
     return view('pages.home');
 });
@@ -16,6 +18,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('profile.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admindashboard', function () {
+    return view('profile.admin.adminDashboard');
+});->middleware(['auth', 'verified', AdminMiddleware::class])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     /* Profile routes */
@@ -58,5 +64,6 @@ Route::get('/accessories', [ProductController::class, 'accessories'])->name('pro
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
 Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
+
 
 require __DIR__.'/auth.php';
