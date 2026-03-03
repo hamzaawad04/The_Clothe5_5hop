@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::get('/dashboard', function () {
-    return view('profile.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ProfileController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 
 Route::get('/admindashboard', function () {
@@ -39,7 +39,14 @@ Route::middleware('auth')->group(function () {
     /* Order routes */
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
+    Route::post('/orders/{order_id}/cancel', [OrderController::class, 'cancel'])
+        ->whereNumber('order_id')
+        ->name('orders.cancel');
+    Route::get('/orders/{order_id}', [OrderController::class, 'show'])
+        ->whereNumber('order_id')
+        ->name('orders.show');
 });
 /* Contact routes */
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
