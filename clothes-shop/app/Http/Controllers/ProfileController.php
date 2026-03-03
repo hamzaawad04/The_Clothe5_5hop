@@ -11,6 +11,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function dashboard(): View
+    {
+        return view('profile.dashboard');
+    }
+
     /**
      * Display the user's profile form.
      */

@@ -9,26 +9,85 @@ use App\Models\CartItem;
 use App\Models\ProductVariant;
 use App\Models\InventoryTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    /* Show all orders for the logged-in customer */
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->withCount('items')
+            ->orderByDesc('order_date')
+            ->get();
+
+        return view('orders.status', [
+            'orders' => $orders,
+        ]);
+    }
 
     /* Show one order */
     public function show($order_id)
     {
-        $user = Auth::user();
-
         $order = Order::where('order_id', $order_id)
-                      ->where('user_id', Auth::id())
-                      ->with('items.product', 'items.variant')
-                      ->firstOrFail();
+            ->where('user_id', Auth::id())
+            ->with('items.product', 'items.variant')
+            ->firstOrFail();
 
-        return view('showOrder', [
+        return view('orders.status_details', [
             'order' => $order,
-            'user' => $user
         ]);
+    }
+
+    /* Cancel a customer's cancellable order */
+    public function cancel($order_id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $order = Order::where('order_id', $order_id)
+                ->where('user_id', Auth::id())
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if (!in_array($order->status, ['pending', 'paid'], true)) {
+                DB::rollBack();
+                return redirect()
+                    ->route('orders.index')
+                    ->with('error', 'This order can no longer be cancelled.');
+            }
+
+            $orderItems = OrderItem::where('order_id', $order->order_id)
+                ->with('variant')
+                ->get();
+
+            foreach ($orderItems as $item) {
+                if ($item->variant) {
+                    $item->variant->stock_qty += $item->qty;
+                    $item->variant->save();
+                }
+            }
+
+            $order->status = 'cancelled';
+            $order->save();
+
+            DB::commit();
+
+            return redirect()
+                ->route('orders.index')
+                ->with('success', "Order #{$order->order_id} has been cancelled.");
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+            abort(404);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->route('orders.index')
+                ->with('error', 'Unable to cancel this order right now. Please try again.');
+        }
     }
 
     /* Convert user's cart into an order */
@@ -59,7 +118,7 @@ class OrderController extends Controller
             $total = 0;
 
             foreach ($cartItems as $item) {
-                $variant = $variant = $item->variant;
+                $variant = $item->variant;
 
                 if (!$variant || $variant->stock_qty < $item->qty) {
                     DB::rollBack();
@@ -149,4 +208,3 @@ class OrderController extends Controller
     }
 
 }
-
