@@ -15,32 +15,54 @@
                     Welcome back Admin :)
                 </h3>
 
-                <!-- 12‑Card Admin Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Normal User Dashboard Options -->
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8">
+                    <div class="p-6 text-black">
+                        {{ __("You're logged in!") }}
 
-                    @php
-                        $cards = [
-                            'Product Management',
-                            'Orders Management',
-                            'Customer Management',
-                            'Inventory & Supply Chain',
-                            'Sales & Analytics',
-                            'Marketing & Promotions',
-                            'Website & Content Management',
-                            'User Roles & Permissions',
-                            'Payments & Finances',
-                            'Security & Settings',
-                        ];
-                    @endphp
-
-                    @foreach ($cards as $card)
-                        <a href="#"
-                           class="block bg-[#14213D] text-[#FCA311] font-semibold text-center py-6 rounded-lg shadow hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                            {{ $card }}
-                        </a>
-                    @endforeach
-
+                        <div class="mt-8 grid grid-cols-2 gap-6">
+                            <a href="{{ route('orders.index') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                YOUR ORDERS
+                            </a>
+                            <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                RETURNS AND REFUNDS
+                            </button>
+                            <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                PAYMENTS METHODS
+                            </button>
+                            <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                SETTINGS
+                            </button>
+                        </div>
+                        <div class="mt-8 grid grid-cols-2 gap-6">
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                Product Management
+                            </a>
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                Order Management
+                            </a>
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                Customer Management
+                            </a>
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                Inventory & Supply Stock
+                            </a>
+                        </div>
+                        <div class="mt-8 grid grid-cols-2 gap-6">
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                Sales & Analytics
+                            </a>
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                User Roles & Permissions
+                            </a>
+                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                Payments & Shipments
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
+            
 
             </div>
         </div>
