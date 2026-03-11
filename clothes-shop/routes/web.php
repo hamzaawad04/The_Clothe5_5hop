@@ -20,11 +20,6 @@ Route::get('/dashboard', [ProfileController::class, 'dashboard'])
     ->name('dashboard');
 
 
-Route::get('/admindashboard', function () {
-    return view('profile.admin.adminDashboard');
-})->middleware(['auth', 'verified', AdminMiddleware::class])->name('admin.dashboard');
-
-
 Route::middleware('auth')->group(function () {
     /* Profile routes */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -76,9 +71,12 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 
 /* Admin Routes */
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     
-    //
+    Route::get('/admin/dashboard', function () {
+        return view('profile.admin.admindashboard');
+    })->name('admin.dashboard');
+
 
 });
 require __DIR__.'/auth.php';
