@@ -40,9 +40,4 @@ class Product extends Model
     public function wishlist() {
         return $this->hasMany(Wishlist::class, 'product_id', 'product_id');
     }
-
-    /* Define relationship between products and reviews */
-    public function reviews() {
-        return $this->hasMany(Review::class, 'product_id', 'product_id');
-    }
 }
