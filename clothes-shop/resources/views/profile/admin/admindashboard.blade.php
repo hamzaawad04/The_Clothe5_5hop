@@ -35,7 +35,7 @@
                             </button>
                         </div>
                         <div class="mt-8 grid grid-cols-2 gap-6">
-                            <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                            <a href="{{ route('admin.products.index') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
                                 Product Management
                             </a>
                             <a href="#" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
