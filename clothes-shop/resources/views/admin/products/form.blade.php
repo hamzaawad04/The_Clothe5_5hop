@@ -83,10 +83,11 @@
 
 <div class="mt-8 flex items-center gap-3">
     <button type="submit"
-            class="inline-flex items-center px-4 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+            class="inline-flex rounded border border-[#14213D] px-4 py-2 text-sm font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
         {{ $submitLabel }}
     </button>
-    <a href="{{ route('admin.products.index') }}" class="text-sm font-semibold text-gray-600 hover:underline">
+    <a href="{{ route('admin.products.index') }}"
+       class="inline-flex rounded border border-[#14213D] px-4 py-2 text-sm font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
         Cancel
     </a>
 </div>
