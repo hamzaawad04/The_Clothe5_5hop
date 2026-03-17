@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
@@ -82,5 +83,14 @@ Route::middleware(['auth', 'admin'])
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
         Route::resource('products', AdminProductController::class);
+
+        Route::get('/sales-analytics', [AdminOrderController::class, 'salesAnalytics'])
+            ->name('sales-analytics');
+
+        Route::get('/sales-analytics/order-count', [AdminOrderController::class, 'salesAnalyticsCount'])
+            ->name('sales-analytics.order-count');
+
+        
+
     });
 require __DIR__.'/auth.php';
