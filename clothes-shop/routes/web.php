@@ -8,6 +8,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProductController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
@@ -72,56 +74,13 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 
 /* Admin Routes */
-Route::middleware(['auth', 'verified', 'admin'])
+Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::get('/dashboard', function () {
-            return view('profile.admin.admindashboard');
-        })->name('dashboard');
 
-        Route::get('/products', function () {
-            $products = Product::with(['category', 'images' => function ($query) {
-                $query->orderByDesc('is_primary')->orderBy('product_image_id');
-            }])
-                ->orderByDesc('product_id')
-                ->get();
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-            return view('admin.products.index', ['products' => $products]);
-        })->name('products.index');
-
-        Route::get('/products/create', function () {
-            $categories = Category::orderBy('name')->get();
-            return view('admin.products.create', ['categories' => $categories]);
-        })->name('products.create');
-
-        Route::post('/products', function () {
-            return redirect()->route('admin.products.index');
-        })->name('products.store');
-
-        Route::get('/products/{product_id}/edit', function ($product_id) {
-            $product = Product::with('images')->findOrFail($product_id);
-            $categories = Category::orderBy('name')->get();
-
-            return view('admin.products.edit', [
-                'product' => $product,
-                'categories' => $categories,
-            ]);
-        })
-            ->whereNumber('product_id')
-            ->name('products.edit');
-
-        Route::put('/products/{product_id}', function ($product_id) {
-            return redirect()->route('admin.products.edit', $product_id);
-        })
-            ->whereNumber('product_id')
-            ->name('products.update');
-
-        Route::delete('/products/{product_id}', function () {
-            return redirect()->route('admin.products.index');
-        })
-            ->whereNumber('product_id')
-            ->name('products.destroy');
-
+        Route::resource('products', AdminProductController::class);
     });
 require __DIR__.'/auth.php';
