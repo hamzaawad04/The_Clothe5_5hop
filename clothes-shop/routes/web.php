@@ -8,8 +8,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProductController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Category;
+use App\Models\Product;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -71,12 +74,13 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 
 /* Admin Routes */
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    
-    Route::get('/admin/dashboard', function () {
-        return view('profile.admin.admindashboard');
-    })->name('admin.dashboard');
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-});
+        Route::resource('products', AdminProductController::class);
+    });
 require __DIR__.'/auth.php';
