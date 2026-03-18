@@ -67,9 +67,12 @@
                                             </select>
 
                                             <button type="submit"
-                                                class="px-3 py-1 text-sm bg-[#14213D] text-white rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                                                class="inline-flex rounded border border-[#14213D] px-3 py-1 text-xs font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
                                                 Update
                                             </button>
+                                            <a href="{{ route('admin.orders.show', $order->order_id) }}" class="inline-flex rounded border border-[#14213D] px-3 py-1 text-xs font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
+                                                Order Details
+                                            </a>
                                         </div>
                                     </form>
                                 </td>

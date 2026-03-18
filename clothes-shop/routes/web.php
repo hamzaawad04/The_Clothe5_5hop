@@ -95,5 +95,8 @@ Route::middleware(['auth', 'admin'])
 
         Route::patch('/orders/{order_id}/status', [AdminOrderController::class, 'updateStatus'])
             ->name('orders.updateStatus');
+
+        Route::get('/orders/{order_id}', [AdminOrderController::class, 'show'])
+            ->name('orders.show');
     });
 require __DIR__.'/auth.php';

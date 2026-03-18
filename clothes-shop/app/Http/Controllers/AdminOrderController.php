@@ -36,6 +36,13 @@ class AdminOrderController extends Controller
             ->with('success', 'Order status successfully updated');
     }
 
+    public function show($order_id) {
+        $order = Order::with(['items.product', 'items.variant', 'user'])
+            ->findOrFail($order_id);
+
+        return view('orders.status_details', compact('order'));
+    }
+
   /* Admin sales analytics dashboard */
     public function salesAnalytics()
     {
