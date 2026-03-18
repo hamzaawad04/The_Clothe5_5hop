@@ -6,9 +6,36 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class AdminOrderController extends Controller
 {
+
+    public function index(Request $request): View {
+
+        // Get orders
+        $orders = Order::with('user')
+            ->orderByDesc('order_date')
+            ->get();
+
+        return view('admin.orders.index', compact('orders'));
+    }
+
+
+    public function updateStatus(Request $request, $order_id) {
+        
+        $validated = $request->validate([
+            'status' => 'required|in:pending,paid,shipped,completed,cancelled'
+        ]);
+
+        $order = Order::findOrFail($order_id);
+        $order->status = $validated['status'];
+        $order->save();
+
+        return redirect()->route('admin.orders.index')
+            ->with('success', 'Order status successfully updated');
+    }
+
   /* Admin sales analytics dashboard */
     public function salesAnalytics()
     {

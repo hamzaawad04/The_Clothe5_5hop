@@ -90,7 +90,10 @@ Route::middleware(['auth', 'admin'])
         Route::get('/sales-analytics/order-count', [AdminOrderController::class, 'salesAnalyticsCount'])
             ->name('sales-analytics.order-count');
 
-        
+        Route::get('/orders', [AdminOrderController::class, 'index'])
+            ->name('orders.index');
 
+        Route::patch('/orders/{order_id}/status', [AdminOrderController::class, 'updateStatus'])
+            ->name('orders.updateStatus');
     });
 require __DIR__.'/auth.php';

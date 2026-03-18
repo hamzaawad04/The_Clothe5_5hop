@@ -19,7 +19,7 @@
             <nav class="p-4 space-y-1">
                 <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Dashboard</a>
                 <a href="{{ route('products.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Product Management</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Order Management</a>
+                <a href="{{ route('admin.orders.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Order Management</a>
                 <a href="{{ url('/admin/sales-analytics') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Sales & Analytics</a>
                 <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Customer Management</a>
                 <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Inventory & Supply</a>
