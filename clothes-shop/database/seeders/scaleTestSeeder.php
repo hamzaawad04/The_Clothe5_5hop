@@ -18,7 +18,6 @@ class scaleTestSeeder extends Seeder
                 'name' => 'theocratic',
                 'description' => 'lorem ipsum',
                 'base_price' => 20,
-                'low_stock_threshold' => 5,
                 'category_id' => 1,
             ],
         ]);

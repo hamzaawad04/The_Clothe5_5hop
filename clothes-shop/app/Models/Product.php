@@ -12,7 +12,6 @@ class Product extends Model
         'name',
         'description',
         'base_price',
-        'low_stock_threshold',
         'category_id'
     ];
 

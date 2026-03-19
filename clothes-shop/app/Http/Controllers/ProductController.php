@@ -90,7 +90,6 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:500',
             'base_price' => 'required|numeric',
-            'low_stock_threshold' => 'nullable|integer',
             'category_id' => 'required|integer|exists:categories,category_id'
         ]);
 
@@ -147,7 +146,6 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:500',
             'base_price' => 'required|numeric',
-            'low_stock_threshold' => 'nullable|integer',
             'category_id' => 'required|integer|exists:categories,category_id'
         ]);
 

@@ -69,7 +69,7 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 font-semibold text-sm text-gray-700">
-                                {{ $product->low_stock_threshold ?? 'N/A' }}
+                                N/A
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">

@@ -29,15 +29,7 @@
                class="w-full rounded border-gray-300 focus:border-[#14213D] focus:ring-[#14213D]">
     </div>
 
-    <div>
-        <label for="low_stock_threshold" class="block text-sm font-medium text-gray-700 mb-1">Low Stock Threshold</label>
-        <input id="low_stock_threshold"
-               type="number"
-               name="low_stock_threshold"
-               value="{{ old('low_stock_threshold', $product?->low_stock_threshold) }}"
-               min="0"
-               class="w-full rounded border-gray-300 focus:border-[#14213D] focus:ring-[#14213D]">
-    </div>
+    <!-- Stock and low stock threshold are now managed per variant -->
 
     <div class="md:col-span-2">
         <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category</label>

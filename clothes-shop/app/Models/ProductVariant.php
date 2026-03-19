@@ -13,6 +13,7 @@ class ProductVariant extends Model
         'size',
         'colour',
         'stock_qty',
+        'low_stock_threshold',
     ];
 
     public function product()

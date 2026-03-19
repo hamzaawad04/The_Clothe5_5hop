@@ -25,7 +25,6 @@ CREATE TABLE products (
     name                 VARCHAR(255) NOT NULL,
     description          TEXT,
     base_price           DECIMAL(10,2) NOT NULL,
-    low_stock_threshold  INT,
     category_id          INT NOT NULL,
     CONSTRAINT fk_products_category
         FOREIGN KEY (category_id)
@@ -52,6 +51,7 @@ CREATE TABLE product_variants (
     size       VARCHAR(50) NOT NULL,
     colour     VARCHAR(50),
     stock_qty  INT NOT NULL,
+    low_stock_threshold INT NOT NULL,
     CONSTRAINT fk_variants_product
         FOREIGN KEY (product_id)
         REFERENCES products(product_id)
