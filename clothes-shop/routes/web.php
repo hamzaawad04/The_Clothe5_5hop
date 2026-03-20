@@ -8,6 +8,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishlistController;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminOrderController;
@@ -35,6 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/update/{variant_id}', [CartController::class, 'updateQuantity'])->name('cart.update');
     Route::delete('/cart/remove/{variant_id}', [CartController::class, 'removeItem'])->name('cart.remove');
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+    /* Wishlist routes */
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
+    Route::delete('/wishlist/{wishlist_id}', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
     /* Order routes */
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');

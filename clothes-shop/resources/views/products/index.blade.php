@@ -85,6 +85,7 @@
       color: #6b7280;
       font-size: 14px;
       border-bottom: 1px solid #e5e7eb;
+      position: relative;
     }
     .card .image img {
       width: auto;
@@ -326,6 +327,17 @@
                     <div class='image-back'>
                       <img src="{{ $back }}">
                     </div>
+
+                    <!-- WISHLIST BUTTON -->
+                    @auth
+                      <form method="POST" action="{{ route('wishlist.add') }}" style="position: absolute; top: 10px; right: 10px;">
+                        @csrf
+                        <input type="hidden" name="variant_id" value="{{ $result->variants->first()->variant_id }}">
+                        <button type="submit" class="bg-white bg-opacity-80 p-1 rounded-full hover:bg-opacity-100 text-lg">
+                          ❤️
+                        </button>
+                      </form>
+                    @endauth
 
                   </div>
                   <div class='info'>

@@ -51,7 +51,7 @@
 
         <a href="{{ route('cart.basket') }}"><img src="{{ asset('icons/basket.svg') }}" alt="Basket" class="w-7 h-9"></a>
 
-        <a href="#"><img src="{{ asset('icons/wishlist.svg') }}" alt="Wishlist" class="w-10 h-6"></a>
+           <a href="{{ route('wishlist.index') }}"><img src="{{ asset('icons/wishlist.svg') }}" alt="Wishlist" class="w-10 h-6"></a>
 
        </div>
    </header>
