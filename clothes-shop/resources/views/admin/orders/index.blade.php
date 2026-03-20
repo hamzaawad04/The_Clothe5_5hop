@@ -1,9 +1,15 @@
-<x-app-layout :show-navigation="false">
-    <x-admin-sidebar />
+<x-app-layout :show-navigation="true">
 
-    <div class="py-10 ml-64">
+    <x-slot name="sidebar">
+        <x-admin-sidebar :activeItem="'orders'" />
+    </x-slot>
+
+    <x-slot name="header">
+        <h1 class="text-3xl font-bold text-[#14213D]">Order Management</h1>
+    </x-slot>
+
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-[#14213D] mb-6">Order Management</h1>
 
             @if (session('success'))
                 <div class="mb-4 rounded border border-green-200 bg-green-50 text-green-700 px-4 py-3">
@@ -11,9 +17,8 @@
                 </div>
             @endif
 
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto bg-white shadow-sm rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
-
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">ID</th>
@@ -24,50 +29,32 @@
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Update</th>
                         </tr>
                     </thead>
-
                     <tbody class="bg-white divide-y divide-gray-100">
                         @forelse ($orders as $order)
                             <tr>
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    {{ $order->order_id }}
-                                </td>
-
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    {{ $order->ship_name}}
-                                </td>
-
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    £{{ number_format($order->total_amount, 2) }}
-                                </td>
-
-                                <td class="px-6 py-4 text-sm font-semibold">
-                                    {{ ucfirst($order->status) }}
-                                </td>
-
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    {{ $order->order_date }}
-                                </td>
-
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $order->order_id }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $order->ship_name }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">£{{ number_format($order->total_amount, 2) }}</td>
+                                <td class="px-6 py-4 text-sm font-semibold">{{ ucfirst($order->status) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $order->order_date }}</td>
                                 <td class="px-6 py-4">
                                     <form method="POST" action="{{ route('admin.orders.updateStatus', $order->order_id) }}">
                                         @csrf
                                         @method('PATCH')
-
                                         <div class="flex items-center gap-2">
                                             <select name="status" class="rounded border-gray-300 text-sm">
                                                 @foreach (['pending','paid','shipped','completed','cancelled'] as $status)
-                                                    <option value="{{ $status }}"
-                                                        @selected($order->status === $status)>
+                                                    <option value="{{ $status }}" @selected($order->status === $status)>
                                                         {{ ucfirst($status) }}
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                             <button type="submit"
                                                 class="inline-flex rounded border border-[#14213D] px-3 py-1 text-xs font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
                                                 Update
                                             </button>
-                                            <a href="{{ route('admin.orders.show', $order->order_id) }}" class="inline-flex rounded border border-[#14213D] px-3 py-1 text-xs font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
+                                            <a href="{{ route('admin.orders.show', $order->order_id) }}"
+                                                class="inline-flex rounded border border-[#14213D] px-3 py-1 text-xs font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
                                                 Order Details
                                             </a>
                                         </div>
@@ -82,11 +69,12 @@
                             </tr>
                         @endforelse
                     </tbody>
-
                 </table>
             </div>
+
         </div>
     </div>
-</x-app-layout>
 
+
+</x-app-layout>
 @include('components.footer')
