@@ -1,3 +1,5 @@
+@props(['showNavigation' => true])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,7 +19,9 @@
     </head>
     <body class="font-playfair antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @if ($showNavigation)
+                @include('layouts.navigation')
+            @endif
 
             <!-- Page Heading -->
             @isset($header)

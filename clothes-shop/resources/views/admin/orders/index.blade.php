@@ -1,12 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800">
-            Order Management
-        </h2>
-    </x-slot>
+<x-app-layout :show-navigation="false">
+    <x-admin-sidebar />
 
-    <div class="py-10">
+    <div class="py-10 ml-64">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-[#14213D] mb-6">Order Management</h1>
 
             @if (session('success'))
                 <div class="mb-4 rounded border border-green-200 bg-green-50 text-green-700 px-4 py-3">

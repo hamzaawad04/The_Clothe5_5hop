@@ -14,22 +14,8 @@
     <div class="min-h-screen w-full flex relative">
 
         <!-- SIDEBAR -->
-        <aside class="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 shadow-lg z-20">
-            <div class="h-20 flex items-center justify-center border-b border-gray-200">
-                <span class="text-xl font-bold text-[#14213D]">Admin Menu</span>
-            </div>
-
-            <nav class="p-4 space-y-4">
-                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Dashboard</a>
-                <a href="{{ route('admin.products.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Product Management</a>
-                <a href="{{ route('admin.orders.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Order Management</a>
-                <a href="{{ route('admin.sales-analytics') }}" class="block px-4 py-2 rounded-lg text-sm font-medium bg-[#14213D] text-[#FCA311]">Sales & Analytics</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Customer Management</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Inventory & Supply</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">User Roles & Permissions</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Payments & Shipments</a>
-            </nav>
-        </aside>
+         
+        <x-admin-sidebar/>
 
         <!-- MAIN CONTENT -->
         <div class="flex-1 ml-64 flex">
@@ -86,8 +72,6 @@
                         </table>
                     </div>
                 </div>
-
-                @include('components.footer')
 
             </main>
         </div>

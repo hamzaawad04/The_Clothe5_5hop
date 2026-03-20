@@ -1,11 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            {{ __('Admin Dashboard') }}
-        </h2>
+        <div class="ml-64">
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+                {{ __('Admin Dashboard') }}
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="py-12">
+    <x-admin-sidebar/>
+
+    <div class="py-12 ml-64">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white shadow-sm sm:rounded-lg p-8">
@@ -20,20 +24,6 @@
                     <div class="p-6 text-black">
                         {{ __("You're logged in!") }}
 
-                        <div class="mt-8 grid grid-cols-2 gap-6">
-                            <a href="{{ route('orders.index') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                                YOUR ORDERS
-                            </a>
-                            <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                                RETURNS AND REFUNDS
-                            </button>
-                            <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                                PAYMENTS METHODS
-                            </button>
-                            <a href="{{ route('profile.edit') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                                SETTINGS
-                            </a>
-                        </div>
                         <div class="mt-8 grid grid-cols-2 gap-6">
                             <a href="{{ route('admin.products.index') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
                                 Product Management

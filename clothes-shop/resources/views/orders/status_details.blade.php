@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :show-navigation="!request()->routeIs('admin.*')">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Order #{{ $order->order_id }}

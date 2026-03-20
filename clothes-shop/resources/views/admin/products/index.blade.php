@@ -1,18 +1,16 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-2xl text-gray-800">
-                Product Management
-            </h2>
-            <a href="{{ route('admin.products.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                Add Product
-            </a>
-        </div>
-    </x-slot>
+<x-app-layout :show-navigation="false">
+    <x-admin-sidebar />
 
-    <div class="py-10">
+    <div class="py-10 ml-64">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-6 flex items-center justify-between">
+                <h1 class="text-3xl font-bold text-[#14213D]">Product Management</h1>
+                <a href="{{ route('admin.products.create') }}"
+                    class="inline-flex items-center px-4 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                    Add Product
+                </a>
+            </div>
+
             @if (session('success'))
             <div class="mb-4 rounded border border-green-200 bg-green-50 text-green-700 px-4 py-3">
                 {{ session('success') }}
@@ -100,7 +98,6 @@
                 </table>
             </div>
         </div>
-    </div>
     </div>
 </x-app-layout>
 
