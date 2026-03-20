@@ -36,15 +36,18 @@
         </div>
         @endguest
 
+        @auth
+
             @if(auth()->user()->role === 'admin')
                 <a href="{{ url('/admin/dashboard') }}">
                     <img src="{{ asset('icons/admin-page.svg') }}" alt="Admin Dashboard" class="w-6 h-6">
                 </a>
             @endif
 
-        @auth
+
            <a href="{{ url('/dashboard') }}"><img src="{{ asset('icons/account.svg') }}" alt="Account" class="w-6 h-6"></a>
         @endauth
+        
 
         <a href="{{ route('cart.basket') }}"><img src="{{ asset('icons/basket.svg') }}" alt="Basket" class="w-7 h-9"></a>
 
