@@ -1,6 +1,5 @@
 <x-app-layout :show-navigation="true">
 
-<<<<<<< HEAD
     <x-slot name="sidebar">
         <x-admin-sidebar :activeItem="'orders'" />
     </x-slot>
@@ -10,9 +9,6 @@
     </x-slot>
 
     <div class="py-6">
-=======
-    <div class="ml-64 p-10 min-h-screen">
->>>>>>> 7b8b5d66a3fd97a7830d9085bad68010ec0bba6a
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if (session('success'))
