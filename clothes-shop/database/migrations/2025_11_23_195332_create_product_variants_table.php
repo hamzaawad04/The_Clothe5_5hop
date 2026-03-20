@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('size', 50);
             $table->string('colour', 50)->nullable();
             $table->integer('stock_qty');
+            $table->integer('low_stock_threshold');
             $table->timestamps();
 
             //  Constraints
