@@ -9,19 +9,18 @@
         if ($itemKey !== null && $activeItem === $itemKey) {
             return true;
         }
-
         foreach ($patterns as $pattern) {
             if (request()->routeIs($pattern)) {
                 return true;
             }
         }
-
         return false;
     };
 @endphp
 
-<aside class="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 shadow-lg z-20">
-    <div class="h-20 flex items-center justify-center border-b border-gray-200">
+<aside style="width:256px; min-height:100%; background:white; border-right:1px solid #e5e7eb; box-shadow:2px 0 4px rgba(0,0,0,0.05);">
+
+    <div style="height:64px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #e5e7eb;">
         <span class="text-xl font-bold text-[#14213D]">Admin Menu</span>
     </div>
 
@@ -30,40 +29,30 @@
            class="{{ $base }} {{ $isActive(['admin.dashboard'], 'dashboard') ? $activeClass : $inactiveClass }}">
             Dashboard
         </a>
-
         <a href="{{ route('admin.products.index') }}"
            class="{{ $base }} {{ $isActive(['admin.products.*'], 'products') ? $activeClass : $inactiveClass }}">
             Product Management
         </a>
-
         <a href="{{ route('admin.orders.index') }}"
            class="{{ $base }} {{ $isActive(['admin.orders.*'], 'orders') ? $activeClass : $inactiveClass }}">
             Order Management
         </a>
-
         <a href="{{ route('admin.sales-analytics') }}"
            class="{{ $base }} {{ $isActive(['admin.sales-analytics'], 'sales-analytics') ? $activeClass : $inactiveClass }}">
             Sales & Analytics
         </a>
-
-        <a href="#"
-           class="{{ $base }} {{ $activeItem === 'customers' ? $activeClass : $inactiveClass }}">
+        <a href="#" class="{{ $base }} {{ $activeItem === 'customers' ? $activeClass : $inactiveClass }}">
             Customer Management
         </a>
-
-        <a href="#"
-           class="{{ $base }} {{ $activeItem === 'inventory' ? $activeClass : $inactiveClass }}">
+        <a href="#" class="{{ $base }} {{ $activeItem === 'inventory' ? $activeClass : $inactiveClass }}">
             Inventory & Supply
         </a>
-
-        <a href="#"
-           class="{{ $base }} {{ $activeItem === 'roles' ? $activeClass : $inactiveClass }}">
+        <a href="#" class="{{ $base }} {{ $activeItem === 'roles' ? $activeClass : $inactiveClass }}">
             User Roles & Permissions
         </a>
-
-        <a href="#"
-           class="{{ $base }} {{ $activeItem === 'payments' ? $activeClass : $inactiveClass }}">
+        <a href="#" class="{{ $base }} {{ $activeItem === 'payments' ? $activeClass : $inactiveClass }}">
             Payments & Shipments
         </a>
     </nav>
+
 </aside>
