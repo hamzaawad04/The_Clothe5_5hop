@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Sales Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-playfair text-black">
 
     <div class="min-h-screen w-full flex relative">
 
         <!-- SIDEBAR -->
         <aside class="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 shadow-lg z-20">
             <div class="h-20 flex items-center justify-center border-b border-gray-200">
-                <span class="text-xl font-bold text-blue-700">Admin Menu</span>
+                <span class="text-xl font-bold text-[#14213D]">Admin Menu</span>
             </div>
 
-            <nav class="p-4 space-y-1">
-                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Dashboard</a>
-                <a href="{{ route('products.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Product Management</a>
-                <a href="{{ route('admin.orders.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Order Management</a>
-                <a href="{{ url('/admin/sales-analytics') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Sales & Analytics</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Customer Management</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Inventory & Supply</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">User Roles & Permissions</a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-100 hover:text-blue-800">Payments & Shipments</a>
+            <nav class="p-4 space-y-4">
+                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Dashboard</a>
+                <a href="{{ route('admin.products.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Product Management</a>
+                <a href="{{ route('admin.orders.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Order Management</a>
+                <a href="{{ route('admin.sales-analytics') }}" class="block px-4 py-2 rounded-lg text-sm font-medium bg-[#14213D] text-[#FCA311]">Sales & Analytics</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Customer Management</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Inventory & Supply</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">User Roles & Permissions</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#14213D] hover:text-[#FCA311] transition">Payments & Shipments</a>
             </nav>
         </aside>
 
@@ -32,13 +35,13 @@
         <div class="flex-1 ml-64 flex">
             <main class="p-10 w-full min-w-0">
 
-                <h1 class="text-3xl font-bold mb-6">Admin Sales Analytics</h1>
+                <h1 class="text-3xl font-bold text-[#14213D] mb-6">Admin Sales Analytics</h1>
 
                 <!-- TOTAL ORDERS CARD -->
                 <div class="mb-6 p-6 bg-white shadow rounded-lg flex items-center justify-between">
                     <div>
                         <p class="text-sm text-gray-500">Total Orders Placed</p>
-                        <p id="total-orders" class="text-4xl font-bold text-blue-600">{{ $totalOrders }}</p>
+                        <p id="total-orders" class="text-4xl font-bold text-[#14213D]">{{ $totalOrders }}</p>
                     </div>
                     <div class="text-right">
                         <p class="text-sm text-gray-400">Auto-refresh every 15 seconds</p>
@@ -49,34 +52,34 @@
                 <!-- CHARTS -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="p-6 bg-white shadow rounded-lg">
-                        <h2 class="text-xl font-semibold mb-4">Top Products by Quantity Sold</h2>
+                        <h2 class="text-xl font-semibold text-[#14213D] mb-4">Top Products by Quantity Sold</h2>
                         <div id="top-products-chart" class="w-full h-[400px]"></div>
                     </div>
 
                     <div class="p-6 bg-white shadow rounded-lg">
-                        <h2 class="text-xl font-semibold mb-4">Products Sold by Category</h2>
+                        <h2 class="text-xl font-semibold text-[#14213D] mb-4">Products Sold by Category</h2>
                         <div id="category-pie-chart" class="w-full h-[400px]"></div>
                     </div>
                 </div>
 
                 <!-- TABLE -->
                 <div class="mt-6 p-6 bg-white shadow rounded-lg">
-                    <h2 class="text-xl font-semibold mb-4">Top Products Table</h2>
+                    <h2 class="text-xl font-semibold text-[#14213D] mb-4">Top Products Table</h2>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity Sold</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Rank</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Product</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Quantity Sold</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                            <tbody class="bg-white divide-y divide-gray-100">
                                 @foreach($topProducts as $index => $item)
                                     <tr>
-                                        <td class="px-6 py-3">{{ $index + 1 }}</td>
-                                        <td class="px-6 py-3">{{ $item->product->name ?? 'Unknown' }}</td>
-                                        <td class="px-6 py-3">{{ $item->total_qty }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $index + 1 }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $item->product->name ?? 'Unknown' }}</td>
+                                        <td class="px-6 py-4 text-sm font-semibold text-gray-700">{{ $item->total_qty }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -128,7 +131,7 @@
 
             chart.draw(data, {
                 bars: 'horizontal',
-                colors: ['#2563eb'],
+                colors: ['#14213D'],
                 legend: { position: 'none' }
             });
         }
@@ -145,7 +148,7 @@
 
             chart.draw(data, {
                 pieHole: 0.42,
-                colors: ['#2563eb', '#1e40af', '#60a5fa', '#93c5fd']
+                colors: ['#14213D', '#1F3A5F', '#FCA311', '#9CA3AF', '#E5E7EB']
             });
         }
     </script>
