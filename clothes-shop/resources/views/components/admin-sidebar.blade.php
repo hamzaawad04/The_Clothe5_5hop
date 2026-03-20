@@ -18,7 +18,7 @@
     };
 @endphp
 
-<aside style="width:256px; min-height:100%; background:white; border-right:1px solid #e5e7eb; box-shadow:2px 0 4px rgba(0,0,0,0.05);">
+<aside class="fixed top-16 left-0 h-[calc(100%-64px)] w-64 bg-white border-r border-gray-200 shadow-sm z-50">
 
     <div style="height:64px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #e5e7eb;">
         <span class="text-xl font-bold text-[#14213D]">Admin Menu</span>

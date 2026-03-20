@@ -1,7 +1,7 @@
 <x-app-layout :show-navigation="false">
     <x-admin-sidebar />
 
-    <div class="py-10 ml-64">
+    <div class="ml-64 p-10 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold text-[#14213D] mb-6">Order Management</h1>
 
