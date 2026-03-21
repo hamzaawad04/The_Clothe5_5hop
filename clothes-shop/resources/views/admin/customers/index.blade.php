@@ -5,13 +5,7 @@
     </x-slot>
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h1 class="text-3xl font-bold text-[#14213D]">Customer Management</h1>
-            <a href="{{ route('admin.customers.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                Add Customer
-            </a>
-        </div>
+        <h1 class="text-3xl font-bold text-[#14213D]">Customer Management</h1>
     </x-slot>
 
     <div class="py-6">
@@ -29,35 +23,44 @@
                 </div>
             @endif
 
-            <!-- Search and Filter Form -->
+            <!-- Search, Filter and Add Customer Row -->
             <div class="mb-6 bg-white shadow-sm rounded-lg p-4">
-                <form method="GET" action="{{ route('admin.customers.index') }}" class="flex items-end gap-4">
-                    <div class="flex-1">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-                        <input type="text" name="search" value="{{ request('search') }}"
-                            placeholder="Name, email, or phone..."
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
-                    </div>
-                    <div class="w-40">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                        <select name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
-                            <option value="">All Roles</option>
-                            <option value="customer" {{ request('role') === 'customer' ? 'selected' : '' }}>Customer</option>
-                            <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
-                        </select>
-                    </div>
-                    <div class="w-40">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Verification</label>
-                        <select name="verification" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
-                            <option value="">All Status</option>
-                            <option value="verified" {{ request('verification') === 'verified' ? 'selected' : '' }}>Verified</option>
-                            <option value="unverified" {{ request('verification') === 'unverified' ? 'selected' : '' }}>Unverified</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="px-6 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap">
-                        Filter
-                    </button>
-                </form>
+                <div class="flex items-end gap-4 justify-between">
+                    <!-- Filters on the left -->
+                    <form method="GET" action="{{ route('admin.customers.index') }}" class="flex items-end gap-4">
+                        <div class="flex-1 max-w-sm">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                placeholder="Name, email, or phone..."
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
+                        </div>
+                        <div class="w-40">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                            <select name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
+                                <option value="">All Roles</option>
+                                <option value="customer" {{ request('role') === 'customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                            </select>
+                        </div>
+                        <div class="w-40">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Verification</label>
+                            <select name="verification" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
+                                <option value="">All Status</option>
+                                <option value="verified" {{ request('verification') === 'verified' ? 'selected' : '' }}>Verified</option>
+                                <option value="unverified" {{ request('verification') === 'unverified' ? 'selected' : '' }}>Unverified</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="px-6 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap">
+                            Filter
+                        </button>
+                    </form>
+                    
+                    <!-- Add Customer button on the right -->
+                    <a href="{{ route('admin.customers.create') }}"
+                        class="inline-flex items-center px-5 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap">
+                        Add Customer
+                    </a>
+                </div>
             </div>
 
             <div class="overflow-x-auto bg-white shadow-sm rounded-lg">
