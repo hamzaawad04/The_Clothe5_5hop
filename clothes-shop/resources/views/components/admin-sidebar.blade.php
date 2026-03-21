@@ -43,17 +43,9 @@
         </a>
         <a href="{{ route('admin.customers.index') }}"
            class="{{ $base }} {{ $isActive(['admin.customers.*'], 'customers') ? $activeClass : $inactiveClass }}">
-            Customer Management
+            User Management
         </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'inventory' ? $activeClass : $inactiveClass }}">
-            Inventory & Supply
-        </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'roles' ? $activeClass : $inactiveClass }}">
-            User Roles & Permissions
-        </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'payments' ? $activeClass : $inactiveClass }}">
-            Payments & Shipments
-        </a>
+
     </nav>
 
 </aside>

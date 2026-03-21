@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="px-6 py-4 border-t border-gray-100">
-                        <a href="{{ route('admin.inventory.index') }}"
+                        <a href="{{ route('admin.products.index') }}"
                             class="block w-full text-center px-4 py-2 bg-[#14213D] text-[#FCA311] text-sm font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
                             View Inventory
                         </a>
