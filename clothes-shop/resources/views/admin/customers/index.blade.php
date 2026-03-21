@@ -31,14 +31,14 @@
 
             <!-- Search and Filter Form -->
             <div class="mb-6 bg-white shadow-sm rounded-lg p-4">
-                <form method="GET" action="{{ route('admin.customers.index') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div>
+                <form method="GET" action="{{ route('admin.customers.index') }}" class="flex items-end gap-4">
+                    <div class="flex-1">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                         <input type="text" name="search" value="{{ request('search') }}"
                             placeholder="Name, email, or phone..."
                             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
                     </div>
-                    <div>
+                    <div class="w-40">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
                         <select name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
                             <option value="">All Roles</option>
@@ -46,7 +46,7 @@
                             <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="w-40">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Verification</label>
                         <select name="verification" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
                             <option value="">All Status</option>
@@ -54,11 +54,9 @@
                             <option value="unverified" {{ request('verification') === 'unverified' ? 'selected' : '' }}>Unverified</option>
                         </select>
                     </div>
-                    <div class="flex items-end">
-                        <button type="submit" class="w-full px-4 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
-                            Filter
-                        </button>
-                    </div>
+                    <button type="submit" class="px-6 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap">
+                        Filter
+                    </button>
                 </form>
             </div>
 
