@@ -63,8 +63,6 @@ Route::post('/contact', [ContactMessageController::class, 'store'])->name('conta
 Route::resource('variants', ProductVariantController::class);
 /* Category routes */
 Route::resource('categories', CategoryController::class);
-/* Customer routes */
-Route::resource('customers', CustomerController::class);
 
 Route::get('/about', function () {
     return view('pages.about');
