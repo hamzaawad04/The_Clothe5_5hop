@@ -41,7 +41,8 @@
            class="{{ $base }} {{ $isActive(['admin.sales-analytics'], 'sales-analytics') ? $activeClass : $inactiveClass }}">
             Sales & Analytics
         </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'customers' ? $activeClass : $inactiveClass }}">
+        <a href="{{ route('customers.index') }}"
+           class="{{ $base }} {{ $isActive(['customers.*'], 'customers') ? $activeClass : $inactiveClass }}">
             Customer Management
         </a>
         <a href="#" class="{{ $base }} {{ $activeItem === 'inventory' ? $activeClass : $inactiveClass }}">

@@ -13,6 +13,8 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminCustomerController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
@@ -61,6 +63,8 @@ Route::post('/contact', [ContactMessageController::class, 'store'])->name('conta
 Route::resource('variants', ProductVariantController::class);
 /* Category routes */
 Route::resource('categories', CategoryController::class);
+/* Customer routes */
+Route::resource('customers', CustomerController::class);
 
 Route::get('/about', function () {
     return view('pages.about');
@@ -89,6 +93,8 @@ Route::middleware(['auth', 'admin'])
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
         Route::resource('products', AdminProductController::class);
+
+        Route::resource('customers', AdminCustomerController::class);
 
         Route::get('/sales-analytics', [AdminOrderController::class, 'salesAnalytics'])
             ->name('sales-analytics');
