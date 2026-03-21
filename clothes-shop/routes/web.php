@@ -108,5 +108,7 @@ Route::middleware(['auth', 'admin'])
 
         Route::get('/orders/{order_id}', [AdminOrderController::class, 'show'])
             ->name('orders.show');
-    });
+
+        Route::get('/inventory', [App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('inventory.index');
+        Route::post('/inventory/{variant}/add-stock', [App\Http\Controllers\Admin\InventoryController::class, 'addStock'])->name('inventory.addStock');    });
 require __DIR__.'/auth.php';
