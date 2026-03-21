@@ -145,3 +145,5 @@
     </div>
 
 </x-app-layout>
+@include('components.footer')
+
