@@ -24,40 +24,40 @@
             @endif
 
             <!-- Search, Filter and Add Customer Row -->
-            <div class="mb-6 bg-white shadow-sm rounded-lg p-4">
-                <div class="flex items-end gap-4 justify-between">
+            <div class="mb-6 bg-white shadow-sm rounded-lg p-5">
+                <div class="flex items-end justify-between gap-6">
                     <!-- Filters on the left -->
-                    <form method="GET" action="{{ route('admin.customers.index') }}" class="flex items-end gap-4">
-                        <div class="flex-1 max-w-sm">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                    <form method="GET" action="{{ route('admin.customers.index') }}" class="flex items-end gap-5 flex-1">
+                        <div class="flex-1 max-w-md">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
                             <input type="text" name="search" value="{{ request('search') }}"
                                 placeholder="Name, email, or phone..."
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
+                                class="w-full px-4 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#14213D] focus:border-[#14213D] transition">
                         </div>
-                        <div class="w-40">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                            <select name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
+                        <div class="w-44">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                            <select name="role" class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#14213D] focus:border-[#14213D] bg-white transition" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"/></svg>'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.5em 1.5em;">
                                 <option value="">All Roles</option>
                                 <option value="customer" {{ request('role') === 'customer' ? 'selected' : '' }}>Customer</option>
                                 <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                             </select>
                         </div>
-                        <div class="w-40">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Verification</label>
-                            <select name="verification" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#14213D] focus:border-[#14213D]">
+                        <div class="w-44">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Verification</label>
+                            <select name="verification" class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#14213D] focus:border-[#14213D] bg-white transition" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"/></svg>'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.5em 1.5em;">
                                 <option value="">All Status</option>
                                 <option value="verified" {{ request('verification') === 'verified' ? 'selected' : '' }}>Verified</option>
                                 <option value="unverified" {{ request('verification') === 'unverified' ? 'selected' : '' }}>Unverified</option>
                             </select>
                         </div>
-                        <button type="submit" class="px-6 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap">
+                        <button type="submit" class="px-6 py-2.5 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap shadow-sm">
                             Filter
                         </button>
                     </form>
                     
                     <!-- Add Customer button on the right -->
                     <a href="{{ route('admin.customers.create') }}"
-                        class="inline-flex items-center px-5 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap">
+                        class="inline-flex items-center px-6 py-2.5 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap shadow-sm">
                         Add Customer
                     </a>
                 </div>
