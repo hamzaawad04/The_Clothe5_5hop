@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use App\OrderStatus;
 
 class AdminOrderController extends Controller
 {
@@ -24,11 +25,11 @@ class AdminOrderController extends Controller
     public function updateStatus(Request $request, $order_id) {
         
         $validated = $request->validate([
-            'status' => 'required|in:pending,paid,shipped,completed,cancelled,return_requested,return_accepted,refunded',
+            'status' => 'required|in:Pending,Paid,Shipped,Completed,Cancelled,Return Requested,Return Accepted,Refunded',
         ]);
 
         $order = Order::findOrFail($order_id);
-        $order->status = $validated['status'];
+        $order->status = OrderStatus::from($validated['status']); 
         $order->save();
 
         return redirect()->route('admin.orders.index')

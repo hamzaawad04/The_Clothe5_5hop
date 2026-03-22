@@ -107,7 +107,7 @@ class OrderController extends Controller
         try {
             $order = Order::create([
                 'user_id' => $user->user_id,
-                'status' => 'pending',
+                'status' => 'Pending',
                 'total_amount' => 0, 
                 'ship_name' => $request->ship_name,
                 'ship_address' => $request->ship_address,
