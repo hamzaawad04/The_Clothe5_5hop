@@ -294,7 +294,6 @@
 
                 <div class="flex justify-end gap-2 mt-4">
                     <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
-                    <button @click="showPopup = false" class="text-gray-600 text-sm">Close</button>
                 </div>
            
         </form>
