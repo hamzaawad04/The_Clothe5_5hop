@@ -292,13 +292,6 @@
 </head>
 <body class = "font-playfair text-black">
   @include('components.mainnavbar')
-  <!-- Filter bar -->
-  <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Polo</option><option>Hoodie</option><option>T-Shirt</option><option>Jumper</option><option>Button-Up Shirt</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>White</option><option>Blue</option><option>Red</option><option>Grey</option><option>Navy</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £15</option><option>£15-£25</option><option>£25-£40</option><option>Over £40</option></select></div>
-  </div>
 
   <!-- Navy section removed -->
 

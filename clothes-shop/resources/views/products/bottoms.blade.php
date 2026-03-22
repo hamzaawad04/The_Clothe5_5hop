@@ -181,14 +181,6 @@
   <!-- Top bar -->
   @include('components.mainnavbar')
 
-  <!-- Filter bar -->
-  <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option></select></div>
-  </div>
-
   <!-- Navy section removed -->
 
   <!-- Product grid -->

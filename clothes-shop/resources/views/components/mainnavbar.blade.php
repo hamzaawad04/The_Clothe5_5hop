@@ -74,9 +74,10 @@
         class="hover:text-cathover transition {{ request()->routeIs('products.outerwear') ? 'text-cathover border-b-2 border-cathover' : '' }}">
             Outerwear
         </a>
-        <a href="{{ route('products.accessories') }}"
+    <a href="{{ route('products.accessories') }}"
         class="hover:text-cathover transition {{ request()->routeIs('products.accessories') ? 'text-cathover border-b-2 border-cathover' : '' }}">
             Accessories
         </a>
     </nav>
+    <div class="border-b border-gray-300"></div>
    </div>
