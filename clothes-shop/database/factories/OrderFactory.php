@@ -24,11 +24,14 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
+        
+        $user = User::inRandomOrder()->first() ?? User::factory()->create();
+
         return [
-            'user_id' => User::inRandomOrder()->firstOrFail()->user_id ?? User::factory(),
+            'user_id' => $user -> user_id,
             'status' => fake()->randomElement(OrderStatus::cases()),
             'total_amount' => 0, //calculated later
-            'ship_name' => fake() -> name(),
+            'ship_name' => $user -> first_name . ' ' . $user -> last_name,
             'ship_address' => fake() -> address(),
             'payment_method' => 'credit_card',
             'order_date' => now(),
