@@ -42,7 +42,7 @@
                     <div>
                         <p class="text-sm font-medium text-gray-600">Role</p>
                         <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold {{ $customer->role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                            {{ ucfirst($customer->role) }}
+                            {{ $customer->role }}
                         </span>
                     </div>
                     <div>
