@@ -62,14 +62,30 @@
 
                     <div class="divide-y divide-gray-50">
                         @forelse ($urgentOrders as $order)
+                        @php
+                                $statusClasses = match ($order->status -> value) {
+                                    'Pending' => 'bg-amber-100 text-amber-800',
+                                    'Paid' => 'bg-blue-100 text-blue-800',
+                                    'Shipped' => 'bg-indigo-100 text-indigo-800',
+                                    'Completed' => 'bg-green-100 text-green-800',
+                                    'Cancelled' => 'bg-red-100 text-red-800',
+                                    'Return Requested' => 'bg-orange-100 text-orange-800',
+                                    'Return Accepted' => 'bg-teal-100 text-teal-800',
+                                    'Refunded' => 'bg-slate-100 text-slate-800',
+                                    default => 'bg-gray-100 text-gray-800',
+                                };
+                            @endphp
                             <div class="px-6 py-3 flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-semibold text-gray-800">#{{ $order->order_id }} — {{ $order->ship_name }}</p>
                                     <p class="text-xs text-gray-500">£{{ number_format($order->total_amount, 2) }} · {{ $order->order_date }}</p>
                                 </div>
                                 <span class="text-xs font-semibold px-2 py-1 rounded-full
-                                    {{ $order->status === 'pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700' }}">
-                                    {{ ($order->status) }}
+                                    <td class="px-6 py-4 text-sm font-semibold">
+                                        <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $statusClasses }}">
+                                            {{ ($order->status) }}
+                                        </span>
+                                    </td>
                                 </span>
                             </div>
                         @empty
