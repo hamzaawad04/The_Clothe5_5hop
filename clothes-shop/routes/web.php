@@ -47,6 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/returns', [OrderController::class, 'returns'])->name('orders.returns');
+    Route::post('/orders/{order_id}/request-return', [OrderController::class, 'requestReturn'])
+        ->whereNumber('order_id')
+        ->name('orders.requestReturn');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
     Route::post('/orders/{order_id}/cancel', [OrderController::class, 'cancel'])
         ->whereNumber('order_id')
