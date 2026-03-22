@@ -75,7 +75,7 @@
             </div>
 
             <div class="flex justify-end">
-                <a href="{{ route('orders.index') }}" class="inline-flex items-center rounded border border-[#14213D] px-4 py-2 text-sm font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
+                <a href="{{ route('admin.orders.index') }}" class="inline-flex items-center rounded border border-[#14213D] px-4 py-2 text-sm font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">
                     Back to Orders
                 </a>
             </div>

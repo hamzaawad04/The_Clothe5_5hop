@@ -52,7 +52,7 @@
                             default => 'bg-gray-100 text-gray-800',
                             };
 
-                            $canCancel = in_array($order->status, ['pending', 'paid'], true);
+                            $canCancel = in_array($order->status -> value, ['Pending', 'Paid'], true);
                             @endphp
 
                             <tr class="border-t border-gray-200">

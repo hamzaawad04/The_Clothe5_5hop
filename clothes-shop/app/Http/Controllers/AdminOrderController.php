@@ -40,7 +40,7 @@ class AdminOrderController extends Controller
         $order = Order::with(['items.product', 'items.variant', 'user'])
             ->findOrFail($order_id);
 
-        return view('orders.status_details', compact('order'));
+        return view('admin.orders.order_details', compact('order'));
     }
 
   /* Admin sales analytics dashboard */
