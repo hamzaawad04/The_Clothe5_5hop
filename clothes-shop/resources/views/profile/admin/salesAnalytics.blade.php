@@ -1,85 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Sales Analytics</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+<x-app-layout>
+    <x-slot name="sidebar">
+        <x-admin-sidebar :activeItem="'sales-analytics'" />
+    </x-slot>
 
-<body class="bg-gray-100 font-playfair text-black">
+    <x-slot name="header">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+            Sales & Analytics
+        </h2>
+    </x-slot>
 
-    <div class="min-h-screen w-full flex relative">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="p-6 bg-white shadow rounded-lg flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-500">Total Orders Placed</p>
+                <p id="total-orders" class="text-4xl font-bold text-[#14213D]">{{ $totalOrders }}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-400">Auto-refresh every 15 seconds</p>
+                <p id="order-updated-at" class="text-sm text-gray-500">{{ now()->format('Y-m-d H:i:s') }}</p>
+            </div>
+        </div>
 
-        <!-- SIDEBAR -->
-         
-        <x-admin-sidebar/>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="p-6 bg-white shadow rounded-lg">
+                <h2 class="text-xl font-semibold text-[#14213D] mb-4">Top Products by Quantity Sold</h2>
+                <div id="top-products-chart" class="w-full h-[400px]"></div>
+            </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="flex-1 ml-64 flex">
-            <main class="p-10 w-full min-w-0">
+            <div class="p-6 bg-white shadow rounded-lg">
+                <h2 class="text-xl font-semibold text-[#14213D] mb-4">Products Sold by Category</h2>
+                <div id="category-pie-chart" class="w-full h-[400px]"></div>
+            </div>
+        </div>
 
-                <h1 class="text-3xl font-bold text-[#14213D] mb-6">Admin Sales Analytics</h1>
-
-                <!-- TOTAL ORDERS CARD -->
-                <div class="mb-6 p-6 bg-white shadow rounded-lg flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-gray-500">Total Orders Placed</p>
-                        <p id="total-orders" class="text-4xl font-bold text-[#14213D]">{{ $totalOrders }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm text-gray-400">Auto-refresh every 15 seconds</p>
-                        <p id="order-updated-at" class="text-sm text-gray-500">{{ now()->format('Y-m-d H:i:s') }}</p>
-                    </div>
-                </div>
-
-                <!-- CHARTS -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="p-6 bg-white shadow rounded-lg">
-                        <h2 class="text-xl font-semibold text-[#14213D] mb-4">Top Products by Quantity Sold</h2>
-                        <div id="top-products-chart" class="w-full h-[400px]"></div>
-                    </div>
-
-                    <div class="p-6 bg-white shadow rounded-lg">
-                        <h2 class="text-xl font-semibold text-[#14213D] mb-4">Products Sold by Category</h2>
-                        <div id="category-pie-chart" class="w-full h-[400px]"></div>
-                    </div>
-                </div>
-
-                <!-- TABLE -->
-                <div class="mt-6 p-6 bg-white shadow rounded-lg">
-                    <h2 class="text-xl font-semibold text-[#14213D] mb-4">Top Products Table</h2>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Rank</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Product</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Quantity Sold</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100">
-                                @foreach($topProducts as $index => $item)
-                                    <tr>
-                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $index + 1 }}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $item->product->name ?? 'Unknown' }}</td>
-                                        <td class="px-6 py-4 text-sm font-semibold text-gray-700">{{ $item->total_qty }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </main>
+        <div class="p-6 bg-white shadow rounded-lg">
+            <h2 class="text-xl font-semibold text-[#14213D] mb-4">Top Products Table</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Rank</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Product</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Quantity Sold</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-100">
+                        @foreach($topProducts as $index => $item)
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $index + 1 }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $item->product->name ?? 'Unknown' }}</td>
+                                <td class="px-6 py-4 text-sm font-semibold text-gray-700">{{ $item->total_qty }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- GOOGLE CHARTS -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-
     <script>
         google.charts.load('current', { packages: ['corechart', 'bar'] });
         google.charts.setOnLoadCallback(drawCharts);
@@ -136,8 +115,5 @@
             });
         }
     </script>
-
-</body>
+</x-app-layout>
 @include('components.footer')
-
-</html>
