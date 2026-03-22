@@ -80,6 +80,8 @@
             width: 100%;
             max-width: 1000px;
         }
+
+        /* ---------------- FIXED SECTION ---------------- */
         .wishlist-item {
             position: relative;
             background: #e5e5e5aa;
@@ -89,8 +91,10 @@
             width: 320px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            min-height: 480px; /* ensures equal height like your mockup */
         }
+        /* ------------------------------------------------ */
+
         .item-image {
             width: 100%;
             height: 280px;
@@ -134,6 +138,7 @@
             width: 22px;
             height: 22px;
         }
+
         .wishlist-actions button,
         .move-outside {
             background: #14213D;
@@ -147,12 +152,18 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* ---------------- FIXED SECTION ---------------- */
+        .move-form {
+            margin-top: auto; /* pushes button to bottom */
+        }
+
         .move-outside {
             width: 100%;
-            max-width: 100%;
-            max-width: 320px;
-            margin: 8px 0 20px;
+            margin-top: 12px;
         }
+        /* ------------------------------------------------ */
+
         .action-icon {
             width: 18px;
             height: 18px;
@@ -166,7 +177,6 @@
         }
     </style>
 </head>
-
 <body class="font-playfair text-black">
 
 @include('components.mainnavbar')
