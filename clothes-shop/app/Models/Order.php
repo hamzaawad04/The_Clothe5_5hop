@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\OrderStatus;
 
 class Order extends Model
 {
@@ -17,6 +18,18 @@ class Order extends Model
         'payment_method',
         'order_date'
     ];
+
+    /**
+    * Get the attributes that should be cast.
+    *
+    * @return array<string, string>
+    */
+    protected function casts(): array
+    {
+        return [
+            'status' => OrderStatus::class,
+        ];
+    }
 
     /* Define relationship between orders and users */
     public function user() {

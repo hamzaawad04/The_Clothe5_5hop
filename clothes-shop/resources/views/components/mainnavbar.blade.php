@@ -38,7 +38,7 @@
 
         @auth
 
-            @if(auth()->user()->role === 'admin')
+            @if(auth()->user()->isAdmin())
                 <a href="{{ url('/admin/dashboard') }}">
                     <img src="{{ asset('icons/admin-page.svg') }}" alt="Admin Dashboard" class="w-6 h-6">
                 </a>

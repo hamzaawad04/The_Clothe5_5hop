@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\UserRole;
 
 class User extends Authenticatable
 {
@@ -45,7 +46,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password' => 'hashed'
+            'password' => 'hashed',
+            'role' => UserRole::class,
         ];
     }
 
@@ -74,6 +76,9 @@ class User extends Authenticatable
     }
     /* Function which returns true if user is admin, false otherwise */
     public function isAdmin() {
-        return $this->role === 'admin';
+        return $this->role === UserRole::ADMIN;
+    }
+    public function isCustomer() {
+        return $this->role === UserRole::CUSTOMER;
     }
 }
