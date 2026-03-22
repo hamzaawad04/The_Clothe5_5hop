@@ -11,15 +11,35 @@ use App\OrderStatus;
 
 class AdminOrderController extends Controller
 {
-    public function index(Request $request): View {
+public function index(Request $request): View
+{
+    $query = Order::with('user');
 
-        // Get orders
-        $orders = Order::with('user')
-            ->orderByDesc('order_date')
-            ->get();
-
-        return view('admin.orders.index', compact('orders'));
+    // Filter by status
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
     }
+
+    // Filter by customer shipping name (letter search)
+if ($request->filled('search')) {
+    $query->where('ship_name', 'like', '%' . $request->search . '%');
+}
+
+    // Filter by date range
+    if ($request->filled('date_from')) {
+        $query->whereDate('order_date', '>=', $request->date_from);
+    }
+
+    if ($request->filled('date_to')) {
+        $query->whereDate('order_date', '<=', $request->date_to);
+    }
+
+    $orders = $query
+        ->orderByDesc('order_date')
+        ->paginate(10); // better than get()
+
+    return view('admin.orders.index', compact('orders'));
+}
 
 
     public function updateStatus(Request $request, $order_id) {
