@@ -46,16 +46,42 @@ class WishlistController extends Controller
         return redirect()->back()->with('success', 'Item added to wishlist');
     }
 
-    public function removeFromWishlist($wishlist_id)
+    public function removeFromWishlist($variant_id)
     {
-        $wishlist = Wishlist::findOrFail($wishlist_id);
-        
-        if ($wishlist->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $wishlist = Wishlist::where('user_id', Auth::id())
+            ->where('variant_id', $variant_id)
+            ->firstOrFail();
 
         $wishlist->delete();
 
         return redirect()->route('wishlist.index')->with('success', 'Item removed from favorites');
+    }
+
+    public function moveToCart($variant_id)
+    {
+        $wishlist = Wishlist::where('user_id', Auth::id())
+            ->where('variant_id', $variant_id)
+            ->firstOrFail();
+
+        $cart = \App\Models\Cart::firstOrCreate(['user_id' => Auth::id()]);
+
+        $existingCartItem = \App\Models\CartItem::where('cart_id', $cart->cart_id)
+            ->where('variant_id', $variant_id)
+            ->first();
+
+        if ($existingCartItem) {
+            $existingCartItem->qty += 1;
+            $existingCartItem->save();
+        } else {
+            \App\Models\CartItem::create([
+                'cart_id' => $cart->cart_id,
+                'variant_id' => $variant_id,
+                'qty' => 1,
+            ]);
+        }
+
+        $wishlist->delete();
+
+        return redirect()->route('wishlist.index')->with('success', 'Item moved to basket');
     }
 }

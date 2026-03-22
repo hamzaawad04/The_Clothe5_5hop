@@ -40,7 +40,8 @@ Route::middleware('auth')->group(function () {
     /* Wishlist routes */
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
-    Route::delete('/wishlist/{wishlist_id}', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
+    Route::post('/wishlist/move/{variant_id}', [WishlistController::class, 'moveToCart'])->name('wishlist.move');
+    Route::delete('/wishlist/{variant_id}', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
     /* Order routes */
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');
