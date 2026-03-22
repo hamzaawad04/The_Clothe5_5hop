@@ -10,7 +10,6 @@ use Illuminate\View\View;
 
 class AdminOrderController extends Controller
 {
-
     public function index(Request $request): View {
 
         // Get orders
@@ -25,7 +24,7 @@ class AdminOrderController extends Controller
     public function updateStatus(Request $request, $order_id) {
         
         $validated = $request->validate([
-            'status' => 'required|in:pending,paid,shipped,completed,cancelled'
+            'status' => 'required|in:pending,paid,shipped,completed,cancelled,return_requested,return_accepted,refunded',
         ]);
 
         $order = Order::findOrFail($order_id);
@@ -74,4 +73,3 @@ class AdminOrderController extends Controller
         return response()->json(['totalOrders' => Order::count()]);
     }
 }
-

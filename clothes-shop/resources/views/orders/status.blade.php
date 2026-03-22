@@ -46,6 +46,9 @@
                             'shipped' => 'bg-indigo-100 text-indigo-800',
                             'completed' => 'bg-green-100 text-green-800',
                             'cancelled' => 'bg-red-100 text-red-800',
+                            'return_requested' => 'bg-orange-100 text-orange-800',
+                            'return_accepted' => 'bg-teal-100 text-teal-800',
+                            'refunded' => 'bg-slate-100 text-slate-800',
                             default => 'bg-gray-100 text-gray-800',
                             };
 
@@ -59,7 +62,7 @@
                                 <td class="px-4 py-3 text-gray-700">GBP {{ number_format($order->total_amount, 2) }}</td>
                                 <td class="px-4 py-3">
                                     <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $statusClasses }}">
-                                        {{ ucfirst($order->status) }}
+                                        {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-3">

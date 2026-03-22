@@ -119,8 +119,15 @@
                                         <td class="px-6 py-4 text-sm font-semibold text-gray-700">£{{ number_format($order->total_amount, 2) }}</td>
                                         <td class="px-6 py-4 text-sm">
                                             <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold
-                                                {{ $order->status === 'delivered' ? 'bg-green-100 text-green-800' : ($order->status === 'cancelled' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800') }}">
-                                                {{ ucfirst($order->status) }}
+                                                {{ $order->status === 'pending' ? 'bg-amber-100 text-amber-800' : '' }}
+                                                {{ $order->status === 'paid' ? 'bg-blue-100 text-blue-800' : '' }}
+                                                {{ $order->status === 'shipped' ? 'bg-indigo-100 text-indigo-800' : '' }}
+                                                {{ $order->status === 'completed' ? 'bg-green-100 text-green-800' : '' }}
+                                                {{ $order->status === 'cancelled' ? 'bg-red-100 text-red-800' : '' }}
+                                                {{ $order->status === 'return_requested' ? 'bg-orange-100 text-orange-800' : '' }}
+                                                {{ $order->status === 'return_accepted' ? 'bg-teal-100 text-teal-800' : '' }}
+                                                {{ $order->status === 'refunded' ? 'bg-slate-100 text-slate-800' : '' }}">
+                                                {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
                                             </span>
                                         </td>
                                     </tr>

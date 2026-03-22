@@ -69,7 +69,7 @@
                                 </div>
                                 <span class="text-xs font-semibold px-2 py-1 rounded-full
                                     {{ $order->status === 'pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700' }}">
-                                    {{ ucfirst($order->status) }}
+                                    {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
                                 </span>
                             </div>
                         @empty
@@ -159,8 +159,11 @@
                                             {{ $order->status === 'paid'      ? 'bg-blue-100 text-blue-700'   : '' }}
                                             {{ $order->status === 'shipped'   ? 'bg-purple-100 text-purple-700' : '' }}
                                             {{ $order->status === 'completed' ? 'bg-green-100 text-green-700' : '' }}
-                                            {{ $order->status === 'cancelled' ? 'bg-red-100 text-red-600'     : '' }}">
-                                            {{ ucfirst($order->status) }}
+                                            {{ $order->status === 'cancelled' ? 'bg-red-100 text-red-600'     : '' }}
+                                            {{ $order->status === 'return_requested' ? 'bg-orange-100 text-orange-700' : '' }}
+                                            {{ $order->status === 'return_accepted' ? 'bg-teal-100 text-teal-700' : '' }}
+                                            {{ $order->status === 'refunded' ? 'bg-slate-100 text-slate-700' : '' }}">
+                                            {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-3 text-sm text-gray-700">{{ $order->order_date }}</td>
