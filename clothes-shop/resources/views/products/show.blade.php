@@ -232,7 +232,48 @@
 
         <!-- ADD TO BASKET FORM -->
         <form 
-            x-data="addToCart()"
+            x-data="{
+    variants: {{ $product->variants->toJson() }},
+    variant_id: '{{ $product->variants->first()->variant_id ?? '' }}',
+    qty: 1,
+    showPopup: false,
+
+    get selectedVariant() {
+        return this.variants.find(v => v.variant_id == this.variant_id);
+    },
+
+    isOutOfStock() {
+        return this.selectedVariant && this.selectedVariant.stock_qty <= 0;
+    },
+
+    isLowStock() {
+        return this.selectedVariant 
+            && this.selectedVariant.stock_qty > 0 
+            && this.selectedVariant.stock_qty <= this.selectedVariant.low_stock_threshold;
+    },
+
+    async submitForm() {
+        let formData = new FormData();
+        formData.append('variant_id', this.variant_id);
+        formData.append('qty', this.qty);
+
+        const response = await fetch('{{ route('cart.add') }}', {
+            method: 'POST',
+            headers: { 
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            },
+            body: formData,
+        });
+
+        let result = await response.json();
+
+        if (result.success) {
+            this.showPopup = true;
+            setTimeout(() => this.showPopup = false, 3000);
+        }
+    }
+}"
             @submit.prevent="submitForm"
             method="POST"
             action="{{ route('cart.add') }}"
@@ -274,30 +315,56 @@
                     class="border rounded px-3 py-2 w-20"
                 >
 
+                <div class="stock-status-box ml-4">
+
+                    <div 
+                        class="stock-indicator is-low flex"
+                        x-show="isLowStock()"
+                    >
+                        <span class="status-dot dot-gold"></span>
+                        <span>
+                            Low Stock: Only 
+                            <span x-text="selectedVariant.stock_qty"></span> left
+                        </span>
+                    </div>
+
+                    <div 
+                        class="stock-indicator is-out flex"
+                        x-show="isOutOfStock()"
+                    >
+                        <span class="status-dot dot-gray"></span>
+                        <span>Currently Out of Stock</span>
+                    </div>
+
+                </div>
+
                 <button 
                     type="submit" 
                     class="add-btn hover:bg-[#0f1829]"
+                    :disabled="isOutOfStock()"
+                    :class="{ 'opacity-50 cursor-not-allowed': isOutOfStock() }"
                 >
                     Add to Basket
                 </button>
 
                 <!-- POPUP -->
-            <div 
-                x-show="showPopup"
-                x-transition
-                class="popup"
-                style="display:none;"
-            >
-                <h3 class="font-bold text-lg">Added to Basket!</h3>
-                <p class="text-gray-700 mt-1">{{ $product->name }}</p>
-                <p class="text-gray-500 text-sm">Qty: <span x-text="qty"></span></p>
+                <div 
+                    x-show="showPopup"
+                    x-transition
+                    class="popup"
+                    style="display:none;"
+                >
+                    <h3 class="font-bold text-lg">Added to Basket!</h3>
+                    <p class="text-gray-700 mt-1">{{ $product->name }}</p>
+                    <p class="text-gray-500 text-sm">Qty: <span x-text="qty"></span></p>
 
-                <div class="flex justify-end gap-2 mt-4">
-                    <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
+                        <button @click="showPopup = false" class="text-gray-600 text-sm">Close</button>
+                    </div>
                 </div>
-           
+            </div>
         </form>
- </div>
                 <!-- ADD TO WISHLIST FORM -->
                 <form 
                     method="POST"
@@ -465,50 +532,6 @@
 
 @include('components.footer')
 
-<!-- ALPINE CART LOGIC -->
-<script>
-function addToCart() {
-    return {
-        variant_id: "{{ $product->variants->first()->variant_id }}",
-        qty: 1,
-        showPopup: false,
-
-        async submitForm() {
-            let formData = new FormData();
-            formData.append("variant_id", this.variant_id);
-            formData.append("qty", this.qty);
-
-            const response = await fetch("{{ route('cart.add') }}", {
-                method: "POST",
-                headers: { 
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                    "Accept": "application/json"
-                },
-                body: formData,
-            });
-
-            let result = await response.json();
-
-            if (result.success) {
-                this.showPopup = true;
-                setTimeout(() => this.showPopup = false, 3000);
-            }
-        }
-    }
-}
-
-function openReviewModal() {
-    const modal = document.getElementById("reviewModal");
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-}
-
-function closeReviewModal() {
-    const modal = document.getElementById("reviewModal");
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-}
-</script>
 
 
 </body>
