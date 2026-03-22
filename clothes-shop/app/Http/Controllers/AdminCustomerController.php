@@ -182,9 +182,6 @@ class AdminCustomerController extends Controller
 
             // Create a success message with role change notification
             $message = 'Customer updated successfully.';
-            if ($oldRole !== $validated['role']) {
-                $message .= " Role changed from '{$oldRole}' to '{$validated['role']}'.";
-            }
 
             return redirect()->route('admin.customers.show', $customer->user_id)
                 ->with('success', $message);
