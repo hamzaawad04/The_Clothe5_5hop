@@ -155,7 +155,7 @@ class AdminCustomerController extends Controller
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|string|email|max:255|unique:users,email,' . $customer->user_id . ',user_id',
-            'phone' => 'nullable|string|max:15|unique:users,phone,' . $customer->user_id . ',user_id',
+            'phone' => 'nullable|string|unique:users,phone,' . $customer->user_id . ',user_id',
             'role' => 'required|in:customer,admin',
             'password' => ['nullable', 'confirmed', Password::defaults()],
         ]);
