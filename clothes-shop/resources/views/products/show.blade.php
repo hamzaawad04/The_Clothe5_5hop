@@ -281,6 +281,23 @@
                     Add to Basket
                 </button>
 
+                <!-- POPUP -->
+            <div 
+                x-show="showPopup"
+                x-transition
+                class="popup"
+                style="display:none;"
+            >
+                <h3 class="font-bold text-lg">Added to Basket!</h3>
+                <p class="text-gray-700 mt-1">{{ $product->name }}</p>
+                <p class="text-gray-500 text-sm">Qty: <span x-text="qty"></span></p>
+
+                <div class="flex justify-end gap-2 mt-4">
+                    <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
+                    <button @click="showPopup = false" class="text-gray-600 text-sm">Close</button>
+                </div>
+            </div>
+            
                 <!-- ADD TO WISHLIST FORM -->
                 <form 
                     method="POST"
@@ -300,23 +317,6 @@
                         ❤️ Add to Wishlist
                     </button>
                 </form>
-            </div>
-
-            <!-- POPUP -->
-            <div 
-                x-show="showPopup"
-                x-transition
-                class="popup"
-                style="display:none;"
-            >
-                <h3 class="font-bold text-lg">Added to Basket!</h3>
-                <p class="text-gray-700 mt-1">{{ $product->name }}</p>
-                <p class="text-gray-500 text-sm">Qty: <span x-text="qty"></span></p>
-
-                <div class="flex justify-end gap-2 mt-4">
-                    <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
-                    <button @click="showPopup = false" class="text-gray-600 text-sm">Close</button>
-                </div>
             </div>
 
         </form>
