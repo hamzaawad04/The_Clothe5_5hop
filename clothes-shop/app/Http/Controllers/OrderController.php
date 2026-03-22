@@ -120,9 +120,14 @@ class OrderController extends Controller
             foreach ($cartItems as $item) {
                 $variant = $item->variant;
 
-                if (!$variant || $variant->stock_qty < $item->qty) {
+                if (!$variant) {
                     DB::rollBack();
-                    return redirect()->back()->with('error', 'Insufficient stock for one or more items.');
+                    return redirect()->back()->with('error', 'A product in your cart is no longer available.');
+                }
+
+                if ($item->qty > $variant->stock_qty) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', "Insufficient stock for {$variant->product->name} ({$variant->size}, {$variant->colour}).");
                 }
 
                 $unitPrice = $variant->product->base_price;

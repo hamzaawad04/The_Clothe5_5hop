@@ -53,6 +53,15 @@ class CartController extends Controller
             'qty' => 'required|integer|min:1'
         ]);
 
+        $variant = ProductVariant::where('variant_id', $request->variant_id)->firstOrFail();
+
+        if ($request->qty > $variant->stock_qty) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Requested quantity exceeds available stock.'
+            ], 400);
+        }
+
         $user = auth()->user();
 
         $cart = Cart::firstOrCreate(['user_id' => $user->user_id]);
@@ -62,7 +71,16 @@ class CartController extends Controller
                             ->first();
 
         if ($existing) {
-            $existing->qty += $request->qty;
+            $newQty = $existing->qty + $request->qty;
+
+            if ($newQty > $variant->stock_qty) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Total quantity in cart exceeds available stock.'
+                ], 400);
+            }
+
+            $existing->qty = $newQty;
             $existing->save();
         } else {
             CartItem::create([
@@ -92,6 +110,12 @@ class CartController extends Controller
         $item = CartItem::where('cart_id', $cart->cart_id)
             ->where('variant_id', $variant_id)
             ->firstOrFail();
+
+        $variant = ProductVariant::where('variant_id', $variant_id)->firstOrFail();
+
+        if ($request->qty > $variant->stock_qty) {
+            return redirect()->back()->withErrors('Quantity exceeds available stock.');
+        }
 
         $item->qty = $request->qty;
         $item->save();

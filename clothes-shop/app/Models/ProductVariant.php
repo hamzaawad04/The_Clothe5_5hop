@@ -40,4 +40,15 @@ class ProductVariant extends Model
     {
         return $this->hasMany(Wishlist::class, 'variant_id', 'variant_id');
     }
+
+    public function isOutOfStock(): bool
+    {
+        return $this->stock_qty <= 0;
+    }
+
+    public function isLowStock(): bool
+    {
+        return $this->stock_qty > 0 
+            && $this->stock_qty <= $this->low_stock_threshold;
+    }
 }

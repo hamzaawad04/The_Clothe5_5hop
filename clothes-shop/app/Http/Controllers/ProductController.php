@@ -110,9 +110,12 @@ class ProductController extends Controller
     public function show($product_id) {
         $product = Product::with(['images', 'variants', 'reviews.user'])->findOrFail($product_id);
 
+        $selectedVariant = $product->variants->first();
+
         return view('products.show', [
             'product' => $product,
             'images' => $product->images,
+            'selectedVariant' => $selectedVariant
         ]);
     }
 
