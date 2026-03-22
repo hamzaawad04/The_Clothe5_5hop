@@ -134,7 +134,7 @@
             <div class="bg-white rounded-lg shadow-sm border border-gray-100">
                 <div class="px-6 py-4 border-b border-gray-100">
                     <h4 class="text-base font-bold text-[#14213D]">Recent Orders</h4>
-                    <p class="text-xs text-gray-500 mt-0.5">Last 5 orders placed</p>
+                    <p class="text-xs text-gray-500 mt-0.5">Last 5 completed orders </p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-100">

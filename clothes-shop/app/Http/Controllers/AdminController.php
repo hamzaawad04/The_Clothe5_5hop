@@ -31,9 +31,9 @@ class AdminController extends Controller
 
         $lowStockCount = ProductVariant::where('stock_qty', '<=', 10)->count();
 
-        $recentOrders = Order::latest()->take(5)->get();
-
-        return view('profile.admin.admindashboard', compact(
+$recentOrders = Order::where('status', 'completed')->latest()->take(5)->get();
+        
+return view('profile.admin.admindashboard', compact(
             'totalOrders',
             'totalProducts',
             'totalUsers',
