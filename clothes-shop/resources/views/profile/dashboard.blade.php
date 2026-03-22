@@ -15,9 +15,9 @@
                         <a href="{{ route('orders.index') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
                             YOUR ORDERS
                         </a>
-                        <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
+                        <a href="{{ route('orders.returns') }}" class="block w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded text-center hover:bg-[#FCA311] hover:text-[#14213D] transition">
                             RETURNS AND REFUNDS
-                        </button>
+                        </a>
                         <button class="w-full px-6 py-3 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
                             PAYMENTS METHODS
                         </button>

@@ -207,4 +207,38 @@ class OrderController extends Controller
         ]);
     }
 
+
+    public function returns()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->whereIn('status', ['completed', 'return_requested', 'return_accepted', 'refunded'])
+            ->withCount('items')
+            ->orderByDesc('order_date')
+            ->get();
+
+        return view('orders.returns', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function requestReturn($order_id)
+    {
+        $order = Order::where('order_id', $order_id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        if ($order->status !== 'completed') {
+            return redirect()
+                ->route('orders.returns')
+                ->with('error', 'Only completed orders can be requested for return.');
+        }
+
+        $order->status = 'return_requested';
+        $order->save();
+
+        return redirect()
+            ->route('orders.returns')
+            ->with('success', "Return requested for order #{$order->order_id}.");
+    }
+
 }

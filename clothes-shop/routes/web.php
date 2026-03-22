@@ -13,6 +13,8 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminCustomerController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
@@ -46,6 +48,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('orders.checkout');
     Route::post('/checkout', [OrderController::class, 'checkout'])->name('orders.place-order');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/returns', [OrderController::class, 'returns'])->name('orders.returns');
+    Route::post('/orders/{order_id}/request-return', [OrderController::class, 'requestReturn'])
+        ->whereNumber('order_id')
+        ->name('orders.requestReturn');
     Route::get('/orders/confirmation/{order_id}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
     Route::post('/orders/{order_id}/cancel', [OrderController::class, 'cancel'])
         ->whereNumber('order_id')
@@ -91,6 +97,8 @@ Route::middleware(['auth', 'admin'])
 
         Route::resource('products', AdminProductController::class);
 
+        Route::resource('customers', AdminCustomerController::class);
+
         Route::get('/sales-analytics', [AdminOrderController::class, 'salesAnalytics'])
             ->name('sales-analytics');
 
@@ -105,5 +113,7 @@ Route::middleware(['auth', 'admin'])
 
         Route::get('/orders/{order_id}', [AdminOrderController::class, 'show'])
             ->name('orders.show');
-    });
+
+        Route::get('/inventory', [App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('inventory.index');
+        Route::post('/inventory/{variant}/add-stock', [App\Http\Controllers\Admin\InventoryController::class, 'addStock'])->name('inventory.addStock');    });
 require __DIR__.'/auth.php';

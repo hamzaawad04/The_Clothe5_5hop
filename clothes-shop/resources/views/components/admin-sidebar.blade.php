@@ -41,18 +41,11 @@
            class="{{ $base }} {{ $isActive(['admin.sales-analytics'], 'sales-analytics') ? $activeClass : $inactiveClass }}">
             Sales & Analytics
         </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'customers' ? $activeClass : $inactiveClass }}">
-            Customer Management
+        <a href="{{ route('admin.customers.index') }}"
+           class="{{ $base }} {{ $isActive(['admin.customers.*'], 'customers') ? $activeClass : $inactiveClass }}">
+            User Management
         </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'inventory' ? $activeClass : $inactiveClass }}">
-            Inventory & Supply
-        </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'roles' ? $activeClass : $inactiveClass }}">
-            User Roles & Permissions
-        </a>
-        <a href="#" class="{{ $base }} {{ $activeItem === 'payments' ? $activeClass : $inactiveClass }}">
-            Payments & Shipments
-        </a>
+
     </nav>
 
 </aside>

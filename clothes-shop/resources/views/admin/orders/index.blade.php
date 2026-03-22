@@ -31,11 +31,28 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">
                         @forelse ($orders as $order)
+                            @php
+                                $statusClasses = match ($order->status) {
+                                    'pending' => 'bg-amber-100 text-amber-800',
+                                    'paid' => 'bg-blue-100 text-blue-800',
+                                    'shipped' => 'bg-indigo-100 text-indigo-800',
+                                    'completed' => 'bg-green-100 text-green-800',
+                                    'cancelled' => 'bg-red-100 text-red-800',
+                                    'return_requested' => 'bg-orange-100 text-orange-800',
+                                    'return_accepted' => 'bg-teal-100 text-teal-800',
+                                    'refunded' => 'bg-slate-100 text-slate-800',
+                                    default => 'bg-gray-100 text-gray-800',
+                                };
+                            @endphp
                             <tr>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $order->order_id }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $order->ship_name }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-700">£{{ number_format($order->total_amount, 2) }}</td>
-                                <td class="px-6 py-4 text-sm font-semibold">{{ ucfirst($order->status) }}</td>
+                                <td class="px-6 py-4 text-sm font-semibold">
+                                    <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $statusClasses }}">
+                                        {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
+                                    </span>
+                                </td>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $order->order_date }}</td>
                                 <td class="px-6 py-4">
                                     <form method="POST" action="{{ route('admin.orders.updateStatus', $order->order_id) }}">
@@ -43,9 +60,9 @@
                                         @method('PATCH')
                                         <div class="flex items-center gap-2">
                                             <select name="status" class="rounded border-gray-300 text-sm">
-                                                @foreach (['pending','paid','shipped','completed','cancelled'] as $status)
+                                                @foreach (['pending','paid','shipped','completed','cancelled','return_requested','return_accepted','refunded'] as $status)
                                                     <option value="{{ $status }}" @selected($order->status === $status)>
-                                                        {{ ucfirst($status) }}
+                                                        {{ \Illuminate\Support\Str::of($status)->replace('_', ' ')->title() }}
                                                     </option>
                                                 @endforeach
                                             </select>
