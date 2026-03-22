@@ -57,11 +57,26 @@
    </header>
 
      <!-- Categories -->
-   <nav class="flex justify-between px-20 py-3 text-lg font-medium">
-       <a href="{{ route('products.tops') }}" class="hover:text-cathover">Tops</a>
-       <a href="{{ route('products.bottoms') }}" class="hover:text-cathover">Bottoms</a>
-       <a href="{{ route('products.footwear') }}" class="hover:text-cathover">Footwear</a>
-       <a href="{{ route('products.outerwear') }}" class="hover:text-cathover">Outerwear</a>
-       <a href="{{ route('products.accessories') }}" class="hover:text-cathover">Accessories</a>
-   </nav>
+    <nav class="flex justify-between px-20 py-3 text-lg font-medium">
+        <a href="{{ route('products.tops') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.tops') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Tops
+        </a>
+        <a href="{{ route('products.bottoms') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.bottoms') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Bottoms
+        </a>
+        <a href="{{ route('products.footwear') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.footwear') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Footwear
+        </a>
+        <a href="{{ route('products.outerwear') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.outerwear') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Outerwear
+        </a>
+        <a href="{{ route('products.accessories') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.accessories') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Accessories
+        </a>
+    </nav>
    </div>
