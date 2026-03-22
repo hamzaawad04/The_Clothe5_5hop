@@ -296,8 +296,9 @@
                     <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
                     <button @click="showPopup = false" class="text-gray-600 text-sm">Close</button>
                 </div>
-            </div>
-            
+           
+        </form>
+ </div>
                 <!-- ADD TO WISHLIST FORM -->
                 <form 
                     method="POST"
@@ -318,9 +319,6 @@
                     </button>
                 </form>
             </div>
-
-        </form>
-
     </div>
 </div>
 
