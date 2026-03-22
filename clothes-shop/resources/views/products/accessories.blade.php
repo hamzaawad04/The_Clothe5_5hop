@@ -181,14 +181,6 @@
   <!-- Top bar -->
   @include('components.mainnavbar')
 
-  <!-- Filter bar -->
-  <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Necklace</option><option>Watch</option><option>Scarf</option><option>Glasses</option><option>Gloves</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>One Size</option><option>Small</option><option>Medium</option><option>Large</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>Silver</option><option>Gold</option><option>Rose Gold</option><option>Multi</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £25</option><option>£25-£50</option><option>£50-£100</option><option>Over £100</option></select></div>
-  </div>
-
   <!-- Navy section removed -->
 
   <!-- Product grid -->

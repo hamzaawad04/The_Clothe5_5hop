@@ -181,14 +181,6 @@
   <!-- Top bar -->
   @include('components.mainnavbar')
 
-  <!-- Filter bar -->
-  <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Blazer</option><option>Winter Coat</option><option>Cardigan</option><option>Overcoat</option><option>Denim Jacket</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>Navy</option><option>Grey</option><option>Brown</option><option>Denim</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £100</option><option>£100-£150</option><option>£150-£250</option><option>Over £250</option></select></div>
-  </div>
-
   <!-- Navy section removed -->
 
   <!-- Product grid -->
