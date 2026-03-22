@@ -6,7 +6,7 @@
 
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="text-3xl font-bold text-[#14213D]">Customer Details</h1>
+            <h1 class="text-3xl font-bold text-[#14213D]">User Details</h1>
             <div class="flex gap-2">
                 <a href="{{ route('admin.customers.edit', $customer->user_id) }}"
                     class="inline-flex items-center px-4 py-2 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition">
