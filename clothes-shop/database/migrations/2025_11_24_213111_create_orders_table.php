@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id('order_id');
             $table->unsignedBigInteger('user_id');
             $table->enum('status', [
-                'pending',
-                'paid',
-                'shipped',
-                'completed',
-                'cancelled',
-                'return_requested',
-                'return_accepted',
-                'refunded',
+                'Pending',
+                'Paid',
+                'Shipped',
+                'Completed',
+                'Cancelled',
+                'Return Requested',
+                'Return Accepted',
+                'Refunded',
             ]);
             $table->decimal('total_amount', 10, 2);
             $table->string('ship_name');

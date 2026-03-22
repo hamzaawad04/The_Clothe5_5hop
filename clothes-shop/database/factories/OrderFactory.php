@@ -30,7 +30,7 @@ class OrderFactory extends Factory
             'total_amount' => 0, //calculated later
             'ship_name' => fake() -> name(),
             'ship_address' => fake() -> address(),
-            'payment_method' => null,
+            'payment_method' => 'credit_card',
             'order_date' => now(),
         ];
     }
@@ -39,11 +39,17 @@ class OrderFactory extends Factory
     {
         return $this->afterCreating(function ($order) {
 
-            \App\Models\OrderItem::factory()
+            $items = OrderItem::factory()
                 ->count(rand(1, 3))
                 ->create([
                     'order_id' => $order -> order_id
                 ]);
+
+            $total = $items->sum(function ($item) {
+                return $item->line_total;
+            });
+
+            $order->update(['total_amount' => $total]);
         });
     }
 }

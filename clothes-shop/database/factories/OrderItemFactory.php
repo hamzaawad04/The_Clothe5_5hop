@@ -29,6 +29,7 @@ class OrderItemFactory extends Factory
 
         return [
             'order_id' => Order::factory(),
+            'product_id' => $variant -> product_id,
             'variant_id' => $variant->variant_id,
             'unit_price' => $price,
             'qty' => $qty,

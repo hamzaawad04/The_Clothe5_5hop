@@ -50,7 +50,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-700">£{{ number_format($order->total_amount, 2) }}</td>
                                 <td class="px-6 py-4 text-sm font-semibold">
                                     <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $statusClasses }}">
-                                        {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
+                                        {{ ($order->status) }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $order->order_date }}</td>

@@ -69,7 +69,7 @@
                                 </div>
                                 <span class="text-xs font-semibold px-2 py-1 rounded-full
                                     {{ $order->status === 'pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700' }}">
-                                    {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
+                                    {{ ($order->status) }}
                                 </span>
                             </div>
                         @empty
@@ -155,15 +155,15 @@
                                     <td class="px-6 py-3 text-sm text-gray-700">£{{ number_format($order->total_amount, 2) }}</td>
                                     <td class="px-6 py-3">
                                         <span class="text-xs font-semibold px-2 py-1 rounded-full
-                                            {{ $order->status === 'pending'   ? 'bg-yellow-100 text-yellow-700' : '' }}
-                                            {{ $order->status === 'paid'      ? 'bg-blue-100 text-blue-700'   : '' }}
-                                            {{ $order->status === 'shipped'   ? 'bg-purple-100 text-purple-700' : '' }}
-                                            {{ $order->status === 'completed' ? 'bg-green-100 text-green-700' : '' }}
-                                            {{ $order->status === 'cancelled' ? 'bg-red-100 text-red-600'     : '' }}
-                                            {{ $order->status === 'return_requested' ? 'bg-orange-100 text-orange-700' : '' }}
-                                            {{ $order->status === 'return_accepted' ? 'bg-teal-100 text-teal-700' : '' }}
-                                            {{ $order->status === 'refunded' ? 'bg-slate-100 text-slate-700' : '' }}">
-                                            {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
+                                            {{ $order->status === 'Pending'   ? 'bg-yellow-100 text-yellow-700' : '' }}
+                                            {{ $order->status === 'Paid'      ? 'bg-blue-100 text-blue-700'   : '' }}
+                                            {{ $order->status === 'Shipped'   ? 'bg-purple-100 text-purple-700' : '' }}
+                                            {{ $order->status === 'Completed' ? 'bg-green-100 text-green-700' : '' }}
+                                            {{ $order->status === 'Cancelled' ? 'bg-red-100 text-red-600'     : '' }}
+                                            {{ $order->status === 'Return Requested' ? 'bg-orange-100 text-orange-700' : '' }}
+                                            {{ $order->status === 'Return Accepted' ? 'bg-teal-100 text-teal-700' : '' }}
+                                            {{ $order->status === 'Refunded' ? 'bg-slate-100 text-slate-700' : '' }}">
+                                            {{ ($order->status) }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-3 text-sm text-gray-700">{{ $order->order_date }}</td>
