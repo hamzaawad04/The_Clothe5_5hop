@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot name="header">
-        <h1 class="text-3xl font-bold text-[#14213D]">Customer Management</h1>
+        <h1 class="text-3xl font-bold text-[#14213D]">User Management</h1>
     </x-slot>
 
     <div class="py-6">
@@ -58,7 +58,7 @@
                     <!-- Add Customer button on the right -->
                     <a href="{{ route('admin.customers.create') }}"
                         class="inline-flex items-center px-6 py-2.5 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition whitespace-nowrap shadow-sm">
-                        Add Customer
+                        Add User
                     </a>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="text-sm font-semibold text-red-500 hover:underline"
-                                                onclick="return confirm('Delete this customer?')">
+                                                onclick="return confirm('Delete this user?')">
                                                 Delete
                                             </button>
                                         </form>
@@ -128,7 +128,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="px-6 py-4 text-center text-gray-500">No customers found</td>
+                                <td colspan="8" class="px-6 py-4 text-center text-gray-500">No users found</td>
                             </tr>
                         @endforelse
                     </tbody>
