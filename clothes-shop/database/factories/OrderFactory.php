@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\OrderStatus;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
@@ -23,7 +25,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->user_id ?? User::factory(),
+            'user_id' => User::inRandomOrder()->firstOrFail()->user_id ?? User::factory(),
             'status' => fake()->randomElement(OrderStatus::cases()),
             'total_amount' => 0, //calculated later
             'ship_name' => fake() -> name(),

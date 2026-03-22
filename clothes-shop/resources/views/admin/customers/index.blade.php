@@ -87,8 +87,9 @@
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $customer->email }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $customer->phone ?? 'N/A' }}</td>
                                 <td class="px-6 py-4">
-                                    <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold {{ $customer->role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                                        {{ ucfirst($customer->role) }}
+                                    <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold 
+                                        {{ $customer->isAdmin() ? 'bg-purple-100 text-purple-800' : ($customer->isCustomer() ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800') }}">
+                                        {{ $customer->isAdmin() ? 'Admin' : ($customer->isCustomer() ? 'Customer' : ucfirst($customer->role)) }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-sm">
