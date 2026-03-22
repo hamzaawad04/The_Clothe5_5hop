@@ -27,12 +27,11 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">ID</th>
+                            <th class="px-6 py-3 text-left text-m font-semibold text-gray-600"> ID </th>
                             <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">Product Name</th>
                             <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">Category</th>
                             <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">Price</th>
                             <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">Primary Image</th>
-                            <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">Low Stock Threshold</th>
                             <th class="px-6 py-3 text-left text-m font-semibold text-gray-600">Actions</th>
                         </tr>
                     </thead>
@@ -42,7 +41,13 @@
                                 $primaryImage = $product->images->firstWhere('is_primary', 1) ?? $product->images->first();
                             @endphp
                             <tr>
-                                <td class="px-6 py-4 text-sm text-gray-700">{{ $product->product_id }}</td>
+                                <a href="{{ route('admin.products.index') }}" class="hover:underline cursor-pointer">
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <a href="{{ route('admin.products.show', $product -> product_id) }}" class="hover:underline cursor-pointer">
+                                            {{ $product->product_id }}
+                                        </a>
+                                    </td>
+                                </a>
                                 <td class="px-6 py-4">
                                     <p class="text-sm font-semibold text-gray-900">{{ $product->name }}</p>
                                 </td>
@@ -64,7 +69,6 @@
                                         <span class="text-xs text-gray-500">No image</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 font-semibold text-sm text-gray-700">N/A</td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <a href="{{ route('admin.products.edit', $product->product_id) }}"

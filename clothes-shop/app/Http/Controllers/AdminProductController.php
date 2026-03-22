@@ -157,4 +157,13 @@ class AdminProductController extends Controller
         return redirect()->route('admin.products.index')
             ->with('success', 'Product deleted successfully');
     }
+
+    public function show($product_id)
+    {
+        $product = \App\Models\Product::with('variants')
+            -> where('product_id', $product_id)
+            -> firstOrFail();
+
+        return view('admin.products.variant', compact('product'));
+    }
 }
