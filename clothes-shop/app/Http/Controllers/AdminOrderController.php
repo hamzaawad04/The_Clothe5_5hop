@@ -66,7 +66,7 @@ public function updateStatus(Request $request, $order_id)
             }
         }
 
-        if ($newStatus === OrderStatus::RETURNACCEPTED) {
+        if ($newStatus === OrderStatus::REFUNDED) {
             foreach ($order->items as $item) {
                 $variant = $item->variant;
 
