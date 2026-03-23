@@ -256,7 +256,8 @@
                 variants: {{ $product->variants->toJson() }},
                 variant_id: '{{ $product->variants->first()->variant_id ?? '' }}',
                 qty: 1,
-                showPopup: false,
+                showBasketPopup: false,
+                showWishlistPopup: false,
 
                 get selectedVariant() {
                     return this.variants.find(v => v.variant_id == this.variant_id);
@@ -289,8 +290,8 @@
         let result = await response.json();
 
         if (result.success) {
-            this.showPopup = true;
-            setTimeout(() => this.showPopup = false, 3000);
+            this.showBasketPopup = true;
+            setTimeout(() => this.showBasketPopup = false, 3000);
         }
     },
 
@@ -310,7 +311,8 @@
         let result = await response.json();
 
         if (result.success) {
-            alert('Added to wishlist ❤️');
+            this.showWishlistPopup = true;
+            setTimeout(() => this.showWishlistPopup = false, 3000);
         }
                 }
             }" @submit.prevent="submitForm" method="POST" action="{{ route('cart.add') }}">
@@ -378,13 +380,23 @@
                 </div>
 
                     <!-- POPUP -->
-                    <div x-show="showPopup" x-transition class="popup" style="display:none;">
+                    <div x-show="showBasketPopup" x-transition class="popup" style="display:none;">
                         <h3 class="font-bold text-lg">Added to Basket!</h3>
                         <p class="text-gray-700 mt-1">{{ $product->name }}</p>
                         <p class="text-gray-500 text-sm">Qty: <span x-text="qty"></span></p>
 
                         <div class="flex justify-end gap-2 mt-4">
                             <a href="{{ route('cart.basket') }}" class="text-blue-600 underline text-sm">View Basket</a>
+                        </div>
+                    </div>
+
+                    <div x-show="showWishlistPopup" x-transition class="popup" style="display:none;">
+                        <h3 class="font-bold text-lg">Added to Wishlist!</h3>
+                        <p class="text-gray-700 mt-1">{{ $product->name }}</p>
+                        <p class="text-gray-500 text-sm">Qty: <span x-text="qty"></span></p>
+
+                        <div class="flex justify-end gap-2 mt-4">
+                            <a href="{{ route('wishlist.index') }}" class="text-blue-600 underline text-sm">View Wishlist</a>
                         </div>
                     </div>
 
