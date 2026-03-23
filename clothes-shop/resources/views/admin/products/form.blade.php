@@ -1,4 +1,4 @@
-<div class="grid gap-6 md:grid-cols-2">
+<div class="grid gap-6 md:grid-cols-2 mb-10">
     <div class="md:col-span-2">
         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
         <input id="name"
@@ -71,6 +71,53 @@
                placeholder="images/tops/example-back.png">
         <p class="mt-1 text-xs text-gray-500">Optional. Shown on mouse hover.</p>
     </div>
+</div>
+
+<hr class="my-8">
+
+<h3 class="text-lg font-semibold mt-4">Add New Product Variant</h3>
+<p class="text-sm font-bold mb-4 text-gray-400">Leave blank if you don't want to add a new variant</p>
+
+<div class="grid gap-6 md:grid-cols-2">
+
+    <div>
+        <label class="block text-sm font-medium mb-1">Size</label>
+        <input type="text"
+            name="variant[size]"
+            value="{{ old('variant.size') }}"
+            {{ !$product ? 'required' : '' }}
+            class="w-full rounded border-gray-300">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium mb-1">Colour</label>
+        <input type="text"
+            name="variant[colour]"
+            value="{{ old('variant.colour') }}"
+            {{ !$product ? 'required' : '' }}
+            class="w-full rounded border-gray-300">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium mb-1">Stock Quantity</label>
+        <input type="number"
+            name="variant[stock_qty]"
+            value="{{ old('variant.stock_qty') }}"
+            min="0"
+            {{ !$product ? 'required' : '' }}
+            class="w-full rounded border-gray-300">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium mb-1">Low Stock Threshold</label>
+        <input type="number"
+            name="variant[low_stock_threshold]"
+            value="{{ old('variant.low_stock_threshold') }}"
+            min="0"
+            {{ !$product ? 'required' : '' }}
+            class="w-full rounded border-gray-300">
+    </div>
+
 </div>
 
 <div class="mt-8 flex items-center gap-3">
