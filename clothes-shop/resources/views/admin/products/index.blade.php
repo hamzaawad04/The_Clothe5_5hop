@@ -16,6 +16,7 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             @if (session('success'))
                 <div class="mb-4 rounded border border-green-200 bg-green-50 text-green-700 px-4 py-3">
                     {{ session('success') }}
@@ -51,7 +52,6 @@
                         class="px-6 py-2.5 bg-[#14213D] text-[#FCA311] font-semibold rounded hover:bg-[#FCA311] hover:text-[#14213D] transition shadow-sm">
                         Filter
                     </button>
-
                 </form>
             </div>
 
@@ -70,7 +70,6 @@
 
                     <tbody class="bg-white divide-y divide-gray-100">
                         @forelse ($products as $product)
-
                             @php
                                 $primaryImage = $product->images->firstWhere('is_primary', 1) ?? $product->images->first();
                             @endphp
@@ -90,7 +89,6 @@
                                     </p>
                                 </td>
 
-
                                 <td class="px-6 py-4 font-semibold text-sm text-gray-700">
                                     {{ $product->category?->name ?? 'Unknown' }}
                                 </td>
@@ -98,6 +96,7 @@
                                 <td class="px-6 py-4 font-semibold text-sm text-gray-700">
                                     &pound;{{ number_format((float) $product->base_price, 2) }}
                                 </td>
+
                                 <td class="px-6 py-4">
                                     @if ($primaryImage)
                                         @php
@@ -112,6 +111,7 @@
                                         <span class="text-xs text-gray-500">No image</span>
                                     @endif
                                 </td>
+
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <a href="{{ route('admin.products.edit', $product->product_id) }}"
@@ -143,8 +143,12 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
 
+
+                <div class="mt-4 px-6 py-3 bg-white border-t border-gray-200">
+                    {{ $products->withQueryString()->links('pagination::tailwind') }}
+                </div>
+            </div>
         </div>
     </div>
 
