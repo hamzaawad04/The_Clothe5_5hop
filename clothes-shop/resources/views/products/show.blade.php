@@ -220,6 +220,18 @@
 
 <body>
 
+    <script>
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.remove('hidden');
+            document.getElementById('reviewModal').classList.add('flex');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.add('hidden');
+            document.getElementById('reviewModal').classList.remove('flex');
+        }
+    </script>
+
     @include('components.mainnavbar')
 
     <div class="container">
@@ -272,26 +284,46 @@
                         && this.selectedVariant.stock_qty <= this.selectedVariant.low_stock_threshold;
                 },
 
-                async submitForm() {
-                    let formData = new FormData();
-                    formData.append('variant_id', this.variant_id);
-                    formData.append('qty', this.qty);
+                async addToCart() {
+        let formData = new FormData();
+        formData.append('variant_id', this.variant_id);
+        formData.append('qty', this.qty);
 
-                    const response = await fetch('{{ route('cart.add') }}', {
-                        method: 'POST',
-                        headers: { 
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Accept': 'application/json'
-                        },
-                        body: formData,
-                    });
+        const response = await fetch('{{ route('cart.add') }}', {
+            method: 'POST',
+            headers: { 
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            },
+            body: formData,
+        });
 
-                    let result = await response.json();
+        let result = await response.json();
 
-                    if (result.success) {
-                        this.showPopup = true;
-                        setTimeout(() => this.showPopup = false, 3000);
-                    }
+        if (result.success) {
+            this.showPopup = true;
+            setTimeout(() => this.showPopup = false, 3000);
+        }
+    },
+
+    async addToWishlist() {
+        let formData = new FormData();
+        formData.append('variant_id', this.variant_id);
+
+        const response = await fetch('{{ route('wishlist.add') }}', {
+            method: 'POST',
+            headers: { 
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            },
+            body: formData,
+        });
+
+        let result = await response.json();
+
+        if (result.success) {
+            alert('Added to wishlist ❤️');
+        }
                 }
             }" @submit.prevent="submitForm" method="POST" action="{{ route('cart.add') }}">
                 @csrf
@@ -334,26 +366,28 @@
                         </div>
                     </div>
 
-                    <!-- BUTTONS SIDE BY SIDE, SAME SIZE -->
-                    <div class="flex gap-2 mt-4 w-full">
+                <!-- BUTTONS SIDE BY SIDE, SAME SIZE -->
+                <div class="flex gap-2 mt-4 w-full">
 
-                        <!-- ADD TO BASKET -->
-                        <button type="submit" class="add-btn flex-1 text-center whitespace-nowrap"
-                            :disabled="isOutOfStock()" :class="{ 'opacity-50 cursor-not-allowed': isOutOfStock() }">
-                            Add to Basket
-                        </button>
+                    <!-- ADD TO BASKET -->
+                    <button
+                        type="button"
+                        @click="addToCart()"
+                        class="add-btn flex-1 text-center whitespace-nowrap"
+                        :disabled="isOutOfStock()"
+                        :class="{ 'opacity-50 cursor-not-allowed': isOutOfStock() }">
+                        Add to Basket
+                    </button>
 
-                        <!-- ADD TO WISHLIST -->
-                        <form method="POST" action="{{ route('wishlist.add') }}" class="flex-1 m-0 p-0">
-                            @csrf
-                            <input type="hidden" name="variant_id" x-bind:value="variant_id">
-                            <button type="submit"
-                                class="add-btn bg-red-500 text-white hover:bg-red-600 flex-1 text-center whitespace-nowrap">
-                                Add to Wishlist
-                            </button>
-                        </form>
+                    <!-- ADD TO WISHLIST -->
+                    <button
+                        type="button"
+                        @click="addToWishlist()"
+                        class="add-btn bg-red-500 text-white hover:bg-red-600 flex-1 text-center whitespace-nowrap">
+                        Add to Wishlist
+                    </button>
 
-                    </div>
+                </div>
 
                     <!-- POPUP -->
                     <div x-show="showPopup" x-transition class="popup" style="display:none;">
