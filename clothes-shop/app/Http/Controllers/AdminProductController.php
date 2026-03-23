@@ -38,10 +38,10 @@ class AdminProductController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
 
-            'variants' => 'required|array|min:1',
-            'variants.*.size' => 'required|string',
-            'variants.*.colour' => 'required|string',
-            'variants.*.stock_qty' => 'required|integer|min:0',
+            'variant.size' => 'required|string',
+            'variant.colour' => 'required|string',
+            'variant.stock_qty' => 'required|integer|min:0',
+            'variant.low_stock_threshold' => 'required|integer|min:0',
         ]);
 
         $product = Product::create([
@@ -62,15 +62,12 @@ class AdminProductController extends Controller
             ]);
         }
 
-        if ($request->has('variants')) {
-            foreach ($request->variants as $variant) {
-                $product->variants()->create([
-                    'size' => $variant['size'],
-                    'colour' => $variant['colour'],
-                    'stock_qty' => $variant['stock_qty'],
-                ]);
-            }
-        }
+        $product->variants()->create([
+            'size' => $request->variant['size'],
+            'colour' => $request->variant['colour'],
+            'stock_qty' => $request->variant['stock_qty'],
+            'low_stock_threshold' => $request->variant['low_stock_threshold'],
+        ]);
 
         return redirect()->route('admin.products.index')
             ->with('success', 'Product created successfully');
@@ -93,11 +90,6 @@ class AdminProductController extends Controller
             'base_price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,category_id',
             'description' => 'nullable|string',
-
-            'variants' => 'required|array|min:1',
-            'variants.*.size' => 'required|string',
-            'variants.*.colour' => 'required|string',
-            'variants.*.stock_qty' => 'required|integer|min:0',
         ]);
 
         $product->update([
@@ -108,37 +100,23 @@ class AdminProductController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        $existingVariantIds = [];
+        if ($request->filled('variant.size') || $request->filled('variant.colour') || 
+            $request->filled('variant.stock_qty') || $request->filled('variant.low_stock_threshold')) {
 
-        foreach ($request->variants as $variantData) {
+            $request->validate([
+                'variant.size' => 'required|string',
+                'variant.colour' => 'required|string',
+                'variant.stock_qty' => 'required|integer|min:0',
+                'variant.low_stock_threshold' => 'required|integer|min:0',
+            ]);
 
-            if (isset($variantData['variant_id'])) {
-                $variant = ProductVariant::find($variantData['variant_id']);
-
-                if ($variant) {
-                    $variant->update([
-                        'size' => $variantData['size'],
-                        'colour' => $variantData['colour'],
-                        'stock_qty' => $variantData['stock_qty'],
-                    ]);
-
-                    $existingVariantIds[] = $variant->variant_id;
-                }
-            } 
-            else {
-                $newVariant = $product->variants()->create([
-                    'size' => $variantData['size'],
-                    'colour' => $variantData['colour'],
-                    'stock_qty' => $variantData['stock_qty'],
-                ]);
-
-                $existingVariantIds[] = $newVariant->variant_id;
-            }
+            $product->variants()->create([
+                'size' => $request->variant['size'],
+                'colour' => $request->variant['colour'],
+                'stock_qty' => $request->variant['stock_qty'],
+                'low_stock_threshold' => $request->variant['low_stock_threshold'],
+            ]);
         }
-
-        $product->variants()
-            ->whereNotIn('variant_id', $existingVariantIds)
-            ->delete();
 
         return redirect()->route('admin.products.index')
             ->with('success', 'Product updated successfully');
