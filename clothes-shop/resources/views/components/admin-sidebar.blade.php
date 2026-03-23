@@ -25,7 +25,7 @@
     </div>
 
     <nav class="p-4 space-y-4">
-        <a href="{{ route('admin.dashboard') }}"
+        <a href="{{ route('admin.dashboard.admindashboard') }}"
            class="{{ $base }} {{ $isActive(['admin.dashboard'], 'dashboard') ? $activeClass : $inactiveClass }}">
             Dashboard
         </a>
@@ -37,7 +37,7 @@
            class="{{ $base }} {{ $isActive(['admin.orders.*'], 'orders') ? $activeClass : $inactiveClass }}">
             Order Management
         </a>
-        <a href="{{ route('admin.sales-analytics') }}"
+        <a href="{{ route('admin.dashboard.sales-analytics') }}"
            class="{{ $base }} {{ $isActive(['admin.sales-analytics'], 'sales-analytics') ? $activeClass : $inactiveClass }}">
             Sales & Analytics
         </a>

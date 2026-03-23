@@ -111,7 +111,7 @@ public function updateStatus(Request $request, $order_id)
             ->orderByDesc('total_qty')
             ->get();
 
-        return view('profile.admin.salesAnalytics', [
+        return view('admin.dashboard.salesAnalytics', [
             'totalOrders' => $totalOrders,
             'topProducts' => $topProducts,
             'categoryBreakdown' => $categoryBreakdown,

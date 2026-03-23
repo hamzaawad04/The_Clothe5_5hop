@@ -83,7 +83,7 @@
                                 <span class="text-xs font-semibold px-2 py-1 rounded-full
                                     <td class="px-6 py-4 text-sm font-semibold">
                                         <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $statusClasses }}">
-                                            {{ ($order->status) }}
+                                            {{ ($order -> status -> value) }}
                                         </span>
                                     </td>
                                 </span>
