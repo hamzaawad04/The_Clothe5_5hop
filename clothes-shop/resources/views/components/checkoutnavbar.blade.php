@@ -36,6 +36,12 @@
         @endguest
 
         @auth
+            @if(auth()->user()->isAdmin())
+                <a href="{{ url('/admin/dashboard') }}">
+                    <img src="/icons/admin-page.svg" alt="Admin Dashboard" class="w-6 h-6">
+                </a>
+            @endif
+
            <a href="{{ url('/dashboard') }}"><img src="/icons/account.svg" alt="Account" class="w-6 h-6"></a>
         @endauth
 

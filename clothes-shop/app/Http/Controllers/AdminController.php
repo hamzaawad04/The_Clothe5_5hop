@@ -33,7 +33,7 @@ class AdminController extends Controller
 
 $recentOrders = Order::where('status', 'completed')->latest()->take(5)->get();
         
-return view('profile.admin.admindashboard', compact(
+return view('admin.dashboard.admindashboard', compact(
             'totalOrders',
             'totalProducts',
             'totalUsers',

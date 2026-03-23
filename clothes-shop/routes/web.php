@@ -94,14 +94,14 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.admindashboard');
 
         Route::resource('products', AdminProductController::class);
 
         Route::resource('customers', AdminCustomerController::class);
 
         Route::get('/sales-analytics', [AdminOrderController::class, 'salesAnalytics'])
-            ->name('sales-analytics');
+            ->name('dashboard.sales-analytics');
 
         Route::get('/sales-analytics/order-count', [AdminOrderController::class, 'salesAnalyticsCount'])
             ->name('sales-analytics.order-count');
