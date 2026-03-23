@@ -220,18 +220,6 @@
 
 <body>
 
-    <script>
-        function openReviewModal() {
-            document.getElementById('reviewModal').classList.remove('hidden');
-            document.getElementById('reviewModal').classList.add('flex');
-        }
-
-        function closeReviewModal() {
-            document.getElementById('reviewModal').classList.add('hidden');
-            document.getElementById('reviewModal').classList.remove('flex');
-        }
-    </script>
-
     @include('components.mainnavbar')
 
     <div class="container">
@@ -426,12 +414,97 @@
                     @endif
                 </div>
             </div>
+            <div class="reviews-actions" x-data="{
+        showModal: false,
+        rating: null,
+        reviewText: '',
+        errors: [],
+        async submitReview(productId) {
+            this.errors = [];
 
-            <div class="reviews-actions">
+            const formData = new FormData();
+            formData.append('rating', this.rating);
+            formData.append('review_text', this.reviewText);
+
+            try {
+                const response = await fetch(`/product/${productId}/review`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) throw response;
+
+                const result = await response.json();
+                if (result.success) {
+                    this.showModal = false;
+                    alert(result.success);
+                }
+            } catch (err) {
+                if (err.json) {
+                    const data = await err.json();
+                    if (data.errors) this.errors = Object.values(data.errors).flat();
+                    else if (data.error) this.errors = [data.error];
+                } else {
+                    this.errors = ['Something went wrong.'];
+                }
+            }
+        }
+    }">
+    <!-- REVIEW MODAL -->
+    <div
+    x-show="showModal"
+    x-transition
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    style="display:none;"
+>
+    <div class="bg-white p-8 rounded-lg w-full max-w-md relative">
+
+        <button @click="showModal = false" class="absolute top-3 right-4 text-2xl">&times;</button>
+
+        <h2 class="text-2xl font-bold mb-6">Write a Review</h2>
+
+        <!-- Display Errors -->
+        <template x-if="errors.length">
+            <div class="mb-4 text-red-600">
+                <ul>
+                    <template x-for="error in errors" :key="error">
+                        <li x-text="error"></li>
+                    </template>
+                </ul>
+            </div>
+        </template>
+
+        <form @submit.prevent="submitReview({{ $product->product_id }})">
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">Rating</label>
+                <div class="star-rating">
+                    @for($i = 5; $i >= 1; $i--)
+                        <input type="radio" x-model="rating" value="{{ $i }}" id="star{{ $i }}">
+                        <label for="star{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">Your Review (Optional)</label>
+                <textarea x-model="reviewText" rows="4" class="w-full border rounded px-3 py-2"
+                    placeholder="Share your thoughts about this product..."></textarea>
+            </div>
+
+            <button type="submit" class="add-btn w-full hover:bg-[#0f1829]">
+                Submit Review
+            </button>
+        </form>
+    </div>
+</div>
 
                 @auth
                     <div class="button-group">
-                        <button onclick="openReviewModal()" class="btn-register">
+                        <button @click="showModal = true" class="btn-register">
                             Write a Review
                         </button>
                     </div>
@@ -503,46 +576,6 @@
         </div>
 
     </section>
-
-    <!-- REVIEW MODAL -->
-    <div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-
-        <div class="bg-white p-8 rounded-lg w-full max-w-md relative">
-
-            <button onclick="closeReviewModal()" class="absolute top-3 right-4 text-2xl">&times;</button>
-
-            <h2 class="text-2xl font-bold mb-6">Write a Review</h2>
-
-            <form method="POST" action="{{ route('reviews.store', $product->product_id) }}">
-                @csrf
-
-                <div class="mb-6">
-                    <label class="block mb-2 font-medium">Rating</label>
-
-                    <div class="star-rating">
-                        @for($i = 5; $i >= 1; $i--)
-                            <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}">
-                            <label for="star{{ $i }}">★</label>
-                        @endfor
-                    </div>
-                </div>
-
-                <div class="mb-6">
-                    <label class="block mb-2 font-medium">Your Review (Optional)</label>
-
-                    <textarea name="review_text" rows="4" class="w-full border rounded px-3 py-2"
-                        placeholder="Share your thoughts about this product..."></textarea>
-                </div>
-
-                <button type="submit" class="add-btn w-full hover:bg-[#0f1829]">
-                    Submit Review
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
 
     @include('components.footer')
 

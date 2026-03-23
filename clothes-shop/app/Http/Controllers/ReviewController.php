@@ -22,6 +22,9 @@ class ReviewController extends Controller
             ->first();
 
         if ($existingReview) {
+            if ($request->expectsJson()) {
+            return response()->json(['error' => 'You have already reviewed this product.'], 422);
+            }
             return back()->with('error', 'You have already reviewed this product.');
         }
 
@@ -32,6 +35,10 @@ class ReviewController extends Controller
             'rating' => $request->rating,
             'review_text' => $request->review_text
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => 'Review submitted successfully!']);
+        }
 
         return back()->with('success', 'Review submitted successfully!');
     }

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ReviewController;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
@@ -60,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{order_id}', [OrderController::class, 'show'])
         ->whereNumber('order_id')
         ->name('orders.show');
-    Route::post('/product/{product_id}/review', [\App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
+    Route::post('/product/{product_id}/review', [ReviewController::class, 'store'])->name('reviews.store');
 });
 /* Contact routes */
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact');
