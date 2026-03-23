@@ -115,9 +115,10 @@
                                         @method('PATCH')
                                         <div class="flex items-center gap-2">
                                             <select name="status" class="rounded border-gray-300 text-sm">
-                                                @foreach (['Pending','Paid','Shipped','Completed','Cancelled','Return Requested','Return Accepted','Refunded'] as $status)
-                                                    <option value="{{ $status }}" @selected($order->status === $status)>
-                                                        {{ $status }}
+                                                @foreach (\App\OrderStatus::cases() as $status)
+                                                    <option value="{{ $status->value }}" 
+                                                        @selected($order->status -> value === $status -> value)>
+                                                        {{ $status -> value }}
                                                     </option>
                                                 @endforeach
                                             </select>

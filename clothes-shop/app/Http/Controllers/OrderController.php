@@ -144,9 +144,6 @@ class OrderController extends Controller
                     'line_total' => $lineTotal,
                 ]);
 
-                $variant->stock_qty -= $item->qty;
-                $variant->save();
-
                 /* InventoryTransaction::create([
                     'variant_id' => $variant->variant_id,
                     'change_qty' => -$item->qty,
