@@ -42,19 +42,48 @@ if ($request->filled('search')) {
 }
 
 
-    public function updateStatus(Request $request, $order_id) {
-        
-        $validated = $request->validate([
-            'status' => 'required|in:Pending,Paid,Shipped,Completed,Cancelled,Return Requested,Return Accepted,Refunded',
-        ]);
+public function updateStatus(Request $request, $order_id) 
+{
+    $validated = $request->validate([
+        'status' => 'required|in:Pending,Paid,Shipped,Completed,Cancelled,Return Requested,Return Accepted,Refunded',
+    ]);
 
-        $order = Order::findOrFail($order_id);
-        $order->status = OrderStatus::from($validated['status']); 
-        $order->save();
+    $order = Order::with('items.variant')->findOrFail($order_id);
 
-        return redirect()->route('admin.orders.index')
-            ->with('success', 'Order status successfully updated');
+    $oldStatus = $order->status; 
+    $newStatus = OrderStatus::from($validated['status']);
+
+    if ($oldStatus !== $newStatus) {
+
+        if ($newStatus === OrderStatus::COMPLETED) {
+            foreach ($order->items as $item) {
+                $variant = $item->variant;
+
+                if ($variant) {
+                    $variant->stock_qty -= $item->qty;
+                    $variant->save();
+                }
+            }
+        }
+
+        if ($newStatus === OrderStatus::REFUNDED) {
+            foreach ($order->items as $item) {
+                $variant = $item->variant;
+
+                if ($variant) {
+                    $variant->stock_qty += $item->qty;
+                    $variant->save();
+                }
+            }
+        }
     }
+
+    $order->status = $newStatus;
+    $order->save();
+
+    return redirect()->route('admin.orders.index')
+        ->with('success', 'Order status successfully updated');
+}
 
     public function show($order_id) {
         $order = Order::with(['items.product', 'items.variant', 'user'])
