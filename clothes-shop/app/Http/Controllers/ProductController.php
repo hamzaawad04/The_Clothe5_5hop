@@ -9,14 +9,26 @@ class ProductController extends Controller
 {   
 
     /**
-     *  Returns the index view for the products.
+     *  Returns the index view for the products with optional max price filtering.
      * 
+     *  @param Illuminate\Http\Request $request
      *  @return Illuminate\View\View 
      */
-    public function index() {
-        return view('products.index', ['products' => Product::all()]);
+public function index(Request $request) {
+    $query = Product::with('images', 'variants');
+
+    if ($request->filled('min_price')) {
+        $query->where('base_price', '>=', $request->min_price);
     }
 
+    if ($request->filled('max_price')) {
+        $query->where('base_price', '<=', $request->max_price);
+    }
+
+    $results = $query->get();
+
+    return view('products.index', ['results' => $results]);
+}
     public function search(Request $request)
     {
         $search = $request->input('search');

@@ -70,14 +70,14 @@
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.06);
       overflow: hidden;
-      background: #fff;
+      background: #e5e7eb;
       min-height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .card .image {
-      background: #f3f4f6;
+      background: #fff;
       height: 300px;
       display: flex;
       align-items: center;
@@ -293,61 +293,85 @@
 </head>
 <body class = "font-playfair text-black">
   @include('components.mainnavbar')
-  <!-- Filter bar -->
-  <div class="filters">
-    <div class="filter-group"><label for="sort">Sort</label><select id="sort"><option>Featured</option><option>Polo</option><option>Hoodie</option><option>T-Shirt</option><option>Jumper</option><option>Button-Up Shirt</option></select></div>
-    <div class="filter-group"><label for="size">Size</label><select id="size"><option>All</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
-    <div class="filter-group"><label for="colour">Colour</label><select id="colour"><option>All</option><option>Black</option><option>White</option><option>Blue</option><option>Red</option><option>Grey</option><option>Navy</option></select></div>
-    <div class="filter-group"><label for="price">Price</label><select id="price"><option>All</option><option>Under £15</option><option>£15-£25</option><option>£25-£40</option><option>Over £40</option></select></div>
-  </div>
+<div class="filters">
+    <form method="GET" action="{{ route('products.index') }}" class="flex gap-4 items-end">
+
+        <div class="filter-group">
+            <label for="min_price">Price From:</label>
+            <input 
+                type="number" 
+                id="min_price" 
+                name="min_price" 
+                min="0" 
+                step="0.01" 
+                value="{{ request('min_price', '') }}" 
+                placeholder="£0"
+                class="border p-1 rounded"
+            >
+        </div>
+
+        <div class="filter-group">
+            <label for="max_price">Price To:</label>
+            <input 
+                type="number" 
+                id="max_price" 
+                name="max_price" 
+                min="0" 
+                step="0.01" 
+                value="{{ request('max_price', '') }}" 
+                placeholder="£100"
+                class="border p-1 rounded"
+            >
+        </div>
+
+        <button type="submit" class="px-4 py-2 bg-[#0a2540] text-white rounded">Filter</button>
+    </form>
+</div>
 
   <!-- Navy section removed -->
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">{{ $results->count() }} Items found</div>
-    <div class="grid">
-      @foreach ($results as $result)
+<div class="results-heading">{{ $results->count() }} Items found</div>
 
+<div class="grid">
+    @foreach ($results as $product)
         @php
-          $primary = $result->images->where('is_primary', 1)->first();
-          $secondary = $result->images->where('is_primary', 0)->first();
-          $front = $primary ? asset($primary->url): 'images/placeholder.png';
-          $back = $secondary ? asset($secondary->url): $front;
+            $primary = $product->images->where('is_primary', 1)->first();
+            $secondary = $product->images->where('is_primary', 0)->first();
+            $front = $primary ? asset($primary->url): 'images/placeholder.png';
+            $back = $secondary ? asset($secondary->url): $front;
         @endphp
 
-        <a href="{{ route('products.show', $result->product_id) }}">
+        <a href="{{ route('products.show', $product->product_id) }}">
           <div class='card hover-swap'>
-                  <div class='image'>
+              <div class='image'>
+                <div class='image-front'>
+                  <img src="{{ $front }}">
+                </div>
+                <div class='image-back'>
+                  <img src="{{ $back }}">
+                </div>
 
-                    <div class='image-front'>
-                      <img src="{{ $front }}">
-                    </div>
+                @auth
+                  <form method="POST" action="{{ route('wishlist.add') }}" style="position: absolute; top: 10px; right: 10px;">
+                    @csrf
+                    <input type="hidden" name="variant_id" value="{{ $product->variants->first()->variant_id }}">
+                    <button type="submit" class="bg-white bg-opacity-80 p-1 rounded-full hover:bg-opacity-100 text-lg">
+                      ❤️
+                    </button>
+                  </form>
+                @endauth
 
-                    <div class='image-back'>
-                      <img src="{{ $back }}">
-                    </div>
-
-                    <!-- WISHLIST BUTTON -->
-                    @auth
-                      <form method="POST" action="{{ route('wishlist.add') }}" style="position: absolute; top: 10px; right: 10px;">
-                        @csrf
-                        <input type="hidden" name="variant_id" value="{{ $result->variants->first()->variant_id }}">
-                        <button type="submit" class="bg-white bg-opacity-80 p-1 rounded-full hover:bg-opacity-100 text-lg">
-                          ❤️
-                        </button>
-                      </form>
-                    @endauth
-
-                  </div>
-                  <div class='info'>
-                    <h3>{{ $result->name }}</h3>
-                    <p>£{{ $result->base_price }}</p>
-                  </div>
+              </div>
+              <div class='info'>
+                <h3>{{ $product->name }}</h3>
+                <p>£{{ $product->base_price }}</p>
+              </div>
           </div>
         </a>
-      @endforeach
-    </div>
+    @endforeach
+</div>
   </div>
   @include('components.footer')
 </body>
