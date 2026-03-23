@@ -34,7 +34,10 @@ class WishlistController extends Controller
             ->first();
 
         if ($existing) {
-            return redirect()->back()->with('info', 'Item already in wishlist');
+            return response()->json([
+            'success' => false,
+            'message' => 'Item already in wishlist'
+        ]);
         }
 
         Wishlist::create([
@@ -43,7 +46,10 @@ class WishlistController extends Controller
             'variant_id' => $request->variant_id,
         ]);
 
-        return redirect()->back()->with('success', 'Item added to wishlist');
+        return response()->json([
+            'success' => true,
+            'message' => 'Item added to wishlist'
+        ]);
     }
 
     public function removeFromWishlist($variant_id)
