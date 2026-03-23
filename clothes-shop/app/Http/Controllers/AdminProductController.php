@@ -11,16 +11,31 @@ use Illuminate\Support\Str;
 
 class AdminProductController extends Controller
 {
-
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with(['category', 'images' => function ($query) {
-            $query->orderByDesc('is_primary')->orderBy('product_image_id');
-        }])
-        ->orderByDesc('product_id')
-        ->get();
+        $query = Product::with([
+            'category',
+            'images' => function ($query) {
+                $query->orderByDesc('is_primary')
+                      ->orderBy('product_image_id');
+            }
+        ]);
 
-        return view('admin.products.index', compact('products'));
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $products = $query
+            ->orderByDesc('product_id')
+            ->paginate(10);
+
+        $categories = Category::orderBy('name')->get();
+
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     public function create()
@@ -75,7 +90,10 @@ class AdminProductController extends Controller
 
     public function edit($product_id)
     {
-        $product = Product::with('images')->where('product_id', $product_id)->firstOrFail();
+        $product = Product::with('images')
+            ->where('product_id', $product_id)
+            ->firstOrFail();
+
         $categories = Category::orderBy('name')->get();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -100,23 +118,27 @@ class AdminProductController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        if ($request->filled('variant.size') || $request->filled('variant.colour') || 
-            $request->filled('variant.stock_qty') || $request->filled('variant.low_stock_threshold')) {
+        if (
+        $request->filled('variant.size') ||
+        $request->filled('variant.colour') ||
+        $request->filled('variant.stock_qty') ||
+        $request->filled('variant.low_stock_threshold')
+    ) {
 
-            $request->validate([
-                'variant.size' => 'required|string',
-                'variant.colour' => 'required|string',
-                'variant.stock_qty' => 'required|integer|min:0',
-                'variant.low_stock_threshold' => 'required|integer|min:0',
-            ]);
+        $request->validate([
+            'variant.size' => 'required|string',
+            'variant.colour' => 'required|string',
+            'variant.stock_qty' => 'required|integer|min:0',
+            'variant.low_stock_threshold' => 'required|integer|min:0',
+        ]);
 
-            $product->variants()->create([
-                'size' => $request->variant['size'],
-                'colour' => $request->variant['colour'],
-                'stock_qty' => $request->variant['stock_qty'],
-                'low_stock_threshold' => $request->variant['low_stock_threshold'],
-            ]);
-        }
+        $product->variants()->create([
+            'size' => $request->variant['size'],
+            'colour' => $request->variant['colour'],
+            'stock_qty' => $request->variant['stock_qty'],
+            'low_stock_threshold' => $request->variant['low_stock_threshold'],
+        ]);
+    }
 
         return redirect()->route('admin.products.index')
             ->with('success', 'Product updated successfully');
@@ -138,9 +160,9 @@ class AdminProductController extends Controller
 
     public function show($product_id)
     {
-        $product = \App\Models\Product::with('variants')
-            -> where('product_id', $product_id)
-            -> firstOrFail();
+        $product = Product::with('variants')
+            ->where('product_id', $product_id)
+            ->firstOrFail();
 
         return view('admin.products.variant', compact('product'));
     }
