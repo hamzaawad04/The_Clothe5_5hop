@@ -13,6 +13,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminVariantController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\AdminMiddleware;
@@ -116,4 +117,14 @@ Route::middleware(['auth', 'admin'])
 
         Route::get('/inventory', [App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('inventory.index');
         Route::post('/inventory/{variant}/add-stock', [App\Http\Controllers\Admin\InventoryController::class, 'addStock'])->name('inventory.addStock');    });
+
+        Route::get('/admin/variants/{variant}/edit', [AdminVariantController::class, 'edit'])
+        ->name('admin.variants.edit');
+        
+        Route::put('/admin/variants/{variant}', [AdminVariantController::class, 'update'])
+        ->name('admin.variants.update');
+
+        Route::delete('/admin/variants/{variant}', [AdminVariantController::class, 'destroy'])
+        ->name('admin.variants.destroy');
+
 require __DIR__.'/auth.php';

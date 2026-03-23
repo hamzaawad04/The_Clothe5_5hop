@@ -47,6 +47,7 @@
                                 <th class="px-4 py-3 text-left font-semibold text-gray-700">Colour</th>
                                 <th class="px-4 py-3 text-left font-semibold text-gray-700">Stock</th>
                                 <th class="px-4 py-3 text-left font-semibold text-gray-700">Price</th>
+                                <th class="px-4 py-3 text-left font-semibold text-gray-700">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,6 +67,23 @@
                                     </td>
                                     <td class="px-4 py-3 text-gray-700">
                                         GBP {{ number_format($variant->price ?? $product->base_price, 2) }}
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                            <a href="{{ route('admin.variants.edit', $variant->variant_id) }}"
+                                                class="text-sm font-semibold text-[#14213D] hover:underline">
+                                                Edit
+                                            </a>
+
+                                            <form action="{{ route('admin.variants.destroy', $variant->variant_id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Delete this variant?')"
+                                                    class="text-sm font-semibold text-red-500 hover:underline">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
