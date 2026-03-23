@@ -49,7 +49,7 @@
                         <p class="text-sm font-medium text-gray-600">Email Verification</p>
                         @if ($customer->email_verified_at)
                             <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold bg-green-100 text-green-800">
-                                ✓ Verified on {{ $customer->email_verified_at->format('M d, Y') }}
+                                ✓ Verified on {{ $customer->email_verified_at }}
                             </span>
                         @else
                             <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold bg-yellow-100 text-yellow-800">
@@ -127,7 +127,7 @@
                                                 {{ $order->status === 'return_requested' ? 'bg-orange-100 text-orange-800' : '' }}
                                                 {{ $order->status === 'return_accepted' ? 'bg-teal-100 text-teal-800' : '' }}
                                                 {{ $order->status === 'refunded' ? 'bg-slate-100 text-slate-800' : '' }}">
-                                                {{ \Illuminate\Support\Str::of($order->status)->replace('_', ' ')->title() }}
+                                                {{ $order->status }}
                                             </span>
                                         </td>
                                     </tr>
