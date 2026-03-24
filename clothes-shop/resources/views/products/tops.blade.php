@@ -224,6 +224,13 @@
       font-weight: bold;
       margin: 0;
     }
+    .no-results {
+      text-align: center;
+      padding: 60px 0;
+      color: #6b7280;
+      font-size: 16px;
+      grid-column: 1 / -1;
+    }
     /* About It section (full-bleed) */
     .about-it {
       background: #0a2540;
@@ -293,12 +300,49 @@
 <body class = "font-playfair text-black">
   @include('components.mainnavbar')
 
-  <!-- Navy section removed -->
+  {{-- Filter bar --}}
+  <div class="filters">
+    <div class="filter-group">
+      <label for="filter-size">Size</label>
+      <select id="filter-size">
+        <option value="all">All</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="One Size">One Size</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-colour">Colour</label>
+      <select id="filter-colour">
+        <option value="all">All</option>
+        <option value="Black">Black</option>
+        <option value="White">White</option>
+        <option value="Gold">Gold</option>
+        <option value="Silver">Silver</option>
+        <option value="Brown">Brown</option>
+        <option value="Navy">Navy</option>
+        <option value="Beige">Beige</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-price">Price</label>
+      <select id="filter-price">
+        <option value="all">All</option>
+        <option value="0-25">Under &pound;25</option>
+        <option value="25-50">&pound;25 &ndash; &pound;50</option>
+        <option value="50-100">&pound;50 &ndash; &pound;100</option>
+        <option value="100-999">Over &pound;100</option>
+      </select>
+    </div>
+  </div>
 
   <!-- Product grid -->
   <div class="container">
-    <div class="results-heading">{{ $products->count() }} Items found</div>
-    <div class="grid">
+    <div class="results-heading" id="results-count">{{ $products->count() }} Items found</div>
+    <div class="grid" id="product-grid">
       @foreach ($products as $product)
 
         @php
@@ -306,18 +350,26 @@
           $secondary = $product->images->where('is_primary', 0)->first();
           $front = $primary ? asset($primary->url): 'images/placeholder.png';
           $back = $secondary ? asset($secondary->url): $front;
+          $sizes = $product->variants->pluck('size')->unique()->filter()->values();
+          $colours = $product->variants->pluck('colour')->unique()->filter()->values();
+          $price = (float) $product->base_price;
         @endphp
         
-        <a href="{{ route('products.show', $product->product_id) }}">
+        <a href="{{ route('products.show', $product->product_id) }}"
+           class="product-card-link"
+           data-sizes="{{ $sizes->join(',') }}"
+           data-colours="{{ $colours->join(',') }}"
+           data-price="{{ $price }}"
+           style="text-decoration:none;">
           <div class='card hover-swap'>
                   <div class='image'>
 
                     <div class='image-front'>
-                      <img src="{{ $front }}">
+                      <img src="{{ $front }}" alt="{{ $product->name }}">
                     </div>
 
                     <div class='image-back'>
-                      <img src="{{ $back }}">
+                      <img src="{{ $back }}" alt="{{ $product->name }}">
                     </div>
 
                   </div>
@@ -328,6 +380,9 @@
           </div>
         </a>
       @endforeach
+      <div class="no-results" id="no-results" style="display:none;">
+        No products match your selected filters.
+      </div>
       {{-- <div class="card hover-swap"><div class="image"><div class="image-front"><img src="/images/tops/polofront.png" alt="Premium Unisex Polo Shirt"></div><div class="image-back"><img src="/images/tops/poloback.png" alt="Polo Shirt Back"></div></div><div class="info"><h3>Premium Unisex Polo Shirt</h3><p>£25</p></div></div>
       <div class="card hover-swap-hoodie"><div class="image"><div class="image-front"><img src="/images/tops/hoodiefront.png" alt="Unisex Hoodie"></div><div class="image-back"><img src="/images/tops/hoodieback.png" alt="Unisex Hoodie Back"></div></div><div class="info"><h3>Unisex Hoodie</h3><p>£35</p></div></div>
       <div class="card hover-swap-tshirt"><div class="image"><div class="image-front"><img src="/images/tops/tshirtfront.png" alt="Premium Unisex T-Shirt"></div><div class="image-back"><img src="/images/tops/tshirtback.png" alt="Premium Unisex T-Shirt Back"></div></div><div class="info"><h3>Premium Unisex T-Shirt</h3><p>£15</p></div></div>
@@ -337,5 +392,51 @@
   </div>
 </div>
   @include('components.footer')
+
+  <script>
+    const sizeFilter = document.getElementById('filter-size');
+    const colourFilter = document.getElementById('filter-colour');
+    const priceFilter = document.getElementById('filter-price');
+    const countEl = document.getElementById('results-count');
+    const noResults = document.getElementById('no-results');
+
+    function applyFilters() {
+      const size = sizeFilter.value;
+      const colour = colourFilter.value;
+      const price = priceFilter.value;
+
+      const cards = document.querySelectorAll('.product-card-link');
+      let visible = 0;
+
+      cards.forEach(card => {
+        const cardSizes = card.dataset.sizes.split(',').map(s => s.trim());
+        const cardColours = card.dataset.colours.split(',').map(c => c.trim());
+        const cardPrice = parseFloat(card.dataset.price);
+
+        const sizeMatch = size === 'all' || cardSizes.includes(size);
+        const colourMatch = colour === 'all' || cardColours.includes(colour);
+
+        let priceMatch = true;
+        if (price !== 'all') {
+          const [min, max] = price.split('-').map(Number);
+          priceMatch = cardPrice >= min && cardPrice <= max;
+        }
+
+        if (sizeMatch && colourMatch && priceMatch) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      countEl.textContent = visible + ' Items found';
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    sizeFilter.addEventListener('change', applyFilters);
+    colourFilter.addEventListener('change', applyFilters);
+    priceFilter.addEventListener('change', applyFilters);
+  </script>
 </body>
 </html>
