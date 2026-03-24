@@ -197,18 +197,27 @@ class AdminCustomerController extends Controller
     public function destroy(User $customer)
     {
         try {
-            // Check if customer has pending orders
-            $pendingOrders = Order::where('user_id', $customer->user_id)
-                ->whereIn('status', ['pending', 'processing'])
-                ->count();
+            $allowedStatuses = ['Completed', 'Refunded'];
+            $hasBlockedOrders = Order::where('user_id', $customer->user_id)
+                ->whereNotIn('status', $allowedStatuses)
+                ->exists();
 
-            if ($pendingOrders > 0) {
-                return back()->with('error', 'Cannot delete customer with pending or processing orders.');
+            if ($hasBlockedOrders) {
+                return back()->with('error', "Can't delete user unless all orders are Completed or Refunded.");
             }
 
             $customerName = $customer->first_name . ' ' . $customer->last_name;
             $email = $customer->email;
 
+            $orders = $customer->orders()->with(['items', 'return'])->get();
+
+            foreach ($orders as $order) {
+                $order->return()->delete();
+                $order->items()->delete();
+                $order->delete();
+            }
+
+            $customer->cart()->delete();
             $customer->delete();
 
             return redirect()->route('admin.customers.index')

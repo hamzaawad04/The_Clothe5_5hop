@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReturnModel extends Model
 {
+    protected $table = 'returns';
     protected $primaryKey = 'order_id';
+    public $incrementing = false;
 
     protected $fillable = [
         'order_id',
