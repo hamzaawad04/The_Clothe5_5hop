@@ -40,11 +40,12 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     @php
-                                        $statusClasses = match ($order->status) {
-                                            'completed' => 'bg-green-100 text-green-800',
-                                            'return_requested' => 'bg-orange-100 text-orange-800',
-                                            'return_accepted' => 'bg-teal-100 text-teal-800',
-                                            'refunded' => 'bg-slate-100 text-slate-800',
+                                        $statusValue = $order->status->value;
+                                        $statusClasses = match ($statusValue) {
+                                            'Completed' => 'bg-green-100 text-green-800',
+                                            'Return Requested' => 'bg-orange-100 text-orange-800',
+                                            'Return Accepted' => 'bg-teal-100 text-teal-800',
+                                            'Refunded' => 'bg-slate-100 text-slate-800',
                                             default => 'bg-gray-100 text-gray-800',
                                         };
                                     @endphp
@@ -55,11 +56,11 @@
                                         <td class="px-4 py-3 text-gray-700">GBP {{ number_format($order->total_amount, 2) }}</td>
                                         <td class="px-4 py-3">
                                             <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $statusClasses }}">
-                                                {{ $order->status }}
+                                                {{ $statusValue }}
                                             </span>
                                         </td>
                                         <td class="px-4 py-3">
-                                            @if ($order->status === 'completed')
+                                            @if ($statusValue === 'Completed')
                                                 <form method="POST" action="{{ route('orders.requestReturn', $order->order_id) }}" onsubmit="return confirm('Request return for this order?');">
                                                     @csrf
                                                     <button type="submit" class="inline-flex rounded border border-[#14213D] px-3 py-1 text-xs font-semibold text-[#14213D] hover:bg-[#14213D] hover:text-white transition">

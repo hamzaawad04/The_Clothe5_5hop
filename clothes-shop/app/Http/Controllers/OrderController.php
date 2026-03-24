@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderStatus;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Cart;
@@ -52,7 +53,8 @@ class OrderController extends Controller
                 ->lockForUpdate()
                 ->firstOrFail();
 
-            if (!in_array($order->status, ['pending', 'paid'], true)) {
+            $cancellableStatuses = [OrderStatus::PENDING->value, OrderStatus::PAID->value];
+            if (!in_array($order->status->value, $cancellableStatuses, true)) {
                 DB::rollBack();
                 return redirect()
                     ->route('orders.index')
@@ -70,7 +72,7 @@ class OrderController extends Controller
                 }
             }
 
-            $order->status = 'cancelled';
+            $order->status = OrderStatus::CANCELLED;
             $order->save();
 
             DB::commit();
@@ -212,8 +214,15 @@ class OrderController extends Controller
 
     public function returns()
     {
+        $returnStatuses = [
+            OrderStatus::COMPLETED->value,
+            OrderStatus::RETURNREQUESTED->value,
+            OrderStatus::RETURNACCEPTED->value,
+            OrderStatus::REFUNDED->value,
+        ];
+
         $orders = Order::where('user_id', Auth::id())
-            ->whereIn('status', ['completed', 'return_requested', 'return_accepted', 'refunded'])
+            ->whereIn('status', $returnStatuses)
             ->withCount('items')
             ->orderByDesc('order_date')
             ->get();
@@ -229,13 +238,13 @@ class OrderController extends Controller
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
-        if ($order->status !== 'completed') {
+        if ($order->status->value !== OrderStatus::COMPLETED->value) {
             return redirect()
                 ->route('orders.returns')
                 ->with('error', 'Only completed orders can be requested for return.');
         }
 
-        $order->status = 'return_requested';
+        $order->status = OrderStatus::RETURNREQUESTED;
         $order->save();
 
         return redirect()
