@@ -197,7 +197,7 @@ class AdminCustomerController extends Controller
     public function destroy(User $customer)
     {
         try {
-            $allowedStatuses = ['Completed', 'Refunded'];
+            $allowedStatuses = ['Completed', 'Refunded', 'Cancelled'];
             $hasBlockedOrders = Order::where('user_id', $customer->user_id)
                 ->whereNotIn('status', $allowedStatuses)
                 ->exists();
