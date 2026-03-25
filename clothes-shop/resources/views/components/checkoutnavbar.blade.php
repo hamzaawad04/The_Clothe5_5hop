@@ -36,12 +36,18 @@
         @endguest
 
         @auth
+            @if(auth()->user()->isAdmin())
+                <a href="{{ url('/admin/dashboard') }}">
+                    <img src="/icons/admin-page.svg" alt="Admin Dashboard" class="w-6 h-6">
+                </a>
+            @endif
+
            <a href="{{ url('/dashboard') }}"><img src="/icons/account.svg" alt="Account" class="w-6 h-6"></a>
         @endauth
 
            <a href="{{ route('cart.basket') }}"><img src="/icons/basket.svg" alt="Basket" class="w-7 h-9"></a>
 
-           <a href="#"><img src="/icons/wishlist.svg" alt="Wishlist" class="w-10 h-6"></a>
+           <a href="{{ route('wishlist.index') }}"><img src="/icons/wishlist.svg" alt="Wishlist" class="w-10 h-6"></a>
 
        </div>
    </header>

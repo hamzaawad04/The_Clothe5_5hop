@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\UserRole;
 
 class User extends Authenticatable
 {
@@ -45,7 +46,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password' => 'hashed'
+            'password' => 'hashed',
+            'role' => UserRole::class,
         ];
     }
 
@@ -67,5 +69,16 @@ class User extends Authenticatable
     /* Define relationship between users and their contact messages */
     public function contactMessages() {
         return $this->hasMany(ContactMessage::class, 'user_id', 'user_id');
+    }
+    /* Define relationship between users and their reviews */
+    public function reviews() {
+        return $this->hasMany(Review::class, 'user_id', 'user_id');
+    }
+    /* Function which returns true if user is admin, false otherwise */
+    public function isAdmin() {
+        return $this->role === UserRole::ADMIN;
+    }
+    public function isCustomer() {
+        return $this->role === UserRole::CUSTOMER;
     }
 }

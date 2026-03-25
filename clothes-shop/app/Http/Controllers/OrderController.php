@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderStatus;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Cart;
@@ -9,26 +10,86 @@ use App\Models\CartItem;
 use App\Models\ProductVariant;
 use App\Models\InventoryTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    /* Show all orders for the logged-in customer */
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->withCount('items')
+            ->orderByDesc('order_date')
+            ->get();
+
+        return view('orders.status', [
+            'orders' => $orders,
+        ]);
+    }
 
     /* Show one order */
     public function show($order_id)
     {
-        $user = Auth::user();
-
         $order = Order::where('order_id', $order_id)
-                      ->where('user_id', Auth::id())
-                      ->with('items.product', 'items.variant')
-                      ->firstOrFail();
+            ->where('user_id', Auth::id())
+            ->with('items.product', 'items.variant')
+            ->firstOrFail();
 
-        return view('showOrder', [
+        return view('orders.status_details', [
             'order' => $order,
-            'user' => $user
         ]);
+    }
+
+    /* Cancel a customer's cancellable order */
+    public function cancel($order_id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $order = Order::where('order_id', $order_id)
+                ->where('user_id', Auth::id())
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $cancellableStatuses = [OrderStatus::PENDING->value, OrderStatus::PAID->value];
+            if (!in_array($order->status->value, $cancellableStatuses, true)) {
+                DB::rollBack();
+                return redirect()
+                    ->route('orders.index')
+                    ->with('error', 'This order can no longer be cancelled.');
+            }
+
+            $orderItems = OrderItem::where('order_id', $order->order_id)
+                ->with('variant')
+                ->get();
+
+            foreach ($orderItems as $item) {
+                if ($item->variant) {
+                    $item->variant->stock_qty += $item->qty;
+                    $item->variant->save();
+                }
+            }
+
+            $order->status = OrderStatus::CANCELLED;
+            $order->save();
+
+            DB::commit();
+
+            return redirect()
+                ->route('orders.index')
+                ->with('success', "Order #{$order->order_id} has been cancelled.");
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+            abort(404);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->route('orders.index')
+                ->with('error', 'Unable to cancel this order right now. Please try again.');
+        }
     }
 
     /* Convert user's cart into an order */
@@ -48,7 +109,7 @@ class OrderController extends Controller
         try {
             $order = Order::create([
                 'user_id' => $user->user_id,
-                'status' => 'pending',
+                'status' => 'Pending',
                 'total_amount' => 0, 
                 'ship_name' => $request->ship_name,
                 'ship_address' => $request->ship_address,
@@ -59,11 +120,16 @@ class OrderController extends Controller
             $total = 0;
 
             foreach ($cartItems as $item) {
-                $variant = $variant = $item->variant;
+                $variant = $item->variant;
 
-                if (!$variant || $variant->stock_qty < $item->qty) {
+                if (!$variant) {
                     DB::rollBack();
-                    return redirect()->back()->with('error', 'Insufficient stock for one or more items.');
+                    return redirect()->back()->with('error', 'A product in your cart is no longer available.');
+                }
+
+                if ($item->qty > $variant->stock_qty) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', "Insufficient stock for {$variant->product->name} ({$variant->size}, {$variant->colour}).");
                 }
 
                 $unitPrice = $variant->product->base_price;
@@ -79,9 +145,6 @@ class OrderController extends Controller
                     'qty'        => $item->qty,
                     'line_total' => $lineTotal,
                 ]);
-
-                $variant->stock_qty -= $item->qty;
-                $variant->save();
 
                 /* InventoryTransaction::create([
                     'variant_id' => $variant->variant_id,
@@ -148,5 +211,45 @@ class OrderController extends Controller
         ]);
     }
 
-}
 
+    public function returns()
+    {
+        $returnStatuses = [
+            OrderStatus::COMPLETED->value,
+            OrderStatus::RETURNREQUESTED->value,
+            OrderStatus::RETURNACCEPTED->value,
+            OrderStatus::REFUNDED->value,
+        ];
+
+        $orders = Order::where('user_id', Auth::id())
+            ->whereIn('status', $returnStatuses)
+            ->withCount('items')
+            ->orderByDesc('order_date')
+            ->get();
+
+        return view('orders.returns', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function requestReturn($order_id)
+    {
+        $order = Order::where('order_id', $order_id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        if ($order->status->value !== OrderStatus::COMPLETED->value) {
+            return redirect()
+                ->route('orders.returns')
+                ->with('error', 'Only completed orders can be requested for return.');
+        }
+
+        $order->status = OrderStatus::RETURNREQUESTED;
+        $order->save();
+
+        return redirect()
+            ->route('orders.returns')
+            ->with('success', "Return requested for order #{$order->order_id}.");
+    }
+
+}

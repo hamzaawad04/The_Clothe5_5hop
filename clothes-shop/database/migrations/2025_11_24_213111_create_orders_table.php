@@ -14,7 +14,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
             $table->unsignedBigInteger('user_id');
-            $table->enum('status', ['pending', 'paid', 'shipped', 'completed', 'cancelled']);
+            $table->enum('status', [
+                'Pending',
+                'Paid',
+                'Shipped',
+                'Completed',
+                'Cancelled',
+                'Return Requested',
+                'Return Accepted',
+                'Refunded',
+            ]);
             $table->decimal('total_amount', 10, 2);
             $table->string('ship_name');
             $table->text('ship_address');

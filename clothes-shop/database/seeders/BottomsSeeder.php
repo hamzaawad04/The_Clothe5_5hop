@@ -25,7 +25,6 @@ class BottomsSeeder extends Seeder
                 </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -45,7 +44,6 @@ class BottomsSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -64,7 +62,6 @@ class BottomsSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -83,7 +80,6 @@ class BottomsSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -102,7 +98,6 @@ class BottomsSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 18,
-                'low_stock_threshold' => 5,
                 'category_id' => 2, 
                 'created_at' => now(),
                 'updated_at' => now(),

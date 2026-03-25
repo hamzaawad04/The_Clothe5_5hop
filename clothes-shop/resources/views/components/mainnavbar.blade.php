@@ -37,22 +37,47 @@
         @endguest
 
         @auth
+
+            @if(auth()->user()->isAdmin())
+                <a href="{{ url('/admin/dashboard') }}">
+                    <img src="{{ asset('icons/admin-page.svg') }}" alt="Admin Dashboard" class="w-6 h-6">
+                </a>
+            @endif
+
+
            <a href="{{ url('/dashboard') }}"><img src="{{ asset('icons/account.svg') }}" alt="Account" class="w-6 h-6"></a>
         @endauth
+        
 
-           <a href="{{ route('cart.basket') }}"><img src="{{ asset('icons/basket.svg') }}" alt="Basket" class="w-7 h-9"></a>
+        <a href="{{ route('cart.basket') }}"><img src="{{ asset('icons/basket.svg') }}" alt="Basket" class="w-7 h-9"></a>
 
-           <a href="#"><img src="{{ asset('icons/wishlist.svg') }}" alt="Wishlist" class="w-10 h-6"></a>
+           <a href="{{ route('wishlist.index') }}"><img src="{{ asset('icons/wishlist.svg') }}" alt="Wishlist" class="w-10 h-6"></a>
 
        </div>
    </header>
 
      <!-- Categories -->
-   <nav class="flex justify-between px-20 py-3 text-lg font-medium">
-       <a href="{{ route('products.tops') }}" class="hover:text-cathover">Tops</a>
-       <a href="{{ route('products.bottoms') }}" class="hover:text-cathover">Bottoms</a>
-       <a href="{{ route('products.footwear') }}" class="hover:text-cathover">Footwear</a>
-       <a href="{{ route('products.outerwear') }}" class="hover:text-cathover">Outerwear</a>
-       <a href="{{ route('products.accessories') }}" class="hover:text-cathover">Accessories</a>
-   </nav>
+    <nav class="flex justify-between px-20 py-3 text-lg font-medium">
+        <a href="{{ route('products.tops') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.tops') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Tops
+        </a>
+        <a href="{{ route('products.bottoms') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.bottoms') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Bottoms
+        </a>
+        <a href="{{ route('products.footwear') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.footwear') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Footwear
+        </a>
+        <a href="{{ route('products.outerwear') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.outerwear') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Outerwear
+        </a>
+    <a href="{{ route('products.accessories') }}"
+        class="hover:text-cathover transition {{ request()->routeIs('products.accessories') ? 'text-cathover border-b-2 border-cathover' : '' }}">
+            Accessories
+        </a>
+    </nav>
+    <div class="border-b border-gray-300"></div>
    </div>

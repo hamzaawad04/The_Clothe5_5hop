@@ -25,7 +25,6 @@ class FootwearSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -44,7 +43,6 @@ class FootwearSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -63,7 +61,6 @@ class FootwearSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -82,7 +79,6 @@ class FootwearSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 10.00,
-                'low_stock_threshold' => 5,
                 'category_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(), 
@@ -101,7 +97,6 @@ class FootwearSeeder extends Seeder
                     </ul>
                 ',
                 'base_price' => 18,
-                'low_stock_threshold' => 5,
                 'category_id' => 3, 
                 'created_at' => now(),
                 'updated_at' => now(),

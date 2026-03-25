@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wishlist', function (Blueprint $table) {
+            $table->id('wishlist_item_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('variant_id')->nullable();

@@ -27,6 +27,7 @@ class ProductVariantController extends Controller
             'size' => 'required|string|max:50',
             'colour' => 'nullable|string|max:50',
             'stock_qty' => 'required|integer|min:0',
+            'low_stock_threshold' => 'nullable|integer|min:0',
         ]);
 
         ProductVariant::create($validated);
@@ -52,6 +53,7 @@ class ProductVariantController extends Controller
             'size' => 'required|string|max:50',
             'colour' => 'nullable|string|max:50',
             'stock_qty' => 'required|integer|min:0',
+            'low_stock_threshold' => 'nullable|integer|min:0',
         ]);
 
         $variant->update($validated);

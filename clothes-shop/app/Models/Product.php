@@ -12,7 +12,6 @@ class Product extends Model
         'name',
         'description',
         'base_price',
-        'low_stock_threshold',
         'category_id'
     ];
 
@@ -39,5 +38,10 @@ class Product extends Model
     /* Define relationship between products and wishlists */
     public function wishlist() {
         return $this->hasMany(Wishlist::class, 'product_id', 'product_id');
+    }
+
+    /* Define relationship between products and reviews */
+    public function reviews() {
+        return $this->hasMany(Review::class, 'product_id', 'product_id');
     }
 }

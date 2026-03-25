@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('base_price', 10, 2);
-            $table->integer('low_stock_threshold')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
